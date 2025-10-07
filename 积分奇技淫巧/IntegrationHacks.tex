@@ -1,0 +1,84 @@
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{elegantbook}
+
+\title{积分的奇技淫巧}
+\subtitle{Integration Hacks}
+
+\author{Monika}
+% \institute{Elegant\LaTeX{} Program}
+\date{\today}
+\version{0.1}
+% \bioinfo{自定义}{信息}
+
+% \extrainfo{注意：本模板自 2023 年 1 月 1 日开始，不再更新和维护！}
+
+\setcounter{tocdepth}{3}
+
+\logo{logo-blue.png}
+\cover{cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+\renewcommand{\textbf}[1]{\text{\heiti #1}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{soul}
+\usepackage{arcs}
+\usetikzlibrary{arrows.meta,3d}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+\definecolor{lightyellow}{rgb}{1, 1, 0.8} % 定义一个淡黄色
+\sethlcolor{lightyellow} % 设置为高亮颜色
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\chapter{绪论}
+本书是是 LZU 数学协会举办的数学讲座的讲义，将会讲授一些在课不上不会讲授，但在某些情况有奇效的积分技巧，近年来 cmc 的试题中偶尔会出现此类题目
+
+笔者水平有限，若有不足缺漏之处恳请读者更正，或在 \href{Github仓库处}{}提交PR以更正
+\mainmatter
+
+
+	
+
+\chapter{版本更新历史}
+
+\datechange{2025/10/07}{编写第一章}
+% \datechange{2025/10/05}{编写第一章}
+% \begin{change}
+%   \item 删除 \lstinline{mathpazo} 数学字体选项。
+%   \item 添加邮箱命令 \lstinline{\mailto}。
+%   \item 修改英文字体为 \lstinline{newtx} 系列，另外大型操作符号维持 cm 字体。
+%   \item 中文字体改用 \lstinline{ctex} 宏包自动设置。
+%   \item 删除 \lstinline{xeCJK} 字体设置，原因是不同系统字体不方便统一。
+%   \item 定理换用 \lstinline{tcolorbox} 宏包定义，并基本维持原有的定理样式，优化显示效果，支持跨页；定理类名字重命名，如 etheorem 改为 theorem 等等。
+%   \item 删去自定义的缩进命令 \lstinline{\Eindent}。
+%   \item 添加参考文献宏包 \lstinline{natbib}。
+%   \item 颜色名字重命名。
+% \end{change}
+
+\nocite{*}
+
+\printbibliography[heading=bibintoc, title=\ebibname]
+参考文献尚未编排，此处使用的是模板的默认参考文献，作废
+\appendix
+
+\chapter{基本数学工具}
+
+
+% \section{求和算子与描述统计量}
+
+
+
+
+\end{document}
