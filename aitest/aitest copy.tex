@@ -1,0 +1,460 @@
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{elegantbook}
+
+\title{积分的奇技淫巧}
+\subtitle{Integration Hacks}
+
+\author{Monika}
+% \institute{Elegant\LaTeX{} Program}
+\date{\today}
+\version{0.1}
+% \bioinfo{自定义}{信息}
+
+% \extrainfo{注意：本模板自 2023 年 1 月 1 日开始，不再更新和维护！}
+
+\setcounter{tocdepth}{3}
+
+\logo{logo-blue.png}
+\cover{cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+\renewcommand{\textbf}[1]{\text{\heiti #1}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{soul}
+\usepackage{arcs}
+\usetikzlibrary{arrows.meta,3d}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+\definecolor{lightyellow}{rgb}{1, 1, 0.8} % 定义一个淡黄色
+\sethlcolor{lightyellow} % 设置为高亮颜色
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\chapter{绪论}
+本书是 LZU 数学协会举办的数学讲座的讲义，将会讲授一些在课堂上不会讲授，但在某些情况有奇效的积分技巧，近年来 cmc 的试题中偶尔会出现此类题目。
+
+本书内容主要参考了《全国大学生数学竞赛解析教程》（余志坤主编）、《积分的方法与技巧》（金玉明主编）以及其他一些优秀的积分技巧资料，并融入了我们自己的理解和总结。内容由浅入深，从基础的极限、导数知识，到各类不定积分和定积分的高级技巧，并结合了大量的竞赛真题进行讲解。
+
+笔者水平有限，若有不足缺漏之处恳请读者更正，或在 \href{https://github.com/Monika-shipship/MonikaMathLecture}{Github仓库处（点击即可跳转）} 提交PR以更正。
+\mainmatter
+
+\chapter{极限与微积分基础}
+在本章，我们将回顾微积分的基础知识，这部分内容是后续所有高级技巧的基石。竞赛中的题目往往综合性很强，但万变不离其宗，其根基仍然是对基本概念和定理的深刻理解。
+
+\section{极限}
+\subsection{求函数极限的典型方法}
+求极限是数学竞赛中的重中之重。除了基本的四则运算法则外，更重要的是掌握处理不定式的各种技巧。
+
+\subsubsection{利用基本极限和等价无穷小}
+这是最基础也是最常用的方法。两个重要极限：$\lim_{x\to0}\frac{\sin x}{x}=1$ 和 $\lim_{x\to\infty}(1+\frac{1}{x})^x=e$。
+以及当 $x \to 0$ 时常用的等价无穷小：
+\begin{itemize}
+    \item $\sin x \sim x$, $\tan x \sim x$, $\arcsin x \sim x$, $\arctan x \sim x$
+    \item $1-\cos x \sim \frac{1}{2}x^2$
+    \item $e^x - 1 \sim x$, $a^x - 1 \sim x\ln a$
+    \item $\ln(1+x) \sim x$
+    \item $(1+x)^\alpha - 1 \sim \alpha x$
+\end{itemize}
+\begin{problem}[CMC真题]
+    求极限 $I=\lim_{x\rightarrow0}\frac{\sqrt{\cos x}-\sqrt[3]{\cos x}}{x^{3}+\tan^{2}x}.$
+\end{problem}
+\begin{solution}
+    分母 $x^3+\tan^2 x \sim \tan^2 x \sim x^2$。分子可以进行有理化或者利用等价无穷小 $(1+u)^\alpha - 1 \sim \alpha u$。
+    \begin{align*}
+        \sqrt{\cos x} - \sqrt[3]{\cos x} &= (1+(\cos x - 1))^{1/2} - (1+(\cos x - 1))^{1/3} \\
+        &\sim \left(1+\frac{1}{2}(\cos x - 1)\right) - \left(1+\frac{1}{3}(\cos x - 1)\right) \\
+        &= \frac{1}{6}(\cos x - 1) \sim \frac{1}{6}(-\frac{1}{2}x^2) = -\frac{1}{12}x^2
+    \end{align*}
+    所以 $I = \lim_{x\to 0} \frac{-1/12 x^2}{x^2} = -\frac{1}{12}$。
+\end{solution}
+
+\subsubsection{洛必达(L'Hospital)法则}
+适用于$\frac{0}{0}$和$\frac{\infty}{\infty}$型的不定式。使用时要注意检验条件，并且经常需要结合等价无穷小来简化计算。
+
+\begin{problem}[CMC真题]
+    求极限 $I=\lim_{x\rightarrow0}(\frac{\sin x}{x})^{\frac{1}{1-\cos x}}$
+\end{problem}
+\begin{solution}
+    这是 $1^\infty$ 型不定式，先取对数。设 $L = \ln I$，则
+    \begin{align*}
+        L &= \lim_{x\to 0} \frac{\ln(\frac{\sin x}{x})}{1-\cos x} \quad (\text{为 } \frac{0}{0} \text{ 型}) \\
+        &\overset{L'H}{=} \lim_{x\to 0} \frac{\frac{x}{\sin x} \cdot \frac{x\cos x - \sin x}{x^2}}{\sin x} \\
+        &= \lim_{x\to 0} \frac{x\cos x - \sin x}{x^2 \sin x} \\
+        &\sim \lim_{x\to 0} \frac{x(1-\frac{x^2}{2}) - (x-\frac{x^3}{6})}{x^3} \quad (\text{使用泰勒展开简化}) \\
+        &= \lim_{x\to 0} \frac{-\frac{x^3}{2} + \frac{x^3}{6}}{x^3} = -\frac{1}{3}
+    \end{align*}
+    所以原极限 $I = e^L = e^{-1/3}$。
+\end{solution}
+
+\subsubsection{泰勒(Taylor)公式}
+泰勒公式是处理极限问题的“大杀器”，尤其是在洛必达法则变得繁琐或失效时。核心思想是用多项式来逼近函数。
+\begin{problem}[CMC真题]
+    求极限 $I=\lim_{x\rightarrow0}\frac{\ln(\cos~x+x~sin~2x)}{e^{x^{2}}-\sqrt[3]{1-x^{2}}}.$
+\end{problem}
+\begin{solution}
+    对分子分母分别使用泰勒展开。
+    分子：
+    $\cos x = 1 - \frac{x^2}{2} + O(x^4)$
+    $x \sin 2x = x(2x - O(x^3)) = 2x^2 - O(x^4)$
+    $\ln(\cos x + x \sin 2x) = \ln(1 + \frac{3}{2}x^2 + O(x^4)) \sim \frac{3}{2}x^2$
+
+    分母：
+    $e^{x^2} = 1 + x^2 + O(x^4)$
+    $\sqrt[3]{1-x^2} = (1-x^2)^{1/3} = 1 - \frac{1}{3}x^2 + O(x^4)$
+    $e^{x^2} - \sqrt[3]{1-x^2} = (1+x^2) - (1-\frac{1}{3}x^2) + O(x^4) = \frac{4}{3}x^2 + O(x^4)$
+
+    所以 $I = \lim_{x\to 0} \frac{3/2 x^2}{4/3 x^2} = \frac{9}{8}$。
+\end{solution}
+
+\subsubsection{利用定积分定义求极限}
+形如 $\lim_{n\to\infty} \frac{1}{n} \sum_{k=1}^n f(\frac{k}{n})$ 的极限，可以转化为定积分 $\int_0^1 f(x) dx$。
+\begin{problem}[CMC真题]
+    求极限 $A_{n}=\frac{n}{n^{2}+1^{2}}+\frac{n}{n^{2}+2^{2}}+\cdot\cdot\cdot+\frac{n}{n^{2}+n^{2}},$
+\end{problem}
+\begin{solution}
+    将求和式变形为黎曼和的形式：
+    \begin{equation*}
+        A_n = \sum_{k=1}^n \frac{n}{n^2+k^2} = \frac{1}{n} \sum_{k=1}^n \frac{1}{1+(k/n)^2}
+    \end{equation*}
+    这是一个以 $f(x) = \frac{1}{1+x^2}$ 在区间 $[0,1]$ 上的黎曼和。
+    因此，
+    \begin{equation*}
+        \lim_{n\to\infty} A_n = \int_0^1 \frac{1}{1+x^2} dx = [\arctan x]_0^1 = \frac{\pi}{4}
+    \end{equation*}
+\end{solution}
+
+\subsubsection{利用Stolz-Cesàro定理}
+Stolz定理是处理数列不定式极限的有力工具，可以看作是数列版本的洛必达法则。
+\begin{itemize}
+    \item $\frac{*}{\infty}$ 型: 若 $\{y_n\}$ 严格单增趋于 $+\infty$，且 $\lim_{n\to\infty} \frac{x_{n+1}-x_n}{y_{n+1}-y_n} = L$，则 $\lim_{n\to\infty} \frac{x_n}{y_n} = L$。
+    \item $\frac{0}{0}$ 型: 若 $\{x_n\}, \{y_n\}$ 均趋于0，$\{y_n\}$ 严格单减，且 $\lim_{n\to\infty} \frac{x_{n+1}-x_n}{y_{n+1}-y_n} = L$，则 $\lim_{n\to\infty} \frac{x_n}{y_n} = L$。
+\end{itemize}
+\begin{problem}[CMC真题]
+ 设数列 $\{a_{n}\}$ 满足 $a_{1}>0,$ $a_{n+1}=a_{n}+\frac{1}{a_{n}},n\ge1.$ 证明:
+$lim_{n\rightarrow\infty}\frac{a_{n}}{\sqrt{2n}}=1.$
+\end{problem}
+\begin{solution}
+    显然 $\{a_n\}$ 是严格单增正数列。若 $\lim_{n\to\infty} a_n = A$ (有限)，则 $A=A+\frac{1}{A}$，导出 $1/A=0$ 矛盾。故 $\lim_{n\to\infty} a_n = +\infty$。
+    考虑 $\lim_{n\to\infty} \frac{a_n^2}{2n}$，这是一个 $\frac{\infty}{\infty}$ 型，适用Stolz定理。
+    \begin{equation*}
+        \lim_{n\to\infty} \frac{a_n^2}{2n} = \lim_{n\to\infty} \frac{a_{n+1}^2 - a_n^2}{2(n+1)-2n} = \frac{1}{2}\lim_{n\to\infty} \left( (a_n+\frac{1}{a_n})^2 - a_n^2 \right) = \frac{1}{2}\lim_{n\to\infty} (2 + \frac{1}{a_n^2}) = 1
+    \end{equation*}
+    因此 $\lim_{n\to\infty} \frac{a_n}{\sqrt{2n}} = 1$。
+\end{solution}
+
+\section{导数与微分中值定理}
+\subsection{导数定义的应用}
+\begin{problem}[CMC真题]
+ 设函数 $f(x)$ 在点 $x_{0}$ 处可导, $\{\alpha_{n}\}$ 与 $\{\beta_{n}\}$ 是两个趋于0的正数列,求极限
+$I=lim_{n\rightarrow\infty}\frac{f(x_{0}+\alpha_{n})-f(x_{0}-\beta_{n})}{\alpha_{n}+\beta_{n}}.$
+\end{problem}
+\begin{solution}
+    在分子中加减 $f(x_0)$ 以凑出导数定义形式：
+    \begin{align*}
+        I &= \lim_{n\to\infty} \left( \frac{f(x_0+\alpha_n) - f(x_0)}{\alpha_n+\beta_n} + \frac{f(x_0) - f(x_0-\beta_n)}{\alpha_n+\beta_n} \right) \\
+        &= \lim_{n\to\infty} \left( \frac{f(x_0+\alpha_n) - f(x_0)}{\alpha_n} \cdot \frac{\alpha_n}{\alpha_n+\beta_n} + \frac{f(x_0-\beta_n) - f(x_0)}{-\beta_n} \cdot \frac{\beta_n}{\alpha_n+\beta_n} \right)
+    \end{align*}
+    因为 $f'(x_0)$ 存在，所以 $\frac{f(x_0+h)-f(x_0)}{h} = f'(x_0) + o(1)$。
+    令 $\frac{f(x_0+\alpha_n) - f(x_0)}{\alpha_n} = f'(x_0) + r_n$ 和 $\frac{f(x_0-\beta_n) - f(x_0)}{-\beta_n} = f'(x_0) + s_n$，其中 $r_n, s_n \to 0$。
+    \begin{align*}
+        I &= \lim_{n\to\infty} \left( (f'(x_0)+r_n)\frac{\alpha_n}{\alpha_n+\beta_n} + (f'(x_0)+s_n)\frac{\beta_n}{\alpha_n+\beta_n} \right) \\
+        &= \lim_{n\to\infty} \left( f'(x_0)(\frac{\alpha_n+\beta_n}{\alpha_n+\beta_n}) + \frac{r_n\alpha_n+s_n\beta_n}{\alpha_n+\beta_n} \right)
+    \end{align*}
+    因为 $|\frac{r_n\alpha_n+s_n\beta_n}{\alpha_n+\beta_n}| \le \frac{|r_n|\alpha_n+|s_n|\beta_n}{\alpha_n+\beta_n} \le |r_n|+|s_n| \to 0$，由夹逼准则知第二项极限为0。
+    所以 $I = f'(x_0)$。
+\end{solution}
+
+\subsection{微分中值定理的应用}
+微分中值定理（罗尔、拉格朗日、柯西）是连接函数值与导数值的桥梁，在证明题和求极限中都有重要应用。
+\begin{problem}[CMC真题]
+    设函数 $f(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导。证明在 $(a,b)$ 内至少存在一点 $\xi$，使得 $2\xi(f(b)-f(a)) = (b^2-a^2)f'(\xi)$。
+\end{problem}
+\begin{solution}
+    需要证明的式子可以变形为 $\frac{f(b)-f(a)}{b^2-a^2} = \frac{f'(\xi)}{2\xi}$。
+    这提示我们使用柯西中值定理。设 $F(x) = f(x)$ 和 $G(x)=x^2$。
+    $F(x)$ 和 $G(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导，且 $G'(x) = 2x \neq 0$ （若 $0 \notin (a,b)$）。
+    根据柯西中值定理，存在 $\xi \in (a,b)$ 使得：
+    \begin{equation*}
+        \frac{F(b)-F(a)}{G(b)-G(a)} = \frac{F'(\xi)}{G'(\xi)} \implies \frac{f(b)-f(a)}{b^2-a^2} = \frac{f'(\xi)}{2\xi}
+    \end{equation*}
+    整理即得 $2\xi(f(b)-f(a)) = (b^2-a^2)f'(\xi)$。
+    （如果 $0 \in [a,b]$，需要进行更详细的讨论，但结论依然成立）。
+\end{solution}
+
+\section{积分基础}
+\subsection{不定积分}
+\subsubsection{基本方法回顾}
+\begin{itemize}
+    \item \textbf{第一类换元法（凑微分）}
+    \item \textbf{第二类换元法} (三角代换、根式代换等)
+    \item \textbf{分部积分法}
+\end{itemize}
+
+\subsubsection{有理函数积分（Heaviside掩盖法）}
+用于快速分解有理真分式 $\frac{P(x)}{Q(x)}$。
+\paragraph{情况一：分母为单重一次因式}
+若 $Q(x) = (x-a)Q_1(x)$，则 $\frac{P(x)}{Q(x)} = \frac{A}{x-a} + \dots$，其中 $A = \left. \frac{P(x)}{Q_1(x)} \right|_{x=a}$。
+\paragraph{情况二：分母为r重一次因式}
+若 $Q(x) = (x-a)^r Q_1(x)$，则展开式中包含 $\sum_{k=0}^{r-1} \frac{A_k}{(x-a)^{r-k}}$，其中 $A_k = \frac{1}{k!} \left[ \frac{d^k}{dx^k} \left( \frac{P(x)}{Q_1(x)} \right) \right]_{x=a}$。
+
+\subsection{定积分}
+\subsubsection{利用对称性}
+\begin{problem}[CMC真题]
+    计算 $I=\int_{-\pi}^{\pi} \frac{x^2 \sin x}{1+\cos^2 x} dx$。
+\end{problem}
+\begin{solution}
+    积分区间关于原点对称。被积函数 $f(x) = \frac{x^2 \sin x}{1+\cos^2 x}$ 是奇函数，因为 $f(-x) = \frac{(-x)^2 \sin(-x)}{1+\cos^2(-x)} = -f(x)$。因此积分值为0。
+\end{solution}
+
+\subsubsection{区间再现}
+$\int_a^b f(x)dx = \int_a^b f(a+b-x)dx$ 是一个极其有用的性质。
+
+\chapter{双元法}
+双元法是一种处理具有对称结构被积函数的强大思想。其核心是将被积函数中的两个部分 $p(x), q(x)$ 看作一个整体，利用它们之间存在的代数关系（特别是微分关系）来简化积分。
+
+\section{二次双元：$p^2 \pm q^2 = C^2$}
+\textbf{定义}: 满足 $p^2 \pm q^2 = C^2$ (C为常数) 关系的一对函数 $(p, q)$ 为一对二次双元。
+\begin{itemize}
+    \item \textbf{实圆关系} ($+$): $p^2 + q^2 = C^2$。微分得 $pdp = -qdq \implies \frac{dp}{q} = -\frac{dq}{p}$。
+    \item \textbf{虚圆关系} ($-$): $p^2 - q^2 = C^2$。微分得 $pdp = qdq \implies \frac{dp}{q} = \frac{dq}{p}$。
+\end{itemize}
+这个微分关系是双元法所有变换的基础，例如“等分性”：$\frac{A dq \mp B dp}{Ap \pm Bq} = \frac{dq}{p}$。
+
+\subsection{基本构型与核心公式}
+\textbf{构型1 (基础微分形式)}: $\int \frac{dq}{p}$
+\begin{itemize}
+    \item \textbf{虚圆}: $\int \frac{dq}{p} = \int \frac{d(p+q)}{p+q} = \ln(p+q)$
+    \item \textbf{实圆}: $\int \frac{dq}{p} = \int \frac{d(q/p)}{1+(q/p)^2} = \arctan\frac{q}{p}$
+\end{itemize}
+
+\textbf{构型2 (点火公式的本质)}: $\int p dq$
+这个积分可以通过凑微分和分部积分思想得到一个非常优美的公式：
+\begin{equation}
+    \int p dq = \frac{1}{2} (pq + C^2 \int \frac{dq}{p}) \quad (\text{实圆关系})
+\end{equation}
+\begin{equation}
+    \int p dq = \frac{1}{2} (pq + C^2 \int \frac{dq}{p}) \quad (\text{虚圆关系, 这里应为 } p^2-q^2=C^2, 2\int pdq = pq+C^2\int\frac{dq}{p})
+\end{equation}
+\begin{proof}
+(虚圆 $p^2-q^2=C^2$): $\int pdq = pq - \int qdp = pq - \int \frac{q^2}{p}dq = pq - \int \frac{p^2-C^2}{p}dq = pq - \int pdq + C^2\int\frac{dq}{p}$. 移项得 $2\int pdq = pq + C^2\int\frac{dq}{p}$。
+\end{proof}
+这个公式将形如 $\int \sqrt{a^2 \pm x^2} dx$ 的积分统一起来，并将其计算转化为基本构型1。
+
+\begin{problem}
+    计算 $I = \int \sqrt{a^2+x^2} dx$。
+\end{problem}
+\begin{solution}
+    设双元 $p=\sqrt{a^2+x^2}, q=x$。它们满足虚圆关系 $p^2-q^2=a^2$。
+    我们要求的是 $\int p dq$。套用公式：
+    \begin{align*}
+        I = \int p dq &= \frac{1}{2} (pq + a^2 \int \frac{dq}{p}) \\
+          &= \frac{1}{2} (x\sqrt{a^2+x^2} + a^2 \ln(p+q)) \\
+          &= \frac{1}{2} (x\sqrt{a^2+x^2} + a^2 \ln(x+\sqrt{a^2+x^2}))
+    \end{align*}
+\end{solution}
+
+\subsection{对勾三元与四次根式积分}
+当被积函数中出现 $x \pm 1/x$ 结构时，可以考虑对勾双元。
+恒等式 $(x-\frac{a}{x})^{2}+4a=(x+\frac{a}{x})^{2}$ 诱导出一对双元。通常取 $a=1$，并引入第三个元 $r=\sqrt{x^2+1/x^2+b}$，构成“对勾三元”：
+$p=x+1/x, q=x-1/x, r=\sqrt{p^2-2+b} = \sqrt{q^2+2+b}$。
+\begin{problem}
+求 $\int\frac{1-x^{2}}{1+x^{2}}\frac{dx}{\sqrt{x^{4}+x^{2}+1}}.$
+\end{problem}
+\begin{solution}
+分子分母同除以 $x^2$ (在根号内是 $x^4$)：
+\begin{equation*}
+    I = \int \frac{1/x^2-1}{1/x^2+1} \frac{dx}{\sqrt{x^2+1+1/x^2}}
+\end{equation*}
+设对勾双元 $p=x+1/x, q=x-1/x$。
+注意到 $dp = (1-1/x^2)dx$。
+\begin{equation*}
+    I = \int \frac{-dp}{p\sqrt{p^2-1}}
+\end{equation*}
+令 $p=\sec\theta$, $dp=\sec\theta\tan\theta d\theta$。
+\begin{equation*}
+    I = \int \frac{-\sec\theta\tan\theta d\theta}{\sec\theta \tan\theta} = \int -d\theta = -\theta+C = -\text{arcsec}(p)+C = -\text{arcsec}(x+1/x)+C
+\end{equation*}
+\end{solution}
+
+\chapter{单元法}
+单元法是双元法的变体，其核心关系是**乘积为常数**，即 $pq=C$。它统一并简化了经典的欧拉代换和万能代换。
+
+\section{基本思想：从双元到单元}
+二次双元 $p^2-q^2=C$ 可以写作 $(p-q)(p+q)=C$。如果我们令 $s=p+q, t=p-q$，那么它们就满足单元关系 $st=C$。这揭示了双元法和单元法的深刻联系。
+例如，处理 $\sqrt{ax^2+bx+c}$ 时，欧拉的第一类代换 $\sqrt{ax^2+bx+c} = t \pm \sqrt{a}x$ 本质上就是构造了一个单元关系。但直接使用单元法进行计算通常更为简洁。
+
+\begin{problem}
+    计算 $I = \int \frac{dx}{(2+x)\sqrt{1+x}}$
+\end{problem}
+\begin{solution}
+    这是一个可以用根式代换 $t=\sqrt{1+x}$ 解决的标准题目。我们用单元法的思想来重新审视。
+    设 $p = \sqrt{1+x}, q = 2+x = 1+p^2$。这没有形成 $pq=C$ 的关系。
+    
+    正确的单元构造应该是基于被积函数结构。设 $t = \sqrt{1+x}$，则 $x=t^2-1$。
+    $I = \int \frac{2t dt}{(t^2+1)t} = 2 \int \frac{dt}{t^2+1} = 2 \arctan t + C = 2\arctan\sqrt{1+x}+C$。
+    这个例子太简单，无法体现单元法的威力。让我们回到之前那个更复杂的例子。
+
+\begin{problem}
+    计算 $I = \int \frac{dx}{1+\sqrt{x}+\sqrt{1+x}}$
+\end{problem}
+\begin{solution}
+    设单元 $p=\sqrt{1+x}+\sqrt{x}, q=\sqrt{1+x}-\sqrt{x}$，则 $pq=1$。
+    我们用 $p$ 来表示 $x$ 和 $dx$：
+    $p-q = 2\sqrt{x} \implies p - 1/p = 2\sqrt{x} \implies x = (\frac{p-1/p}{2})^2$。
+    $dx = 2(\frac{p-1/p}{2}) \cdot (\frac{1+1/p^2}{2}) dp = \frac{p^2-1}{2p} \frac{p^2+1}{p^2} dp$。
+    被积函数的分母是 $1+\sqrt{x}+\sqrt{1+x} = 1+p$。
+    \begin{align*}
+        I &= \int \frac{1}{1+p} \cdot \frac{(p-1)(p+1)}{2p} \cdot \frac{p^2+1}{p^2} dp = \int \frac{(p-1)(p^2+1)}{2p^3} dp \\
+        &= \frac{1}{2} \int (1 - \frac{1}{p} + \frac{1}{p^2} - \frac{1}{p^3}) dp \\
+        &= \frac{1}{2} (p - \ln p - \frac{1}{p} + \frac{1}{2p^2}) + C
+    \end{align*}
+    代回 $p = \sqrt{1+x}+\sqrt{x}$ 和 $1/p = q = \sqrt{1+x}-\sqrt{x}$：
+    $p-1/p = 2\sqrt{x}$
+    \begin{equation*}
+        I = \frac{1}{2} (2\sqrt{x} - \ln(\sqrt{1+x}+\sqrt{x}) + \frac{1}{2}(\sqrt{1+x}-\sqrt{x})^2) + C \\
+        = \sqrt{x} - \frac{1}{2}\ln(\sqrt{1+x}+\sqrt{x}) + \frac{1}{4}(1+2x-2\sqrt{x(1+x)}) + C
+    \end{equation*}
+\end{solution}
+
+\section{指数类的单元法}
+当被积函数形如 $\int g(x) e^{f(x)} dx$ 时，一个有效的策略是尝试寻找一个函数 $P(x)$，使得 $(P(x)e^{f(x)})' = g(x)e^{f(x)}$。这其实就是单元法的思想。
+我们寻找两个单元 $p, q$，其中一个（比如 $p$）包含 $e^{f(x)}$，另一个（$q$）是辅助函数，它们之间有简单的微分关系，且它们的组合能够表达出被积函数。
+
+\begin{problem}
+    计算 $I = \int(1+x-\frac{1}{x})e^{x+\frac{1}{x}}dx$。
+\end{problem}
+\begin{solution}
+    被积函数中 $e^{x+1/x}$ 提示我们积分的结果很可能包含这一项。
+    我们尝试对 $P(x)e^{x+1/x}$ 求导，看看能否凑出被积函数。
+    $(x e^{x+1/x})' = 1 \cdot e^{x+1/x} + x \cdot e^{x+1/x} \cdot (1-1/x^2) = (1+x-1/x) e^{x+1/x}$。
+    这恰好就是被积函数。因此，
+    \begin{equation*}
+        I = \int (x e^{x+1/x})' dx = x e^{x+1/x} + C
+    \end{equation*}
+    从单元法的角度看，我们实际上是猜测了 $p=xe^{x+1/x}$，并发现 $dp$ 就是被积表达式。
+\end{solution}
+
+\chapter{组合积分法}
+组合积分法专门处理形如 $\int \frac{a_1 f(x) + b_1 g(x)}{a f(x) + b g(x)} dx$ 的积分，其核心是通过构造辅助积分并建立线性方程组来求解。
+
+\section{核心思想与基本函数对}
+该方法适用于满足特定微分性质的函数对 $(f(x), g(x))$，常见的有：
+\begin{itemize}
+    \item \textbf{三角函数对}: $f(x)=\sin x, g(x)=\cos x$。满足 $f'(x)=g(x), g'(x)=-f(x)$。
+    \item \textbf{双曲函数对}: $f(x)=\sinh x, g(x)=\cosh x$。满足 $f'(x)=g(x), g'(x)=f(x)$。
+    \item \textbf{指数函数对}: $f(x)=e^x, g(x)=e^{-x}$。满足 $f'(x)=f(x), g'(x)=-g(x)$。
+\end{itemize}
+方法的核心是：将被积函数的分子写成分母及其导数的线性组合。
+$a_1 f(x) + b_1 g(x) = A(a f(x) + b g(x)) + B(a f'(x) + b g'(x))$
+通过比较系数解出A和B，然后积分。
+\begin{align*}
+    I &= \int (A + B \frac{(a f(x) + b g(x))'}{a f(x) + b g(x)}) dx \\
+      &= Ax + B \ln|a f(x) + b g(x)| + C
+\end{align*}
+
+\section{三角函数对 $(\sin x, \cos x)$}
+对于 $I = \int \frac{a_1 \sin x + b_1 \cos x}{a \sin x + b \cos x} dx$，我们设：
+$a_1 \sin x + b_1 \cos x = A(a \sin x + b \cos x) + B(a \cos x - b \sin x)$
+比较 $\sin x$ 和 $\cos x$ 的系数：
+$a_1 = Aa - Bb$
+$b_1 = Ab + Ba$
+解得 $A = \frac{aa_1+bb_1}{a^2+b^2}$ 和 $B = \frac{ab_1-ba_1}{a^2+b^2}$。
+最终结果为 $I = Ax + B \ln|a \sin x + b \cos x| + C$。
+
+\chapter{不定积分的更多技巧}
+
+\section{推广的分部积分公式}
+对于被积函数是多项式 $P(x)$ 与 $e^{ax}, \sin(ax), \cos(ax)$ 相乘的积分，可以反复使用分部积分法。这可以总结成一个一般公式。例如：
+\begin{equation}
+\int P(x)e^{ax}dx=\frac{e^{ax}}{a}\left(P(x) - \frac{P'(x)}{a} + \frac{P''(x)}{a^2} - \dots + (-1)^n \frac{P^{(n)}(x)}{a^n}\right) + C
+\end{equation}
+其中n是多项式P(x)的次数。
+\begin{problem}
+计算 $\int (x^2+2x)e^{3x} dx$。
+\end{problem}
+\begin{solution}
+令 $P(x)=x^2+2x, a=3$。
+$P'(x) = 2x+2$, $P''(x) = 2$, $P'''(x)=0$。
+\begin{align*}
+    I &= \frac{e^{3x}}{3} \left( (x^2+2x) - \frac{2x+2}{3} + \frac{2}{9} \right) + C \\
+      &= \frac{e^{3x}}{3} \left( x^2 + \frac{4}{3}x - \frac{4}{9} \right) + C
+\end{align*}
+\end{solution}
+
+\section{循环法与递推法}
+\begin{itemize}
+    \item \textbf{循环法}: 主要用于分部积分后原积分再次出现的情况，如 $\int e^x \cos x dx$。
+    \item \textbf{递推法}: 用于计算带有整数参数的积分族，通过分部积分得到 $I_n$ 和 $I_{n-k}$ 之间的关系，如沃利斯积分。
+\end{itemize}
+
+\chapter{定积分与广义积分的高级技巧}
+
+\section{含参变量积分法 (费曼技巧)}
+通过对积分引入参数并对参数求导来简化积分。
+\begin{problem}
+    计算积分 $I = \int_0^1 \frac{x^2 - 1}{\ln x} dx$。
+\end{problem}
+\begin{solution}
+    构造 $I(a) = \int_0^1 \frac{x^a - 1}{\ln x} dx$。我们要求的是 $I(2)$。
+    $I'(a) = \int_0^1 \frac{\partial}{\partial a} (\frac{x^a - 1}{\ln x}) dx = \int_0^1 x^a dx = \frac{1}{a+1}$。
+    积分回来 $I(a) = \ln(a+1) + C$。
+    由 $I(0) = 0$ 知 $C=0$。所以 $I(a)=\ln(a+1)$，故 $I(2)=\ln 3$。
+\end{solution}
+
+\section{无穷级数积分法}
+将积分函数展开成幂级数，然后逐项积分。这对于某些看似困难的定积分非常有效。
+\begin{problem}
+    计算 $I = \int_0^1 \frac{\ln(1+x)}{x} dx$。
+\end{problem}
+\begin{solution}
+    我们知道 $\ln(1+x) = \sum_{n=1}^\infty (-1)^{n-1} \frac{x^n}{n}$ for $|x|<1$。
+    \begin{align*}
+        I &= \int_0^1 \frac{1}{x} \sum_{n=1}^\infty (-1)^{n-1} \frac{x^n}{n} dx \\
+        &= \int_0^1 \sum_{n=1}^\infty (-1)^{n-1} \frac{x^{n-1}}{n} dx \\
+        &= \sum_{n=1}^\infty \frac{(-1)^{n-1}}{n} \int_0^1 x^{n-1} dx \quad (\text{交换积分与求和}) \\
+        &= \sum_{n=1}^\infty \frac{(-1)^{n-1}}{n} \left[ \frac{x^n}{n} \right]_0^1 \\
+        &= \sum_{n=1}^\infty \frac{(-1)^{n-1}}{n^2} = 1 - \frac{1}{4} + \frac{1}{9} - \frac{1}{16} + \dots
+    \end{align*}
+    这是一个著名的级数，其值为 $\frac{\pi^2}{12}$。
+\end{solution}
+
+\section{特殊函数与特殊积分}
+\subsection{Gamma 函数与 Beta 函数}
+这两个函数是阶乘向实数和复数的推广，在计算特定形式的定积分时非常有用。
+\begin{itemize}
+    \item $\Gamma(z) = \int_0^\infty t^{z-1}e^{-t} dt$
+    \item $B(x, y) = \int_0^1 t^{x-1}(1-t)^{y-1} dt = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}$
+\end{itemize}
+
+\subsection{Frullani 积分}
+公式： $\int_0^\infty \frac{f(ax) - f(bx)}{x} dx = (f(0) - f(\infty)) \ln\frac{a}{b}$
+
+\subsection{Lobachevsky 积分}
+若 $f(x)$ 是以 $\pi$ 为周期的偶函数，则 $\int_0^\infty f(x) \frac{\sin x}{x} dx = \int_0^{\pi/2} f(x) dx$。
+这是一个非常奇特的公式，可以将一个广义积分转化为一个普通定积分。
+
+\begin{problem}
+    计算 $\int_0^\infty \frac{\sin x}{x} dx$。
+\end{problem}
+\begin{solution}
+    令 $f(x)=1$。这是一个以 $\pi$ 为周期的偶函数。
+    根据Lobachevsky积分公式：
+    \begin{equation*}
+        \int_0^\infty \frac{\sin x}{x} dx = \int_0^{\pi/2} 1 dx = \frac{\pi}{2}
+    \end{equation*}
+\end{solution}
+
+\end{document}
+

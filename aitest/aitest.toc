@@ -1,0 +1,41 @@
+\contentsline {chapter}{绪论}{iii}{chapter*.2}%
+\contentsline {chapter}{\numberline {第一章}极限与微积分基础}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}极限}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}求函数极限的典型方法}{1}{subsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1.1}利用基本极限和等价无穷小}{1}{subsubsection.1.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1.2}洛必达(L'Hospital)法则}{1}{subsubsection.1.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.1.3}泰勒(Taylor)公式}{2}{subsubsection.1.1.1.3}%
+\contentsline {subsubsection}{\numberline {1.1.1.4}利用定积分定义求极限}{2}{subsubsection.1.1.1.4}%
+\contentsline {subsubsection}{\numberline {1.1.1.5}利用Stolz-Cesàro定理}{2}{subsubsection.1.1.1.5}%
+\contentsline {section}{\numberline {1.2}导数与微分中值定理}{2}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}导数定义的应用}{2}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}微分中值定理的应用}{3}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}积分基础}{3}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}不定积分}{3}{subsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.1}基本方法回顾}{3}{subsubsection.1.3.1.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.2}有理函数积分（Heaviside掩盖法）}{3}{subsubsection.1.3.1.2}%
+\contentsline {paragraph}{\numberline {1.3.1.2.1}情况一：分母为单重一次因式}{3}{paragraph.1.3.1.2.1}%
+\contentsline {paragraph}{\numberline {1.3.1.2.2}情况二：分母为r重一次因式}{3}{paragraph.1.3.1.2.2}%
+\contentsline {subsection}{\numberline {1.3.2}定积分}{3}{subsection.1.3.2}%
+\contentsline {subsubsection}{\numberline {1.3.2.1}利用对称性}{3}{subsubsection.1.3.2.1}%
+\contentsline {subsubsection}{\numberline {1.3.2.2}区间再现}{4}{subsubsection.1.3.2.2}%
+\contentsline {chapter}{\numberline {第二章}双元法}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}二次双元：$p^2 \pm q^2 = C^2$}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}基本构型与核心公式}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}对勾三元与四次根式积分}{5}{subsection.2.1.2}%
+\contentsline {chapter}{\numberline {第三章}单元法}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}基本思想：从双元到单元}{7}{section.3.1}%
+\contentsline {section}{\numberline {3.2}指数类的单元法}{7}{section.3.2}%
+\contentsline {chapter}{\numberline {第四章}组合积分法}{8}{chapter.4}%
+\contentsline {section}{\numberline {4.1}核心思想与基本函数对}{8}{section.4.1}%
+\contentsline {section}{\numberline {4.2}三角函数对 $(\sin x, \cos x)$}{8}{section.4.2}%
+\contentsline {chapter}{\numberline {第五章}不定积分的更多技巧}{9}{chapter.5}%
+\contentsline {section}{\numberline {5.1}推广的分部积分公式}{9}{section.5.1}%
+\contentsline {section}{\numberline {5.2}循环法与递推法}{9}{section.5.2}%
+\contentsline {chapter}{\numberline {第六章}定积分与广义积分的高级技巧}{10}{chapter.6}%
+\contentsline {section}{\numberline {6.1}含参变量积分法 (费曼技巧)}{10}{section.6.1}%
+\contentsline {section}{\numberline {6.2}无穷级数积分法}{10}{section.6.2}%
+\contentsline {section}{\numberline {6.3}特殊函数与特殊积分}{10}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Gamma 函数与 Beta 函数}{10}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Frullani 积分}{10}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Lobachevsky 积分}{10}{subsection.6.3.3}%

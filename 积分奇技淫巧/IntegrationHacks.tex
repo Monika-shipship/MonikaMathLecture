@@ -45,11 +45,85 @@
 \chapter{绪论}
 本书是是 LZU 数学协会举办的数学讲座的讲义，将会讲授一些在课不上不会讲授，但在某些情况有奇效的积分技巧，近年来 cmc 的试题中偶尔会出现此类题目
 
-笔者水平有限，若有不足缺漏之处恳请读者更正，或在 \href{Github仓库处}{}提交PR以更正
+笔者水平有限，若有不足缺漏之处恳请读者更正，或在 \href{https://github.com/Monika-shipship/MonikaMathLecture}{Github仓库处（点击即可跳转）} 提交PR以更正
 \mainmatter
 
+\chapter{基础知识}
+在本章列举出关于微积分最基础的知识，读者应做到在看到本章的所有题目时能瞬间反应出答案来
+\section{极限}
+所谓的极限，就是 Approach ,不断地逼进一个值，但是始终不会到达
 
-	
+用数学语言来讲就是
+\begin{equation}
+  \lim_{x \to a} f(x)=A \iff \forall \epsilon>0,\exists \delta>0, \text{使得当}x \in \left[ a-\epsilon,a+\epsilon \right], \left\vert f(x) -A\right\vert <\epsilon
+\end{equation}
+如果函数是多元函数，则定义为从任意路径趋近于该点的值都相同，注意是任意路径而不是任意角度，取所有斜率的直线并不能穷尽所有路径，比如下面这个
+\begin{problem}
+    $\lim_{(x,y) \to (0,0)} \frac{xy}{x+y} $ 是否存在？
+  \end{problem}
+  如果你取所有斜率的直线，比如 $y=kx$，而误以为直线能穷尽所有路径，就会得出极限为零的错误答案 $\lim_{(x,y) \to (0,0)} f(x,y)=\lim \frac{(kx^{2})}{(1+k)x}=\lim_{x \to 0} \frac{k}{(1+k)}x=0$
+  \begin{solution}
+    不存在，取路径 $y=-x+x^{2},\lim_{(x,y) \to (0,0)} \frac{x(-x-x^{2})}{x^{2}}=\lim_{x \to 0}(-1-x)=-1$\
+    这条路径得到的值和 $y=kx$ 路径得到的值不同，所以极限不存在
+  \end{solution}
+\section{导数}
+我们使用最朴素的导数理解方式，自变量发生微小变化后，因变量会随之发生一个微小变化，这两个变化的比值就是导数，也是斜率
+
+\begin{equation}
+  \frac{\mathrm{d}y}{\mathrm{d}x} \big|_{x_0}\equiv \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}=\lim_{x \to x_0} \frac{y(x)-y(x_0)}{x-x_0}
+\end{equation}
+利用这个定义不难算出一些初等函数的导数，这里只以 $x^{n}$ 和 $\sin x$ 的导数为例
+\begin{example}
+  \begin{equation}
+    (x^{n})^{\prime }=\frac{\Delta x^{n}}{\Delta x}=\frac{(x+\Delta x)^{n}-x^{n}}{\Delta x}=\frac{x^{n}+}{1}
+  \end{equation}
+\end{example}
+\begin{itemize}
+  \item $(x^{n})^{\prime }=n x^{n-1},(e^{ax})^{\prime }=ae^{x},(a^{x})^{\prime }=(e^{x\ln a})^{\prime }=\ln a \cdot  a^{x}$
+  \begin{problem}
+    $(x^{x})^{\prime }=?,(x^{x^{x}})^{\prime }=?$
+  \end{problem}
+  \begin{solution}
+    $x^{x}=e^{\ln(x^{x})}=e^{x\ln x},(x^{x})^{\prime }=e^{x \ln x}()$
+  \end{solution}
+\end{itemize}
+\section{洛必达法则}
+\section{泰勒展开}
+\section{常用求极限方法}
+(1) 利用基本极限;
+(2) 利用无穷小替换;
+(3) 利用L' Hospital (洛必达)法则;
+(4) 利用四抖。r (泰勒)公式;
+(5) 利用导数的定义.
+% \section{傅立叶级数}
+% \section{傅立叶变换}
+	\section{积分}
+    \subsection{积分的定义}
+    \subsection{什么叫积不出来？}
+    \subsection{不定上下限积分的求导公式}
+    \subsection{积分中值定理}
+    \subsection{基本不定积分方法}
+    \subsubsection{凑微分}
+    \subsubsection{分部积分}
+    \subsection{换元}
+    \subsubsection{万能代换}
+    \subsubsection{根式代换}
+    \subsubsection{倒代换}
+    \subsubsection{部分分式法}
+    \subsubsection{留数法}
+    \subsection{基本定积分方法}
+    \subsubsection{区间再现}
+    \subsubsection{点火}
+
+\chapter{双元法}
+\chapter{单元法}
+\chapter{组合积分法}
+\chapter{其他小方法}
+\section{费曼求导法}
+\section{循环法}
+\section{先求递推，再求特值}
+\section{rullani (傅汝兰尼)积分公式}
+
 
 \chapter{版本更新历史}
 
@@ -73,7 +147,7 @@
 参考文献尚未编排，此处使用的是模板的默认参考文献，作废
 \appendix
 
-\chapter{基本数学工具}
+\chapter{积分表}
 
 
 % \section{求和算子与描述统计量}
