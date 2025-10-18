@@ -33,6 +33,12 @@
 \usetikzlibrary{arrows.meta,3d}
 
 \addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\artanh}{artanh}
+\DeclareMathOperator{\arsech}{arsech}
+\DeclareMathOperator{\arcoth}{arcoth}
+\DeclareMathOperator{\arcsch}{arcsch}
 \definecolor{lightyellow}{rgb}{1, 1, 0.8} % 定义一个淡黄色
 \sethlcolor{lightyellow} % 设置为高亮颜色
 \begin{document}
@@ -72,23 +78,544 @@
 \begin{equation}
   \frac{\mathrm{d}y}{\mathrm{d}x} \big|_{x_0}\equiv \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}=\lim_{x \to x_0} \frac{y(x)-y(x_0)}{x-x_0}
 \end{equation}
-利用这个定义不难算出一些初等函数的导数，这里只以 $x^{n}$ 和 $\sin x$ 的导数为例
+利用这个定义不难算出一些初等函数的导数
+
+另外需要注意的是，在最开始学习微积分时，最好不要使用 $y^{\prime }$ 这种记号来表示一阶导，因为这不利于你最开始的理解导数的计算法则，不过当你熟悉之后，随便怎么用都行，在开始阶段，最好使用 $\frac{\mathrm{d}y}{\mathrm{d}x}$ 这种记号，并且直接将 $\mathrm{d}y,\mathrm{d}x$ 当成普通的数来运算，可加可减可乘可除，这虽然略失严谨，但能帮助你快速入门
+\subsubsection{求导的法则}
+
+
+要得到；这个法则非常简单，我们将 $\Delta x$ 视为一个有限的小量，而 $\mathrm{d}x$ 是将这个小量趋于零，所以每次你见到 $\mathrm{d}$ ，就已经暗示了这里有一个量会趋近于零 
+
+\begin{itemize}
+
+  \item 乘法，前导加后导
+  
+  $\Delta(uv)=(u+\Delta u)(v+\Delta v)-uv=uv+u \Delta v+v \Delta u+ \Delta u \Delta v - uv =u \Delta v+v \Delta u+ \Delta u \Delta v$
+  
+  $\Delta u \Delta v$ 是两个微小量相乘，比一个微小量更小，认为他是高阶小量，有几个微小量相乘就是几阶小量，这里 $\Delta u \Delta v$ 就是二阶小量，他和一阶小量 $v \Delta u+ \Delta u$ 相比可以略去，于是得到 $\Delta(uv)\approx u \Delta v+v \Delta u $ 注意只有这一步才是约等于，因为略去了二阶小量
+
+  当我们取 $\Delta u ,\Delta v $ 都趋近于零的时候，约等号就变成了等号，同时也把 $\Delta$ 换成 $\mathrm{d}$
+
+  于是我们说 $\mathrm{d} (uv)=u \mathrm{d} v+v\mathrm{d}u$ 我们管这个叫 \textcolor{red}{前导加后导}
+
+  上面阐释了求导数的基本方法，再用相同的方法求除法
+
+  \item 除法，上导减下导
+  
+  $\Delta \left( \frac{u}{v} \right) = \frac{u+\Delta u}{v+\Delta v}-\frac{u}{v}=\frac{uv+v \Delta u-uv-u \Delta v}{v(v+\Delta v)}=\frac{v \Delta u - u \Delta v}{v(v+\Delta v)}$
+
+  取极限 ${\Delta v,\Delta u \to 0}$
+
+  $d(\frac{u}{v})=\frac{v\mathrm{d}u-u\mathrm{d}v}{v^{2}}$
+  
+          \item 求导是线性的 $\mathrm{d}(u+v)=\mathrm{d}u+\mathrm{d}v\implies \frac{\mathrm{d}(u+v)}{\mathrm{d}t}=\frac{\mathrm{d}u}{\mathrm{d}t}+\frac{\mathrm{d}v}{\mathrm{d}t}$
+          \item 链式法则，这一点将 $\mathrm{d}x$ 这种量整体看作是普通的数计算即可（说是整体是你不要干出 $\frac{dy}{dx}$ 把 d 给约去了这种事来），于是所谓链式就很简单了
+          
+          以下是帮助你快速理解的，而不是证明
+
+          $\frac{\mathrm{d}y}{\mathrm{d}t}$ 这个式子乘以 $\frac{\mathrm{d}x}{\mathrm{d}x}=1$ 后得到 $\frac{\mathrm{d}y}{\mathrm{d}t} \cdot \frac{\mathrm{d}x}{\mathrm{d}x}=\frac{\mathrm{d}y}{\mathrm{d}x}\cdot \frac{\mathrm{d}x}{\mathrm{d}t}$
+          \begin{example}
+            \begin{equation}
+              \begin{aligned}
+              (e^{\sqrt{\sin ^{2}x+\cos x}})'&=\frac{\mathrm{d}(e^{\sqrt{\sin ^{2}x+\cos x}})}{\mathrm{d}\sqrt{\sin ^{2}x+\cos x}}\cdot \frac{\mathrm{d}\sqrt{\sin ^{2}x+\cos x}}{\mathrm{d}x} \\
+              &=e^{\sqrt{\sin ^{2}x+\cos x}}\cdot \frac{\mathrm{d}\sqrt{\sin ^{2}x+\cos x}}{\mathrm{d}\sin ^{2}x+\cos x}\cdot \frac{\mathrm{d}(\sin ^{2}x+\cos x)}{\mathrm{d}x}\\
+              &=e^{\sqrt{\sin ^{2}x+\cos x}}\cdot \frac{1}{2 \sqrt{(\sin ^{2}x+\cos x)}}\cdot (2 \sin x \cos x - \sin x )
+              \end{aligned}
+            \end{equation}
+            于是每一步，只要将其中的一大坨变量看作整体，就能机械地进行计算了，比如第一步就是将 $\sqrt{\sin ^{2}x+\cos x}=t$ 看作整体， $\frac{\mathrm{d}(e^{\sqrt{\sin ^{2}x+\cos x}})}{\mathrm{d}\sqrt{\sin ^{2}x+\cos x}}$ 自然就是 $\frac{\mathrm{d}e^{t}}{\mathrm{d}t}=e^{t}$
+          \end{example}
+          \item 反函数
+          
+          将 $\mathrm{d}y,\mathrm{d}x$ 看作数，立刻就有
+          \begin{equation}
+            \frac{\mathrm{d}y}{\mathrm{d}x}=\frac{1}{\frac{\mathrm{d}x}{\mathrm{d}y}}
+          \end{equation}
+          即若 $y=f(x)$ 的反函数是 $x=g(y)$
+        ，则
+        \begin{equation}
+          \frac{\mathrm{d}y}{\mathrm{d}x}=f^{\prime }(x)=\frac{1}{\frac{\mathrm{d}x}{\mathrm{d}y}}=\frac{1}{g^{\prime }(y)}
+        \end{equation}
+        \item 对于多元函数，比如 $z=f(x(t),y(t))$ ，现在想求 $z$ 对 $t$ 的导数，从直觉上讲，当 $t$ 有一微小变化 $\mathrm{d}t$ 后， $x,y$ 也会有相应的变化 $\mathrm{d}x,\mathrm{d}y$ ，然后这个 $\mathrm{d}x,\mathrm{d}y$ 再影响 $z$ 的变化
+        
+        如何具体求出呢？你可以先令 $y$ 不变，那么 $\mathrm{d}y=0$ ，再看看 $\mathrm{d}x$ 会怎么影响 $z$
+
+        于是 $z(x+\mathrm{d}x,y)-z(x,y)=\mathrm{d}z|_{\mathrm{d}y=0}=\mathrm{d}f=\frac{\mathrm{d}f}{\mathrm{d}x}\mathrm{d}x$
+
+        
+
+        在上面 $x$ 变化的基础上，再让 $y$ 变化 $\mathrm{d}y$ 
+        
+        \begin{equation}
+          \begin{aligned}
+          \mathrm{d}z&=z(x+\mathrm{d}x,y+\mathrm{d}y)-z(x,y)\\
+          &=z(x+\mathrm{d}x,y+\mathrm{d}y)-z(x,y+\mathrm{d}y)+z(x,y+\mathrm{d}y)-z(x,y) \\
+          &=\frac{\mathrm{d}f}{\mathrm{d}x}|_{(x,y+\mathrm{d}y)} \mathrm{d}x+\frac{\mathrm{d}f}{\mathrm{d}y}|_{(x,y)} \mathrm{d}y\\
+          &=\frac{\mathrm{d}f}{\mathrm{d}x}|_{(x,y)} \mathrm{d}x+\frac{\mathrm{d}f}{\mathrm{d}y}|_{(x,y)} \mathrm{d}y\\
+          \end{aligned}
+        \end{equation}
+如果按照高数老师们的习惯，将 $\frac{\mathrm{d}f}{\mathrm{d}x}$ 记作 $f^{\prime }_{x} $ （其中有几个撇代表是几阶导，而下标是对谁求导，也有人不写撇）则是
+        $\mathrm{d}z=f^{\prime }_{x}\mathrm{d}x+f^{\prime }_{y}\mathrm{d}y$
+
+如果 $z$ 对 $t$ 求导就是在上式左右两边同时除 $\mathrm{d}t$ ，就得到 $\frac{\mathrm{d}z}{\mathrm{d}t}=f^{\prime }_{x}\frac{\mathrm{d}x}{\mathrm{d}t}+f^{\prime }_{y}\frac{\mathrm{d}y}{\mathrm{d}t}$
+
+如果使用下标来代表对谁求导，则是
+
+\begin{equation}
+  z^{\prime }_{t}=f^{\prime }_{x}x^{\prime }_{t}+f^{\prime }_{y}y^{\prime }_{t}
+\end{equation}
+\end{itemize}
+
+\subsubsection{具体求导例子}
+
+我们已经完全了解了抽象的求导的方法，下面再来具体算一些函数
+
+当然我们能算出结果来的，一般都是初等函数
+
+数学课上会告诉你严格的定义是
+
+\begin{definition}{初等函数}
+  所谓初等函数就是幂函数，指数函数，对数函数，三角函数，反三角函数通过有限次的加减乘除，有限次的复合运算所得的函数
+\end{definition}
+
+对我们而言，你自高中起就熟悉的各种函数的有限次组合，就叫初等函数
+
+以 $x^{n}$ 和 $\sin x,\cos x,e^{x}$ 的导数为例，具体推导其导数形式
 \begin{example}
   \begin{equation}
-    (x^{n})^{\prime }=\frac{\Delta x^{n}}{\Delta x}=\frac{(x+\Delta x)^{n}-x^{n}}{\Delta x}=\frac{x^{n}+}{1}
+    \begin{aligned}
+      (x^{n})^{\prime }&=\lim_{\Delta x \to 0}\frac{(x+\Delta x)^{n}-x^{n}}{\Delta x} \\
+      &=\lim_{\Delta x \to 0}\frac{(x^{n}+nx^{n-1}\Delta x+o(\Delta x))-x^{n}}{\Delta x} \\
+      &=\lim_{\Delta x \to 0}\frac{nx^{n-1}\Delta x+o(\Delta x)}{\Delta x} \\
+      &=nx^{n-1}
+    \end{aligned}
   \end{equation}
 \end{example}
+\begin{example}
+  \begin{equation}
+    \begin{aligned}
+      (\sin x)^{\prime } &= \lim_{\Delta x \to 0} \frac{\sin(x+\Delta x) - \sin x}{\Delta x} \\
+      &= \lim_{\Delta x \to 0} \frac{\sin x \cos \Delta x + \cos x \sin \Delta x - \sin x}{\Delta x} \\
+      &= \lim_{\Delta x \to 0} \frac{\sin x (\cos \Delta x - 1) + \cos x \sin \Delta x}{\Delta x} \\
+      &= \lim_{\Delta x \to 0} \left( \sin x \cdot \frac{\cos \Delta x - 1}{\Delta x} + \cos x \cdot \frac{\sin \Delta x}{\Delta x} \right) \\
+      &= \sin x \cdot 0 + \cos x \cdot 1 \\
+      &= \cos x
+    \end{aligned}
+  \end{equation}
+  \begin{equation}
+    \begin{aligned}
+      (\cos x)^{\prime } &= \lim_{\Delta x \to 0} \frac{\cos(x+\Delta x) - \cos x}{\Delta x} \\
+      &= \lim_{\Delta x \to 0} \frac{\cos x \cos \Delta x - \sin x \sin \Delta x - \cos x}{\Delta x} \\
+      &= \lim_{\Delta x \to 0} \frac{\cos x (\cos \Delta x - 1) - \sin x \sin \Delta x}{\Delta x} \\
+      &= \lim_{\Delta x \to 0} \left( \cos x \cdot \frac{\cos \Delta x - 1}{\Delta x} - \sin x \cdot \frac{\sin \Delta x}{\Delta x} \right) \\
+      &= \cos x \cdot 0 - \sin x \cdot 1 \\
+      &= -\sin x
+    \end{aligned}
+  \end{equation}
+\end{example}
+\begin{example}
+  对于指数函数 $e^x$ 的导数，我们首先需要引入一个与常数 $e$ 的定义相关的重要极限，关于这个重要极限的证明我们放在文末 \ref{prf:ImtLim}
+  \begin{equation}
+    \lim_{h \to 0} \frac{e^h - 1}{h} = 1
+  \end{equation}
+  这个极限的几何意义是函数 $y=e^x$ 在点 $(0,1)$ 处的切线斜率为 1。基于这个基本极限，我们可以推导 $e^x$ 在任意点 $x$ 处的导数。
+  \begin{equation}
+    \begin{aligned}
+      (e^x)' &= \lim_{\Delta x \to 0} \frac{e^{x+\Delta x} - e^x}{\Delta x} \\
+      &= \lim_{\Delta x \to 0} \frac{e^x e^{\Delta x} - e^x}{\Delta x} \\
+      &= e^x \lim_{\Delta x \to 0} \frac{e^{\Delta x} - 1}{\Delta x} \\
+      &= e^x \cdot 1 \\
+      &= e^x
+    \end{aligned}
+  \end{equation}
+  这个结果表明，$e^x$ 是一个导数等于其自身的函数
+
+  如果你将求导看作是一个函数，或者说算子 $D$ ，那么 $D(e^{x} )=e^{x}  $ ，也可称 $e^{x}$ 是求导的不动点（不动点的定义就是 $f(x)=x$的解），这个想法在日后用微分算子法快速解微分方程时有用
+\end{example}
+\begin{example}
+  下面求对数函数的导数。
+  我们首先求自然对数函数 $y = \ln x$ 的导数。根据定义，$\ln x$ 是指数函数 $e^x$ 的反函数。
+  \begin{equation}
+    y = \ln x \iff x = e^y
+  \end{equation}
+  我们可以利用反函数求导法则。对方程 $x = e^y$ 两边同时对 $x$ 求导：
+  \begin{equation}
+    \begin{aligned}
+      \frac{d}{dx}(x) &= \frac{d}{dx}(e^y) \\
+      1 &= e^y \cdot \frac{dy}{dx} \quad (\text{根据链式法则})
+    \end{aligned}
+  \end{equation}
+  从中解出 $\frac{dy}{dx}$：
+  \begin{equation}
+    \frac{dy}{dx} = \frac{1}{e^y}
+  \end{equation}
+  因为 $x = e^y$，所以我们得到：
+  \begin{equation}
+    (\ln x)' = \frac{1}{x}
+  \end{equation}
+  对于更一般的对数函数 $y = \log_a x$，我们可以使用换底公式将其转换为自然对数：
+  \begin{equation}
+    y = \log_a x = \frac{\ln x}{\ln a}
+  \end{equation}
+  由于 $\frac{1}{\ln a}$ 是一个常数，所以：
+  \begin{equation}
+    (\log_a x)' = \frac{d}{dx}\left(\frac{\ln x}{\ln a}\right) = \frac{1}{\ln a} \cdot (\ln x)' = \frac{1}{x \ln a}
+  \end{equation}
+\end{example}
+
+\begin{example}
+  反三角函数的导数，如 $\arcsin x,\arccos x,\arctan x$，可以使用反函数求导法则简便地求出。
+  \begin{itemize}
+    \item 求 $(\arcsin x)'$：
+    设 $y = \arcsin x$，则 $x = \sin y$，其中 $y \in [-\frac{\pi}{2}, \frac{\pi}{2}]$。
+    根据反函数求导法则，$(\arcsin x)' = \frac{dy}{dx} = \frac{1}{\frac{dx}{dy}} = \frac{1}{(\sin y)'} = \frac{1}{\cos y}$。
+    由于 $y \in [-\frac{\pi}{2}, \frac{\pi}{2}]$，$\cos y \ge 0$，因此 $\cos y = \sqrt{1-\sin^2 y} = \sqrt{1-x^2}$。
+    所以，$\displaystyle (\arcsin x)' = \frac{1}{\sqrt{1-x^2}}$。
+
+    \item 求 $(\arccos x)'$：
+    设 $y = \arccos x$，则 $x = \cos y$，其中 $y \in [0, \pi]$。
+    $(\arccos x)' = \frac{1}{(\cos y)'} = \frac{1}{-\sin y}$。
+    由于 $y \in [0, \pi]$，$\sin y \ge 0$，因此 $\sin y = \sqrt{1-\cos^2 y} = \sqrt{1-x^2}$。
+    所以，$\displaystyle (\arccos x)' = -\frac{1}{\sqrt{1-x^2}}$。
+
+    \item 求 $(\arctan x)'$：
+    设 $y = \arctan x$，则 $x = \tan y$，其中 $y \in (-\frac{\pi}{2}, \frac{\pi}{2})$。
+    $(\arctan x)' = \frac{1}{(\tan y)'} = \frac{1}{\sec^2 y}$。
+    利用恒等式 $\sec^2 y = 1 + \tan^2 y = 1+x^2$。
+    所以，$\displaystyle (\arctan x)' = \frac{1}{1+x^2}$。
+  \end{itemize}
+  一个有趣的关系是 $(\arcsin x)' + (\arccos x)' = 0$，这与恒等式 $\arcsin x + \arccos x = \frac{\pi}{2}$ 两边求导的结果是一致的。
+\end{example}
+\begin{example}
+  双曲函数虽然名字里带个“双曲”，听起来很吓人，但它们本质上就是指数函数 $e^x$ 的简单组合。它们与三角函数有很多相似的性质，因此学起来并不难。
+  \subsubsection{双曲函数定义}
+  最基本的两个双曲函数是双曲正弦（sinh）和双曲余弦（cosh）：
+  \begin{align}
+    \sinh x &= \frac{e^x - e^{-x}}{2} \\
+    \cosh x &= \frac{e^x + e^{-x}}{2}
+  \end{align}
+  其他的双曲函数也和三角函数类似，由这两个基本函数组合而成：
+  \begin{equation}
+    \tanh x = \frac{\sinh x}{\cosh x}, \quad \coth x = \frac{1}{\tanh x}, \quad \text{sech}\,x = \frac{1}{\cosh x}, \quad \text{csch}\,x = \frac{1}{\sinh x}
+  \end{equation}
+  
+  \subsubsection{性质与三角函数的深刻联系}
+  为什么叫它们“双曲”函数呢？因为它们和双曲线有关。我们知道三角函数 $(\cos t, \sin t)$ 构成了单位圆 $x^2+y^2=1$ 上的点，而双曲函数 $(\cosh t, \sinh t)$ 则构成了单位双曲线 $x^2-y^2=1$ 上的点。
+  我们可以很容易地验证这个核心性质：
+  \begin{equation}
+    \begin{aligned}
+      \cosh^2 x - \sinh^2 x &= \left(\frac{e^x + e^{-x}}{2}\right)^2 - \left(\frac{e^x - e^{-x}}{2}\right)^2 \\
+      &= \frac{1}{4} \left( (e^{2x} + 2 + e^{-2x}) - (e^{2x} - 2 + e^{-2x}) \right) \\
+      &= \frac{1}{4}(4) = 1
+    \end{aligned}
+  \end{equation}
+  这个恒等式 $\cosh^2 x - \sinh^2 x = 1$ 是双曲函数最重要的性质。但它和三角函数的 $\cos^2 x + \sin^2 x = 1$ 之间有什么联系呢？答案藏在复数域里。
+  
+  根据欧拉公式 $e^{i\theta} = \cos\theta + i\sin\theta$，我们可以得到：
+  \begin{align}
+    \cos\theta &= \frac{e^{i\theta} + e^{-i\theta}}{2} \\
+    \sin\theta &= \frac{e^{i\theta} - e^{-i\theta}}{2i}
+  \end{align}
+  现在，我们把自变量从实数 $x$ 换成纯虚数 $ix$：
+  \begin{align}
+    \cosh(ix) &= \frac{e^{ix} + e^{-ix}}{2} = \cos x \\
+    \sinh(ix) &= \frac{e^{ix} - e^{-ix}}{2} = i \cdot \frac{e^{ix} - e^{-ix}}{2i} = i\sin x
+  \end{align}
+  反过来，我们也可以得到：
+  \begin{align}
+    \cos(ix) &= \frac{e^{i(ix)} + e^{-i(ix)}}{2} = \frac{e^{-x} + e^{x}}{2} = \cosh x \\
+    \sin(ix) &= \frac{e^{i(ix)} - e^{-i(ix)}}{2i} = \frac{e^{-x} - e^{x}}{2i} = \frac{-(e^x - e^{-x})}{2i} = i \cdot \frac{e^x - e^{-x}}{2} = i\sinh x
+  \end{align}
+  这两个关系 $\cos(ix) = \cosh x$ 和 $\sin(ix) = i\sinh x$ 是连接三角函数与双曲函数的桥梁。利用它们，我们可以把任何一个三角函数的恒等式“翻译”成双曲函数的恒等式。
+  
+  例如，我们从 $\cos^2 x + \sin^2 x = 1$ 出发，将 $x$ 替换为 $ix$：
+  \begin{equation}
+    \cos^2(ix) + \sin^2(ix) = 1 \implies (\cosh x)^2 + (i\sinh x)^2 = 1 \implies \cosh^2 x - \sinh^2 x = 1
+  \end{equation}
+  这样，我们得到了双曲函数的基本恒等式。
+  
+  再比如和角公式 $\cos(x+y) = \cos x \cos y - \sin x \sin y$，我们把 $x, y$ 分别换成 $ix, iy$：
+  \begin{align*}
+    \cos(ix+iy) &= \cos(ix)\cos(iy) - \sin(ix)\sin(iy) \\
+    \cosh(x+y) &= (\cosh x)(\cosh y) - (i\sinh x)(i\sinh y) \\
+    \cosh(x+y) &= \cosh x \cosh y + \sinh x \sinh y
+  \end{align*}
+  这提供了一个从三角函数公式推导双曲函数公式的绝佳方法，比死记硬背优雅得多。
+  
+  \paragraph{快速翻译法则}
+  用三角恒等式快速“翻译”出双曲恒等式的经验法则：
+  \begin{itemize}
+    \item 将 $\sin\,\to\,\sinh$，$\cos\,\to\,\cosh$；
+    \item 若出现“两个 $\sinh$ 相乘”的项（如 $\sinh^2x$、$\sinh x\,\sinh y$），则把该项的符号取反
+    
+  \end{itemize}
+
+  实际上就是
+  \begin{equation}
+    \begin{cases} \sin ix\to  i \sinh x     , &   \\\cos ix\to  \cosh x , & \\ \tan ix =i \tanh x  \end{cases}
+  \end{equation}
+
+  例如：$\cos(x+y)=\cos x\cos y-\sin x\sin y$ 按规则得到 $\cosh(x+y)=\cosh x\cosh y+\sinh x\sinh y$。
+
+  \paragraph{三角-双曲性质对比表格}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{l|l}
+      \hline
+      三角函数 & 双曲函数 \\
+      \hline
+      $\cos^2x+\sin^2x=1$ & $\cosh^2x-\sinh^2x=1$ \\
+      $\cos(x\!\pm\!y)=\cos x\cos y\mp\sin x\sin y$ & $\cosh(x\!\pm\!y)=\cosh x\cosh y\pm\sinh x\sinh y$ \\
+      $\sin(x\!\pm\!y)=\sin x\cos y\pm\cos x\sin y$ & $\sinh(x\!\pm\!y)=\sinh x\cosh y\pm\cosh x\sinh y$ \\
+      $\cos 2x=\cos^2x-\sin^2x$ & $\cosh 2x=\cosh^2x+\sinh^2x$ \\
+      $\sin 2x=2\sin x\cos x$ & $\sinh 2x=2\sinh x\cosh x$ \\
+      $(\cos x)'=-\sin x$ & $(\cosh x)'=\sinh x$ \\
+      $(\sin x)'=\cos x$ & $(\sinh x)'=\cosh x$ \\
+      \hline
+    \end{tabular}
+  \end{table}
+
+  \paragraph{倍角公式（显式写出）}
+  由和角公式取 $y=x$（或直接由指数定义）可得：
+  \begin{align}
+    \cosh(2x) &= \cosh^2 x + \sinh^2 x=1+2 \sinh^2 x=2 \cosh^2 x-1, \\
+    \sinh(2x) &= 2\sinh x\,\cosh x, \\
+    \tanh(2x) &= \frac{2\tanh x}{1+\tanh^2 x} \;=\; \frac{2\sinh x\,\cosh x}{\cosh^2 x+\sinh^2 x}.
+  \end{align}
+  说这么多，到底是用来干什么的呢？在积分的时候，他换元很有用，比如 $\sqrt{1+x^{2}}$ 的积分用双曲函数换元就会方便很多， $\sinh \theta= x,\cosh \theta=\sqrt{1+x^{2}}$ 
+  
+  \begin{equation}
+    \begin{aligned}
+    \int \sqrt{1+x^{2}} \mathrm{d}x & =\int \cosh \theta \mathrm{d}(\sinh \theta)\\
+    &=\int \cosh ^{2}\theta \mathrm{d}\theta\\
+    &=\int \frac{(1+ \cosh 2\theta)}{2} \mathrm{d}\theta \\
+    &=\frac{1}{2} \theta +\frac{1}{4} \sinh 2\theta+c\\
+    &=\frac{1}{2}  \arcosh x+\frac{1}{4} 2 \sinh \theta \cosh \theta\\
+    &=\frac{1}{2} \ln(x+\sqrt{1+x^{2}})+\frac{1}{2}x \sqrt{1+x^{2}}+C
+    \end{aligned}
+  \end{equation}
+\end{example}
+
+
+\begin{example}
+  
+  反双曲函数就是把 $\sinh,\cosh,\tanh$ 那些拿来求“反解”。比如 $\sinh \theta = x$ 想要 $\theta$，我们就写成 $\theta=\arsinh x$。从图像上看，$\arsinh$ 是 $\sinh$ 的“左右翻转”，定义域是全体实数，值域也还是全体实数；$\arcosh$ 则只能从 $\cosh x \ge 1$ 的那一截翻上去，值域限制在 $[0,+\infty)$。$\artanh$ 对应的是 $\tanh$ 在 $(-1,1)$ 上的单调部分。
+  
+  用指数函数去解方程可以得到它们和对数的关系：
+  \begin{align}
+    \arsinh x &= \ln\!\left(x + \sqrt{x^{2}+1}\right) \qquad &&(x \in \mathbb{R}), \\
+    \arcosh x &= \ln\!\left(x + \sqrt{x^{2}-1}\right) \qquad &&(x \ge 1), \\
+    \artanh x &= \frac{1}{2}\ln\!\frac{1+x}{1-x} \qquad &&(|x|<1).
+  \end{align}
+  以 $\arsinh$ 为例，把“反解”的步骤详细写出来就是：
+  \begin{align*}
+    y &= \arsinh x \quad \Longleftrightarrow \quad \sinh y = x, \\
+    \sinh y &= \frac{e^{y}-e^{-y}}{2} = x, \\
+    e^{2y} - 2xe^{y} - 1 &= 0 \quad \text{（把等式两边乘 $e^{y}$，凑成一元二次）}, \\
+    e^{y} &= x + \sqrt{x^{2}+1} \quad \text{（只取正根，因为 $e^{y}>0$）}, \\
+    y &= \ln\!\left(x+\sqrt{x^{2}+1}\right).
+  \end{align*}
+  看清这一步后，$\arcosh$、$\artanh$ 完全一样照做，只是换成各自的指数表达式。
+  这些公式的推导和三角反函数类似：先把定义式写成指数形式，再凑成一个对数。它们一方面告诉我们反双曲函数可以用初等函数表示，另一方面也便于做极限或者积分。
+  
+  还记得前面那句 $\sin(ix)=i\sinh x$ 吗？可以不用任何对数公式，直接由“反函数”的唯一性得到关系式。令
+  \begin{equation}
+    \begin{aligned}
+    \sin i x= i \sinh x \\
+    \sin (\arcsin ix)=ix\\
+    \sin(i(-i)\arcsin ix)=ix\\
+    i \sinh ((-i)\arcsin ix)=i x\\
+    \sinh ((-i)\arcsin ix)=x\\
+    \sinh(\arsinh x)=x\\
+    \implies (-i)\arcsin ix=\arsinh x\\
+    \implies \textcolor{red}{\arcsin ix=i\,\arsinh x.}
+    \end{aligned}
+  \end{equation}
+  同理有（主值，$x\in\mathbb{R}$）
+  \begin{equation}
+    \begin{cases}
+      \arcsin (i x)= i\,\arsinh x, \\
+      \arctan (i x)= i\,\artanh x, \\
+      \arccos (i x)= \dfrac{\pi}{2} - i\,\arsinh x.
+    \end{cases}
+  \end{equation}
+  其中第三条也可以和 $\arcosh$ 发生联系。注意到对任意实数 $x$，有
+  \begin{equation*}
+    \arcosh\!\big(\sqrt{1+x^{2}}\big) = \ln\!\big(\sqrt{1+x^{2}}+|x|\big) = |\arsinh x|,
+  \end{equation*}
+  因而可写成
+  \begin{equation*}
+    \arccos(i x)=\frac{\pi}{2}- i\,\operatorname{sgn}(x)\,\arcosh\!\big(\sqrt{1+x^{2}}\big),\quad \operatorname{sgn}(0)=0.
+  \end{equation*}
+  特别地，当 $x\ge 0$ 时，有简洁形式
+  \begin{equation*}
+    \arccos(i x)=\frac{\pi}{2}- i\,\arcosh\!\big(\sqrt{1+x^{2}}\big).
+  \end{equation*}
+  上式的来龙去脉可以简述如下：令 $a=\arsinh x$（即 $\sinh a=x$），则
+  \begin{equation*}
+    \sin(i a)=i\sinh a=i x,\qquad \cos\Big(\tfrac{\pi}{2}-i a\Big)=\sin(i a)=i x,
+  \end{equation*}
+  因此满足 $\cos z=i x$ 的主值解是 $z=\tfrac{\pi}{2}-i\,\arsinh x$，即
+  \begin{equation*}
+    \arccos(i x)=\frac{\pi}{2}- i\,\arsinh x.
+  \end{equation*}
+  又因为 $\arcosh$ 的主值恒非负，且
+  \begin{equation*}
+    \arcosh\!\big(\sqrt{1+x^{2}}\big)=\ln\!\big(\sqrt{1+x^{2}}+|x|\big)=|\arsinh x|,
+  \end{equation*}
+  所以 $\arsinh x=\operatorname{sgn}(x)\,\arcosh\!\big(\sqrt{1+x^{2}}\big)$，从而得到上面的等式。
+  其中 $\operatorname{sgn}(x)$ 是符号函数：$\operatorname{sgn}(x)=1\,(x>0)$，$\operatorname{sgn}(x)=0\,(x=0)$，$\operatorname{sgn}(x)=-1\,(x<0)$。
+  
+  导数从反函数求导公式出发就能搞定。因为 $\sinh(\arsinh x)=x$，两边对 $x$ 求导得到
+  \begin{equation*}
+    \cosh(\arsinh x) \cdot \frac{\mathrm{d}}{\mathrm{d}x}\arsinh x = 1.
+  \end{equation*}
+  注意到 $\cosh^{2} t - \sinh^{2} t = 1$，把 $t=\arsinh x$ 代进去有 $\cosh(\arsinh x)=\sqrt{x^{2}+1}$，于是
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}x}\arsinh x = \frac{1}{\sqrt{x^{2}+1}}.
+  \end{equation*}
+  同理可以得到
+  \begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}x}\arcosh x = \frac{1}{\sqrt{x-1}\sqrt{x+1}}, \qquad
+    \frac{\mathrm{d}}{\mathrm{d}x}\artanh x = \frac{1}{1-x^{2}}.
+  \end{equation*}
+  它们的反过来积分公式就顺理成章：
+  \begin{align}
+    \int \frac{1}{\sqrt{x^{2}+1}}\,\mathrm{d}x &= \arsinh x + C, \\
+    \int \frac{1}{\sqrt{x-1}\sqrt{x+1}}\,\mathrm{d}x &= \arcosh x + C, \\
+    \int \frac{1}{1-x^{2}}\,\mathrm{d}x &= \artanh x + C.
+  \end{align}
+  遇到 $\sqrt{x^{2}+1}$ 这类根式时，直接用 $\sinh$ 换元往往比硬用三角函数更干脆，这些反双曲函数就是最后写答案时的“收尾动作”。
+\end{example}
+
 \begin{itemize}
   \item $(x^{n})^{\prime }=n x^{n-1},(e^{ax})^{\prime }=ae^{x},(a^{x})^{\prime }=(e^{x\ln a})^{\prime }=\ln a \cdot  a^{x}$
   \begin{problem}
     $(x^{x})^{\prime }=?,(x^{x^{x}})^{\prime }=?$
   \end{problem}
   \begin{solution}
-    $x^{x}=e^{\ln(x^{x})}=e^{x\ln x},(x^{x})^{\prime }=e^{x \ln x}()$
+    $x^{x}=e^{\ln(x^{x})}=e^{x\ln x},(x^{x})^{\prime }=e^{x \ln x}(\ln x+x\cdot \frac{1}{x})=x^{x}(\ln x+1)$
   \end{solution}
 \end{itemize}
+
+在继续看下去之前，确保你比自己的名字还熟悉以下函数的导数，因为这非常有利于你后面凑微分
+
+\begin{itemize}
+  \item 幂指对 \begin{equation}
+    \begin{aligned}
+      (x^{n})^{\prime }=n x^{n-1} &\quad (\ln x)^{\prime }=\frac{1}{x} \\
+      (e^{ax})^{\prime }=ae^{ax} &\quad (a^{x})^{\prime }=(e^{x \ln a})^{\prime }=a^{x} \ln a \\
+      (\sqrt{x})^{\prime }=\frac{1}{2 \sqrt{x}} & \quad 
+    \end{aligned}
+  \end{equation}
+
+  \item 三角函数 
+  \begin{equation}
+    \begin{aligned}
+    (\sin x)^{\prime }=\cos x &\quad (\cos x)^{\prime }=-\sin x\\
+    (\tan x)^{\prime }=\frac{1}{\cos ^{2}x} & \quad (\cot x=\frac{1}{\tan x})^{\prime }=-\frac{1}{\sin ^{2}x}\\
+    \end{aligned}
+  \end{equation}
+  \item 反三角
+  \begin{equation}
+    \begin{aligned}
+    (\arctan x)^{\prime }=\frac{1}{1+x^{2}} \quad (\arcsin x)^{\prime }=\frac{1}{\sqrt{1-x^{2}}}  \\
+    (\arccos x)'=(\frac{\pi}{2}-\arcsin x)'
+=-\frac{1}{\sqrt{1-x^{2}}}    \end{aligned}
+  \end{equation}
+  
+\end{itemize}
 \section{洛必达法则}
+
+若 $f(x_0)=0,g(x_0)= 0,g^{\prime }(x_0)=0$
+
+则
+\begin{equation}
+  \lim_{x,\to x_0} \frac{f(x)}{g(x)}=\frac{f^{\prime }(x_0)}{g^{\prime }(x_0)}
+\end{equation}
+
+可以这样来简单理解：
+
+在 $x_0$ 的足够小邻域内，任何函数 $f(x)$ 都可以近似成一条直线
+，这条直线的斜率显然就是其导数 $f^{\prime }(x_0)$
+，那么
+
+\begin{equation}
+  \begin{aligned}
+  f(x)\approx f(x_0)+f^{\prime }(x_0)(x-x_0) \\
+  g(x)\approx g(x_0)+g^{\prime }(x_0)(x-x_0)
+  \end{aligned}
+\end{equation}
+而此时 $f(x_0)=0,g(x_0)=0$
+
+显然 
+\begin{equation}
+  \lim_{x,\to x_0} \frac{f(x)}{g(x)}=\frac{f^{\prime }(x_0)(x-x_0)}{g^{\prime }(x_0)(x-x_0)}=\frac{f^{\prime }(x_0)}{g^{\prime }(x_0)}
+\end{equation}
+
+
+用洛必达我们可以验证一些极限，比如
+
+\begin{example}
+  \begin{equation}
+    \begin{aligned}
+    \lim_{x \to 0} \frac{\sin x }{x}=\lim_{x \to 0} \frac{(\sin x)^{\prime }}{x^{\prime }}=\lim_{x \to 0} \frac{\cos x}{1} \\
+    \end{aligned}
+  \end{equation}
+\end{example}
+
+\subsubsection{Stolz-Cesàro定理--离散化的洛必达法则}
+Stolz定理是处理数列不定式极限的有力工具，可以看作是数列版本的洛必达法则。
+\begin{itemize}
+    \item $\frac{*}{\infty}$ 型: 若 $\{y_n\}$ 严格单增趋于 $+\infty$，且 $\lim_{n\to\infty} \frac{x_{n+1}-x_n}{y_{n+1}-y_n} = L$，则 $\lim_{n\to\infty} \frac{x_n}{y_n} = L$。
+    \item $\frac{0}{0}$ 型: 若 $\{x_n\}, \{y_n\}$ 均趋于0，$\{y_n\}$ 严格单减，且 $\lim_{n\to\infty} \frac{x_{n+1}-x_n}{y_{n+1}-y_n} = L$，则 $\lim_{n\to\infty} \frac{x_n}{y_n} = L$。
+\end{itemize}
+\begin{problem}[CMC真题]
+ 设数列 $\{a_{n}\}$ 满足 $a_{1}>0,$ $a_{n+1}=a_{n}+\frac{1}{a_{n}},n\ge1.$ 证明:
+$lim_{n\rightarrow\infty}\frac{a_{n}}{\sqrt{2n}}=1.$
+\end{problem}
+\begin{solution}
+    显然 $\{a_n\}$ 是严格单增正数列。若 $\lim_{n\to\infty} a_n = A$ (有限)，则 $A=A+\frac{1}{A}$，导出 $1/A=0$ 矛盾。故 $\lim_{n\to\infty} a_n = +\infty$。
+    考虑 $\lim_{n\to\infty} \frac{a_n^2}{2n}$，这是一个 $\frac{\infty}{\infty}$ 型，适用Stolz定理。
+    \begin{equation*}
+        \lim_{n\to\infty} \frac{a_n^2}{2n} = \lim_{n\to\infty} \frac{a_{n+1}^2 - a_n^2}{2(n+1)-2n} = \frac{1}{2}\lim_{n\to\infty} \left( (a_n+\frac{1}{a_n})^2 - a_n^2 \right) = \frac{1}{2}\lim_{n\to\infty} (2 + \frac{1}{a_n^2}) = 1
+    \end{equation*}
+    因此 $\lim_{n\to\infty} \frac{a_n}{\sqrt{2n}} = 1$。
+\end{solution}
 \section{泰勒展开}
+
+利用泰勒展开，可以将绝大部分性质良好的函数展开成级数的形式
+
+\begin{equation}
+  \begin{aligned}
+  f(x)&=\sum_{n=1}^{\infty } \frac{f^{(n)}(x_0)}{n!} (x-x_0)^{n}\\
+  &=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2} (x-x_0)^{2}+\frac{f'''(x_0)}{6}(x-x_0)^{3}+ \cdots \\
+  \end{aligned} 
+\end{equation}
+如何理解此式？
+简单的想法是，当我们的 $x$ 的取值始终在 $x_0$ 附近时， $(x-x_0)$ 是一个小量， $(x-x_0)^{n}$ 就是 $n$ 阶小量
+在这个式子两边同时求导，然后忽略掉高阶小量，只留下量级最大的项
+  \begin{equation}
+  \begin{aligned}
+  f(x)&=f(x_0)+f'(x_0)\Delta x+\frac{f''(x_0)}{2} (\Delta x)^{2}+\frac{f'''(x_0)}{6}(\Delta x)^{3}+ \cdots \approx f(x_0) \\
+  f'(x)&=f'(x_0)+f''(x_0)\Delta x_0+\frac{f'''(x_0)}{2}(\Delta x)^{2}+ \cdots \approx f'(x_0)\\
+  &\cdots
+  \end{aligned} 
+\end{equation}
+上面的约等号在取 $\Delta x\to 0$ 时变成等号
+
+这可以使我们相信 $f(x)=\sum_{n=1}^{\infty } \frac{f^{(n)}(x_0)}{n!} (x-x_0)^{n}$ 这个等式在 $f(x)$ 的任意阶导数都成立
+
+下面列举一些常用导数的泰勒展开，其中 $O(x^{n})$ 表示还剩下一些项，这些项都是 $x^{n}$ 的高阶小量，我们加上 $O(x^{n})$ 用来提醒自己这样估算的误差量级大概有多大
+
+\begin{itemize}
+  \item $e^{x},$12345的阶乘 \begin{equation}
+    e^{x}=\sum \frac{x^{n}}{n!} =1+x+\frac{x^{2}}{2}+\frac{x^{3}}{6}+ O(x^{3})
+  \end{equation}
+  \item 三角函数， $\sin x$ 奇数阶， $\cos x$ 偶数阶，
+  \begin{equation}
+    \sin x=
+  \end{equation}
+\end{itemize}
 \section{常用求极限方法}
 (1) 利用基本极限;
 (2) 利用无穷小替换;
@@ -124,10 +651,10 @@
 \section{先求递推，再求特值}
 \section{rullani (傅汝兰尼)积分公式}
 
-
+\appendix
 \chapter{版本更新历史}
 
-\datechange{2025/10/07}{编写第一章}
+\datechange{2025/10/17}{编写第一章基础知识}
 % \datechange{2025/10/05}{编写第一章}
 % \begin{change}
 %   \item 删除 \lstinline{mathpazo} 数学字体选项。
@@ -141,11 +668,43 @@
 %   \item 颜色名字重命名。
 % \end{change}
 
+\chapter{补充证明}
+
+\section{重要极限的证明}\label{prf:ImtLim}
+\begin{proof}[重要极限的证明]
+  要严格证明 $\lim_{h \to 0} \frac{e^h - 1}{h} = 1$，我们不能使用 $(e^x)'=e^x$ 本身，否则会陷入循环论证。一个严谨的初等证明可以依赖于常数 $e$ 的另一个等价定义：
+  \begin{equation}
+    e = \lim_{k \to 0} (1+k)^{1/k}
+  \end{equation}
+  我们的证明步骤如下：
+  \begin{enumerate}
+    \item 设 $k = e^h - 1$。当 $h \to 0$ 时，显然 $e^h \to e^0 = 1$，因此 $k \to 0$。
+    \item 从 $k = e^h - 1$ 中解出 $h$。我们得到 $e^h = 1+k$，两边取自然对数，得 $h = \ln(1+k)$。
+    \item 将 $h$ 和 $k$ 的表达式代入原极限式中：
+    \begin{equation}
+      \lim_{h \to 0} \frac{e^h - 1}{h} = \lim_{k \to 0} \frac{k}{\ln(1+k)}
+    \end{equation}
+    \item 利用对数的性质 $\ln(a^b) = b\ln a$，对分母进行变形：
+    \begin{equation}
+      \lim_{k \to 0} \frac{1}{\frac{1}{k}\ln(1+k)} = \lim_{k \to 0} \frac{1}{\ln\left((1+k)^{1/k}\right)}
+    \end{equation}
+    \item 由于自然对数函数 $\ln(x)$ 是一个连续函数，我们可以将极限符号移到函数内部：
+    \begin{equation}
+      \frac{1}{\ln\left(\lim_{k \to 0}(1+k)^{1/k}\right)}
+    \end{equation}
+    \item 根据我们引用的 $e$ 的定义，括号内的极限正是 $e$。因此，上式变为：
+    \begin{equation}
+      \frac{1}{\ln(e)} = \frac{1}{1} = 1
+    \end{equation}
+  \end{enumerate}
+  至此，证明完毕。这个证明虽然绕道使用了对数函数，但它依赖的是对数函数的连续性和代数性质，而非其导数，因此是有效的。
+\end{proof}
+
 \nocite{*}
 
 \printbibliography[heading=bibintoc, title=\ebibname]
 参考文献尚未编排，此处使用的是模板的默认参考文献，作废
-\appendix
+% \appendix
 
 \chapter{积分表}
 
