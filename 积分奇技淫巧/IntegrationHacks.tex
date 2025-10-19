@@ -34,6 +34,7 @@
 
 \addbibresource[location=local]{reference.bib} % 参考文献，不要删除
 \DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\arccot}{arccot}
 \DeclareMathOperator{\arcosh}{arcosh}
 \DeclareMathOperator{\artanh}{artanh}
 \DeclareMathOperator{\arsech}{arsech}
@@ -50,6 +51,29 @@
 
 \chapter{绪论}
 本书是是 LZU 数学协会举办的数学讲座的讲义，将会讲授一些在课不上不会讲授，但在某些情况有奇效的积分技巧，近年来 cmc 的试题中偶尔会出现此类题目
+
+参考（抄袭）来源：
+\begin{itemize}
+
+  \item 软件 MATLAB,Wolfram Mathematica
+  \item 网站
+  \begin{itemize}
+    \item \href{https://www.wolframalpha.com/}{WolframAlpha}: 功能足够强大, 除了不定积分外还可以求定积分等。
+    \item \href{https://www.integral-calculator.com/}{integral-calculator}: 专门求不定积分的网站, 并且支持可读步骤输出, 以及相应的图像。
+    \item \href{https://zhuanlan.zhihu.com/p/326288584}{不定积分的解题思路及技巧总结}: 知乎上大 V “马同学” 的不定积分入门文章。
+    \item \href{https://www.zhihu.com/column/c_1108757962939727872}{不定积分之潮}: 虚调子的不定积分专栏
+  \end{itemize}
+  \item 书籍
+  \begin{itemize}
+    \item 《不定积分攻略》 虚调子
+    \item 《吉米多维奇数学分析习题集》第三册 (1628题之后的与不定积分有关的部分)。真·习题集。
+    \item 《积分的方法与技巧》 金玉明等著, 中国科学技术大学出版社, 是17年的书, 基础总结得不错。
+    \item 《Table of Integrals, Series, and Products》, 俗称积分大典, 里面有相当详细的公式表和其他扩展内容。英文。
+    \item 《组合积分法》 朱永银、郭文秀著, 华中科技大学出版社。在零几年的时候算是很新的方法。
+    \item 《微积分学教程》(不定积分部分), 菲赫金哥尔茨. 俗称菲赫, 讲解详细, 由浅入深。
+    \item 《Polylogarithms and Associated Functions》 Leonard Lewin. 一部总结性的多重对数函数相关专著。英文。
+  \end{itemize}
+\end{itemize}
 
 笔者水平有限，若有不足缺漏之处恳请读者更正，或在 \href{https://github.com/Monika-shipship/MonikaMathLecture}{Github仓库处（点击即可跳转）} 提交PR以更正
 \mainmatter
@@ -81,7 +105,7 @@
 利用这个定义不难算出一些初等函数的导数
 
 另外需要注意的是，在最开始学习微积分时，最好不要使用 $y^{\prime }$ 这种记号来表示一阶导，因为这不利于你最开始的理解导数的计算法则，不过当你熟悉之后，随便怎么用都行，在开始阶段，最好使用 $\frac{\mathrm{d}y}{\mathrm{d}x}$ 这种记号，并且直接将 $\mathrm{d}y,\mathrm{d}x$ 当成普通的数来运算，可加可减可乘可除，这虽然略失严谨，但能帮助你快速入门
-\subsubsection{求导的法则}
+\subsection{求导的法则}
 
 
 要得到；这个法则非常简单，我们将 $\Delta x$ 视为一个有限的小量，而 $\mathrm{d}x$ 是将这个小量趋于零，所以每次你见到 $\mathrm{d}$ ，就已经暗示了这里有一个量会趋近于零 
@@ -165,7 +189,7 @@
 \end{equation}
 \end{itemize}
 
-\subsubsection{具体求导例子}
+\subsection{具体求导例子}
 
 我们已经完全了解了抽象的求导的方法，下面再来具体算一些函数
 
@@ -497,33 +521,74 @@
   \end{solution}
 \end{itemize}
 
+\subsection{常用初等函数的导数}
+然后我们在这里总结一下常用函数的求导
+
+\begin{proposition}[微分的四条法则]
+  对一个函数 $f$ 求微分, 若记为 $f'$, 则:
+  \begin{itemize}
+    \item $(f + g)' = f' + g'$ (加和法则)
+    \item $(fg)' = f'g + fg'$ (莱布尼兹法则)
+    \item $(f(g))' = f'(g)\, g'$ (链式法则)
+    \item $(C)' = 0$
+  \end{itemize}
+\end{proposition}
+
 在继续看下去之前，确保你比自己的名字还熟悉以下函数的导数，因为这非常有利于你后面凑微分
 
 \begin{itemize}
-  \item 幂指对 \begin{equation}
+  \item 幂指对 
+  \begin{equation}
     \begin{aligned}
-      (x^{n})^{\prime }=n x^{n-1} &\quad (\ln x)^{\prime }=\frac{1}{x} \\
-      (e^{ax})^{\prime }=ae^{ax} &\quad (a^{x})^{\prime }=(e^{x \ln a})^{\prime }=a^{x} \ln a \\
-      (\sqrt{x})^{\prime }=\frac{1}{2 \sqrt{x}} & \quad 
+      (e^{ax})'&=ae^{ax} &\quad (a^{x})'&= a^{x}\ln a\\
+      (x^{n})'&=n x^{n-1} &\quad (\ln x)'&=\frac{1}{x}\\
+      (x^{\alpha})'&=\alpha x^{\alpha-1} &\quad (x>0\text{ 若 }\alpha\notin\mathbb{Z})
     \end{aligned}
   \end{equation}
 
-  \item 三角函数 
+  \item 特别的，根号，三次根号，分式根号，分式三次根号
   \begin{equation}
     \begin{aligned}
-    (\sin x)^{\prime }=\cos x &\quad (\cos x)^{\prime }=-\sin x\\
-    (\tan x)^{\prime }=\frac{1}{\cos ^{2}x} & \quad (\cot x=\frac{1}{\tan x})^{\prime }=-\frac{1}{\sin ^{2}x}\\
+      (\sqrt{f(x)})'&=\frac{f'(x)}{2\sqrt{f(x)}} &\quad \left(\frac{1}{\sqrt{f(x)}}\right)'&=-\frac{f'(x)}{2\,f(x)^{3/2}} \\
+      (\sqrt[3]{f(x)})'&=\frac{f'(x)}{3\sqrt[3]{f(x)^{2}}} &\quad \left(\frac{1}{\sqrt[3]{f(x)}}\right)'&=-\frac{f'(x)}{3\,f(x)^{4/3}}
     \end{aligned}
   \end{equation}
+
+  \item 三角
+  \begin{equation}
+    \begin{aligned}
+      (\sin x)'&=\cos x &\quad (\cos x)'&=-\sin x \\
+      (\tan x)'&=\frac{1}{\cos^{2}x} &\quad (\cot x)'&=-\frac{1}{\sin^{2}x} \\
+      (\sec x)'&=\sec x\tan x &\quad (\csc x)'&=-\csc x\cot x
+    \end{aligned}
+  \end{equation}
+
   \item 反三角
   \begin{equation}
     \begin{aligned}
-    (\arctan x)^{\prime }=\frac{1}{1+x^{2}} \quad (\arcsin x)^{\prime }=\frac{1}{\sqrt{1-x^{2}}}  \\
-    (\arccos x)'=(\frac{\pi}{2}-\arcsin x)'
-=-\frac{1}{\sqrt{1-x^{2}}}    \end{aligned}
+      (\arcsin x)'&=\frac{1}{\sqrt{1-x^{2}}} &\quad (\arccos x)'&=-\frac{1}{\sqrt{1-x^{2}}} \\
+      (\arctan x)'&=\frac{1}{1+x^{2}} &\quad (\arccot x)'&=-\frac{1}{1+x^{2}}
+    \end{aligned}
   \end{equation}
-  
+
+  \item 双曲
+  \begin{equation}
+    \begin{aligned}
+      (\sinh x)'&=\cosh x &\quad (\cosh x)'&=\sinh x \\
+      (\tanh x)'&=\frac{1}{\cosh^{2} x} &\quad (\coth x)'&=-\frac{1}{\sinh^{2} x}
+    \end{aligned}
+  \end{equation}
+
+  \item 反双曲
+  \begin{equation}
+    \begin{aligned}
+      (\arsinh x)'&=\frac{1}{\sqrt{1+x^{2}}} &\quad (\arcosh x)'&=\frac{1}{\sqrt{x-1}\,\sqrt{x+1}} \\
+      (\artanh x)'&=\frac{1}{1-x^{2}} &\quad (|x|<1;\,\arcosh\,x\text{ 取 }x\ge1)
+    \end{aligned}
+  \end{equation}
 \end{itemize}
+
+
 \section{洛必达法则}
 
 若 $f(x_0)=0,g(x_0)= 0,g^{\prime }(x_0)=0$
@@ -608,53 +673,2265 @@ $lim_{n\rightarrow\infty}\frac{a_{n}}{\sqrt{2n}}=1.$
 下面列举一些常用导数的泰勒展开，其中 $O(x^{n})$ 表示还剩下一些项，这些项都是 $x^{n}$ 的高阶小量，我们加上 $O(x^{n})$ 用来提醒自己这样估算的误差量级大概有多大
 
 \begin{itemize}
-  \item $e^{x},$12345的阶乘 \begin{equation}
-    e^{x}=\sum \frac{x^{n}}{n!} =1+x+\frac{x^{2}}{2}+\frac{x^{3}}{6}+ O(x^{3})
+  \item 幂指对 $e^{x},$12345的阶乘 \begin{equation}
+    e^{x}=\sum \frac{x^{n}}{n!} =1+x+\frac{x^{2}}{2}+\frac{x^{3}}{6}+ O(x^{5})
   \end{equation}
-  \item 三角函数， $\sin x$ 奇数阶， $\cos x$ 偶数阶，
   \begin{equation}
-    \sin x=
+    a^{x}=e^{x \ln a}=1+x \ln a+\frac{(x \ln a)^{2}}{2}+\frac{(x \ln a)^{3}}{6}+ O((x \ln a)^{5})
   \end{equation}
+  $ \ln x$ 12345 正负交错
+  \begin{equation}
+    \ln(1+x)=x-\frac{x^{2}}{2}+\frac{x^{3}}{3}-\frac{x^{4}}{4}+\frac{x^{5}}{5}+O(x^{6})
+  \end{equation}
+  利用 $(1+x)^{n}=\sum_{k=0}^{n} C_{n}^{k}x^{n}$ ，推广到 $n$ 为实数就有
+  \begin{equation}
+    (1+x)^{a}=1+ax+\frac{a(a-1)}{2}x^{2}+\frac{a(a-1)(a-2)}{3!}x^{3}
+  \end{equation}
+  特别的，对于 $a=\frac{1}{2},a=-\frac{1}{2}$（把上面的通项直接代进去即可）：
+  \begin{equation}
+    \sqrt{1+x}=1+\frac{x}{2}-\frac{x^{2}}{8}+\frac{x^{3}}{16}-\frac{5x^{4}}{128}+O(x^{5}).
+  \end{equation}
+  \begin{equation}
+    \frac{1}{\sqrt{1+x}}=1-\frac{x}{2}+\frac{3x^{2}}{8}-\frac{5x^{3}}{16}+\frac{35x^{4}}{128}+O(x^{5}).
+  \end{equation}
+  \item 三角函数，$\sin$ 奇阶乘，$\cos$ 偶阶乘，$\tan$ 系数有些复杂，只记前两项即可，如果现场想不起来，但又必须需要 $\tan x$ 展开到 $x^{5}$，可以通过 
+  \begin{equation}
+    \begin{aligned}
+    \tan x&= \frac{\sin x}{\cos x}= \frac{x-\frac{x^{3}}{6}+\frac{x^{5}}{120}+O(x^{7})}{1-\frac{x^{2}}{2}+\frac{x^{4}}{24}+O(x^{6})}\\
+    &=x\cdot \frac{1-\frac{x^{2}}{6}+\frac{x^{4}}{120}+O(x^{6})}{1-\frac{x^{2}}{2}+\frac{x^{4}}{24}+O(x^{6})}\\
+    &\text{利用} \frac{1}{1+x}=1-x+x^{2}-x^{3}+x^{4}+ \cdots  \\
+    &=x(1-\frac{x^{2}}{6}+\frac{x^{4}}{120}+O(x^{6}))(1+\frac{x^{2}}{2}-\frac{x^{4}}{24}+O(x^{6})+[-\frac{x^{2}}{2}+\frac{x^{4}}{24}+O(x^{6})]^{2}) \\
+    &\text{只展到平方，是因为} x^{2} \text{平方后已经是四次，而我们只用展开到四次} \\
+    &\text{然后忽略所有四次以上的项}\\
+    &=x(1-\frac{x^{2}}{6}+\frac{x^{4}}{120}+O(x^{6}))(1+\frac{x^{2}}{2}-\frac{x^{4}}{24}+O(x^{6})+\frac{x^{4}}{4}) \\
+    &=x(1-\frac{x^{2}}{6}+\frac{x^{4}}{120}+O(x^{6}))(1+\frac{x^{2}}{2}+\frac{5x^{4}}{24}+O(x^{6})) \\
+    &=x(1+\frac{x^{2}}{2}+\frac{5x^{4}}{24}-\frac{x^{2}}{6}-\frac{x^{4}}{12}+\frac{x^{4}}{120}) \\
+    &=x(1+\frac{x^{2}}{3}+\frac{2}{15}x^{4})
+    \end{aligned}
+  \end{equation}
+  \begin{equation}
+    \begin{aligned}
+      \sin x &= x-\frac{x^{3}}{3!}+\frac{x^{5}}{5!}-\frac{x^{7}}{7!}+O(x^{9}),\\
+      \cos x &= 1-\frac{x^{2}}{2!}+\frac{x^{4}}{4!}-\frac{x^{6}}{6!}+O(x^{8}),\\
+      \tan x &= x+\frac{x^{3}}{3}+\frac{2x^{5}}{15}+\frac{17x^{7}}{315}+O(x^{9})
+    \end{aligned}
+  \end{equation}
+  $\tan x$ 有一个通项，仅作展示，读者只需要记忆 $\tan x = x+\frac{x^{3}}{3}+\frac{2x^{5}}{15}$ 就够了
+  \begin{equation}
+    \tan x = \sum_{n=1}^{\infty} \frac{(-1)^{n-1}\,2^{2n}\big(2^{2n}-1\big)\,B_{2n}}{(2n)!}\,x^{2n-1},\quad (B_{2n}\text{ 为伯努利数}).
+  \end{equation}
+
+  % 导数递推”：设 $\tan x=\sum_{n\ge1} a_n x^{2n-1}$，由 $\frac{\mathrm{d}}{\mathrm{d}x}\tan x=1+\tan^2 x$，比系数得
+  %   \begin{equation}
+  %     (2n-1)a_n = \sum_{k=1}^{n-1} a_k a_{n-k}\quad (n\ge2),\quad a_1=1,
+  %   \end{equation}
+    
+  \item 反三角
+  \begin{equation}
+    \begin{aligned}
+      \arcsin x &= x+\frac{x^{3}}{6}+\frac{3x^{5}}{40}+\frac{5x^{7}}{112}+O(x^{9}),\\
+      \arccos x &= \frac{\pi}{2}-x-\frac{x^{3}}{6}-\frac{3x^{5}}{40}-\frac{5x^{7}}{112}+O(x^{9}),\\
+      \arctan x &= x-\frac{x^{3}}{3}+\frac{x^{5}}{5}-\frac{x^{7}}{7}+O(x^{9}).
+    \end{aligned}
+  \end{equation}
+  \begin{note}
+    当然，通过 $\arctan x = x-\frac{x^{3}}{3}+\frac{x^{5}}{5}-\frac{x^{7}}{7}+O(x^{9}).$ 你可以轻易地得到 \begin{equation}
+      1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+ \cdots =\arctan 1=\frac{\pi}{2}
+    \end{equation}
+    有一年的期末高数就是考的这个，如果你不熟悉这个泰勒展开便不易做出
+  \end{note}
+  \item 双曲函数
+  
+  通过
+  \begin{equation}
+    \begin{cases} \sin ix\to  i \sinh x     , &   \\\cos ix\to  \cosh x , & \\ \tan ix =i \tanh x  \end{cases}
+  \end{equation}
+  在三角函数的泰勒展开中令 $x\to i x$ ，计算后约掉 $i$ ，可直接得到（补到七阶/六阶以便观察规律）
+  \begin{equation}
+    \begin{aligned}
+      \sinh x &= x+\frac{x^{3}}{3!}+\frac{x^{5}}{5!}+\frac{x^{7}}{7!}+O(x^{9}),\\
+      \cosh x &= 1+\frac{x^{2}}{2!}+\frac{x^{4}}{4!}+\frac{x^{6}}{6!}+O(x^{8}),\\
+      \tanh x &= x-\frac{x^{3}}{3}+\frac{2x^{5}}{15}-\frac{17x^{7}}{315}+O(x^{9}).
+    \end{aligned}
+  \end{equation}
+  或者也能直接通过定义展开 $e^{x}$ 也能快速得到
+  \begin{align}
+    \sinh x &= \frac{e^x - e^{-x}}{2} \\
+             &= \frac{\big(1+x+\tfrac{x^{2}}{2!}+\tfrac{x^{3}}{3!}+\tfrac{x^{4}}{4!}+\tfrac{x^{5}}{5!}+\cdots\big)
+                       - \big(1-x+\tfrac{x^{2}}{2!}-\tfrac{x^{3}}{3!}+\tfrac{x^{4}}{4!}-\tfrac{x^{5}}{5!}+\cdots\big)}{2} \\
+             &= \frac{2x+\tfrac{2x^{3}}{3!}+\tfrac{2x^{5}}{5!}+\cdots}{2}
+              = x+\frac{x^{3}}{3!}+\frac{x^{5}}{5!}+O(x^{7}),\\
+    \cosh x &= \frac{e^x + e^{-x}}{2} \\
+             &= \frac{\big(1+x+\tfrac{x^{2}}{2!}+\tfrac{x^{3}}{3!}+\tfrac{x^{4}}{4!}+\tfrac{x^{5}}{5!}+\cdots\big)
+                       + \big(1-x+\tfrac{x^{2}}{2!}-\tfrac{x^{3}}{3!}+\tfrac{x^{4}}{4!}-\tfrac{x^{5}}{5!}+\cdots\big)}{2} \\
+             &= \frac{2+\tfrac{2x^{2}}{2!}+\tfrac{2x^{4}}{4!}+\cdots}{2}
+              = 1+\frac{x^{2}}{2!}+\frac{x^{4}}{4!}+O(x^{6}).
+  \end{align}
+
+  \item 反双曲函数，$\arsinh x,\artanh x$ 是 $\sinh x,\tanh x$ 的反函数，所以第二项肯定符号相反，这样就能记住了
+  
+  关于 $\arcosh x $ 注意他是 $1$ 处展开的，因为 $cosh 0=1$
+  \begin{equation}
+    \begin{aligned}
+      \arsinh x &= x-\frac{x^{3}}{6}+\frac{3x^{5}}{40}-\frac{5x^{7}}{112}+O(x^{9}),\\
+      \artanh x &= x+\frac{x^{3}}{3}+\frac{x^{5}}{5}+\frac{x^{7}}{7}+O(x^{9}).
+    \end{aligned}
+  \end{equation}
+  \begin{equation}
+    \arcosh(1+u)=\sqrt{2u}-\frac{(2u)^{3/2}}{12}+O\!\big(u^{5/2}\big),\quad u\to 0^{+}.
+  \end{equation}
+  两个“快法”推导，随手就能检验这个系数：
+  \begin{itemize}
+    \item 级数反解：设 $y=\arcosh(1+u)$，则 $\cosh y=1+u$，而 $\cosh y=1+\dfrac{y^{2}}{2}+\dfrac{y^{4}}{24}+O(y^{6})$。
+    令 $y=\sqrt{2u}\,(1+c\,u+O(u^{2}))$，比较 $u^{2}$ 项得 $c=-\tfrac{1}{12}$，于是
+    $\,y=\sqrt{2u}\big(1-\tfrac{u}{12}+O(u^{2})\big)$，展开即上式。
+    \item 对数定义：$\arcosh(1+u)=\ln\big(1+u+\sqrt{u(2+u)}\big)$。
+    先把 $\sqrt{u(2+u)}=\sqrt{2u}\,\big(1+\tfrac{u}{4}+O(u^{2})\big)$，再对 $\ln(\cdot)$ 在 1 处做泰勒，保留到 $u^{3/2}$，同样得到系数 $-\tfrac{1}{12}$。
+  \end{itemize}
 \end{itemize}
 \section{常用求极限方法}
-(1) 利用基本极限;
-(2) 利用无穷小替换;
-(3) 利用L' Hospital (洛必达)法则;
-(4) 利用四抖。r (泰勒)公式;
-(5) 利用导数的定义.
+\begin{itemize}
+  \item L' Hospital (洛必达)法则
+  \item 泰勒展开
+  \item 导数的定义
+\end{itemize}
+
+我们不认为 基本极限  和 无穷小替换是单独的方法，而是认为他们都属于泰勒中的一种，并且使用泰勒会避免掉无穷小替换时忽略高阶项带来的错误，所以请读者尽量使用泰勒，或者在使用所谓的替换时，在心里要清楚你忽略了哪些项
+\subsection{可以直接使用泰勒的}
+\begin{example}
+  这个极限非常容易出错，请读者细心计算
+
+  \begin{equation}
+   \lim_{x \to 0} \frac{\frac{1}{\artanh x} -\frac{1}{x}}{x}
+  \end{equation}
+\end{example}
+
+\begin{solution}
+  在 $x=0$ 附近用泰勒展开：
+  \begin{equation*}
+    \artanh x = x + \frac{x^{3}}{3} + \frac{x^{5}}{5} + O(x^{7}).
+  \end{equation*}
+  取倒数并用泰勒展开：
+  \begin{equation*}
+    \frac{1}{\artanh x}
+    = \frac{1}{x}\,\frac{1}{1+\frac{x^{2}}{3}+\frac{x^{4}}{5}+O(x^{6})}
+    = \frac{1}{x}\Big(1-\frac{x^{2}}{3} + (\tfrac{1}{9}-\tfrac{1}{5})x^{4} + O(x^{6})\Big)
+    = \frac{1}{x} - \frac{x}{3} - \frac{4x^{3}}{45} + O(x^{5}).
+  \end{equation*}
+  因而
+  \begin{equation*}
+    \frac{1}{\artanh x} - \frac{1}{x} = -\frac{x}{3} - \frac{4x^{3}}{45} + O(x^{5}) \to 0\quad (x\to 0).
+  \end{equation*}
+  主项为 $-\tfrac{x}{3}$。
+
+  注意（阶数不够会翻车）：如果“只”把 $\artanh x$ 截到三次，且直接把主项写成 $x-\tfrac{x^{3}}{3}$ 再取倒数，
+  \begin{equation*}
+    \frac{1}{\;x-\tfrac{x^{3}}{3}\;} = \frac{1}{x}\,\frac{1}{1-\tfrac{x^{2}}{3}} = \frac{1}{x}\Big(1+\frac{x^{2}}{3}+O(x^{4})\Big)
+    = \frac{1}{x} + \frac{x}{3} + O(x^{3}),
+  \end{equation*}
+  于是得到
+  \begin{equation*}
+    \Big(\frac{1}{\artanh x}\Big)_{\text{误}} - \frac{1}{x} = +\frac{x}{3} + O(x^{3}),
+  \end{equation*}
+  符号竟然与正确结果相反！原因在于：$\artanh x$ 的三次项系数虽然进入了近似，但“倒数”会把二阶误差放大成主导效应；必须保留到足够阶（这里至少到 $x^{5}$）才能给出正确的线性主项。
+\end{solution}
+
+\begin{example}
+  求极限 $I = \lim_{x \to 0} \frac{\sqrt[3]{\cos x} - \sqrt{\cos x}}{x + \tan^2 x}$.
+\end{example}
+官方的解法是这样的：
+\begin{solution}
+  【分析】利用恒等式：$a^n - b^n = (a - b)(a^{n-1} + a^{n-2}b + \dots + ab^{n-2} + b^{n-1})$，极限运算法则及基本极限 $\lim_{x \to 0} \frac{1 - \cos x}{x^2} = \frac{1}{2}$ 与 $\lim_{x \to 0} \frac{\tan x}{x} = 1$.
+
+  解
+  $$
+  \begin{aligned}
+  I &= \lim_{x \to 0} \frac{\sqrt[3]{\cos x} - \sqrt{\cos x}}{x + \left(\frac{\tan x}{x}\right)^2 \cdot x^2} \cdot \frac{\sqrt[6]{\cos x} - 1}{x^2} = \lim_{x \to 0} \frac{\sqrt[6]{\cos x} - 1}{x^2} \\
+  &= \lim_{x \to 0} \frac{\cos x - 1}{x^2} \cdot \frac{1}{\sqrt[6]{\cos^5 x} + \sqrt[6]{\cos^4 x} + \dots + 1} \\
+  &= -\frac{1}{2} \cdot \frac{1}{6} = -\frac{1}{12}.
+  \end{aligned}
+  $$
+
+  但是我们完全可以用泰勒展开的办法来计算，根本不用动脑子直接代入即可（手写：）
+
+  
+\end{solution}
+
+\begin{example}
+  设数列 $\{a_n\}$ 满足 $|a_0| < 1$, $a_n = \sqrt{\frac{1 + a_{n-1}}{2}}, n=1, 2, \dots$. 求 $\lim_{n \to \infty} 4^n (1 - a_n)$.
+\end{example}
+\begin{solution}
+  解 令 $x = \arccos a_0$，则 $\cos x = a_0, -\pi < x < \pi$, 且 $x \ne 0$. 利用归纳法易证 $a_n = \cos \frac{x}{2^n}, n = 0, 1, 2, \dots$.
+  所以
+  $$
+  \lim_{n \to \infty} 4^n (1 - a_n) = \lim_{n \to \infty} 4^n \left(1 - \cos \frac{x}{2^n}\right) = \lim_{n \to \infty} \frac{x^2}{2} \left(\frac{\sin \frac{x}{2^{n+1}}}{\frac{x}{2^{n+1}}}\right)^2 = \frac{x^2}{2}.
+  $$
+\end{solution}
+
+\begin{example}
+  \begin{example}
+  设 $a_n = \sum_{k=1}^{n-1} \frac{\sin \frac{(2k - 1)\pi}{2n}}{\cos^2 \frac{(k - 1)\pi}{2n} \cos^2 \frac{k\pi}{2n}}, n = 1, 2, \dots$, 求 $\lim_{n \to \infty} \frac{a_n}{n^3}$. (Putnam
+
+  (普特南) 数学竞赛试题, 2019 B2)
+\end{example}
+\end{example}
+\begin{solution}
+  解 利用三角公式, 得
+  $$
+  \begin{aligned}
+  a_n \sin \frac{\pi}{2n} &= \sum_{k=1}^{n-1} \frac{4 \sin \frac{(2k - 1)\pi}{2n} \sin \frac{\pi}{2n}}{\left(1 + \cos \frac{k-1}{n}\pi\right)\left(1 + \cos \frac{k}{n}\pi\right)} \\
+  &= 2 \sum_{k=1}^{n-1} \frac{\cos \frac{k-1}{n}\pi - \cos \frac{k}{n}\pi}{\left(1 + \cos \frac{k-1}{n}\pi\right)\left(1 + \cos \frac{k}{n}\pi\right)} \\
+  &= 2 \sum_{k=1}^{n-1} \left(\frac{1}{1 + \cos \frac{k}{n}\pi} - \frac{1}{1 + \cos \frac{k-1}{n}\pi}\right) \\
+  &= \frac{2}{1 + \cos \frac{n-1}{n}\pi} - 1 = \cot^2 \frac{\pi}{2n},
+  \end{aligned}
+  $$
+  所以
+  $$
+  \lim_{n \to \infty} \frac{a_n}{n^3} = \lim_{n \to \infty} \frac{8}{\pi^3} \frac{\left(\frac{\pi}{2n}\right)^3}{\sin \frac{\pi}{2n}} \cos^2 \frac{\pi}{2n} = \frac{8}{\pi^3}.
+  $$
+\end{solution}
+
+\begin{example}
+  求极限: $I = \lim_{x \to +\infty} \left[\sqrt[n]{(x + a_1)(x + a_2)\dots(x + a_n)} - x\right]$.
+\end{example}
+\begin{solution}
+  解 因为当 $x \to 0$ 时, 有 $(1 + x)^\alpha - 1 \sim \alpha x$, 所以
+  $$
+  \begin{aligned}
+  I &= \lim_{x \to +\infty} \left[x \sqrt[n]{\left(1 + \frac{a_1}{x}\right)\left(1 + \frac{a_2}{x}\right)\dots\left(1 + \frac{a_n}{x}\right)} - 1\right] \\
+  &= \lim_{x \to +\infty} x \left[\sqrt[n]{1 + \left(\left(1 + \frac{a_1}{x}\right)\left(1 + \frac{a_2}{x}\right)\dots\left(1 + \frac{a_n}{x}\right) - 1\right)} - 1\right] \\
+  &= \lim_{x \to +\infty} x \cdot \frac{1}{n} \left[\left(1 + \frac{a_1}{x}\right)\left(1 + \frac{a_2}{x}\right)\dots\left(1 + \frac{a_n}{x}\right) - 1\right].
+  \end{aligned}
+  $$
+  注意到
+  $$
+  \left(1 + \frac{a_1}{x}\right)\left(1 + \frac{a_2}{x}\right)\dots\left(1 + \frac{a_n}{x}\right) = 1 + \frac{1}{x} \sum_{k=1}^n a_k + \frac{b_2}{x^2} + \dots + \frac{b_n}{x^n},
+  $$
+  其中 $b_2, \dots, b_n$ 为常数, 于是
+  $$
+  I = \lim_{x \to +\infty} \frac{x}{n} \left(\frac{1}{x} \sum_{k=1}^n a_k + \frac{b_2}{x^2} + \dots + \frac{b_n}{x^n}\right) = \frac{1}{n} \sum_{k=1}^n a_k.
+  $$
+\end{solution}
+
+\begin{example}
+  求极限 $I = \lim_{x \to 0} \frac{\ln(\cos x + x \sin 2x)}{e^{x^2} - \sqrt[3]{1 - x^2}}$.
+\end{example}
+\begin{solution}
+  解
+  $$
+  \begin{aligned}
+  I &= \lim_{x \to 0} \frac{\ln[1 + (\cos x - 1) + x \sin 2x]}{e^{x^2} - \sqrt[3]{1 - x^2}} = \lim_{x \to 0} \frac{(\cos x - 1) + x \sin 2x}{e^{x^2} - \sqrt[3]{1 - x^2}} \\
+  &= \lim_{x \to 0} \frac{\frac{\cos x - 1}{x^2} + 2 \cdot \frac{\sin 2x}{2x}}{\frac{e^{x^2} - 1}{x^2} + \frac{\sqrt[3]{1 - x^2} - 1}{-x^2}} = \frac{-\frac{1}{2} + 2}{1 + \frac{1}{3}} = \frac{9}{8}.
+  \end{aligned}
+  $$
+\end{solution}
+\begin{example}
+  求 $I = \lim_{x \to 0} \frac{\arcsin x - \sin x}{\arctan x - \tan x}$.
+\end{example}
+\begin{solution}
+  解
+  $$
+  I = \lim_{x \to 0} \frac{\frac{1}{\sqrt{1 - x^2}} - \cos x}{\frac{1}{1 + x^2} - \sec^2 x} = \lim_{x \to 0} \frac{(1 + x^2) \cos^2 x}{\sqrt{1 - x^2}} \cdot \lim_{x \to 0} \frac{1 - \sqrt{1 - x^2} \cos x}{\cos^2 x - (1 + x^2)}.
+  $$
+  显然, 第一个因子的极限已确定. 对第二个因子利用 L'Hospital 法则, 得
+  $$
+  I = \lim_{x \to 0} \frac{\sqrt{1 - x^2} \sin x + \frac{x \cos x}{\sqrt{1 - x^2}}}{-2 \cos x \sin x - 2x} = \lim_{x \to 0} \frac{\sqrt{1 - x^2} \cdot \frac{\sin x}{x} + \frac{\cos x}{\sqrt{1 - x^2}}}{-2 \cos x \cdot \frac{\sin x}{x} - 2} = -\frac{1}{2}.
+  $$
+\end{solution}
+
+\subsection{使用洛必达的}
+\begin{example}
+  求 $I = \lim_{x \to 0} \frac{2x - \int_{-x}^x \left(\frac{\sin t}{t}\right)^2 dt}{x - \sin x}$.
+\end{example}
+\begin{solution}
+  解 利用 L'Hospital 法则, 得
+  $$
+  I = \lim_{x \to 0} \frac{2 - 2 \left(\frac{\sin x}{x}\right)^2}{1 - \cos x} = \lim_{x \to 0} \frac{2(x + \sin x)}{x} \cdot \frac{x^2}{1 - \cos x} \cdot \frac{x - \sin x}{x^3} = \lim_{x \to 0} 8 \frac{x - \sin x}{x^3} = \frac{4}{3}.
+  $$
+\end{solution}
+\begin{example}
+  求极限 $I = \lim_{\varphi \to 0} \frac{1 - \cos \varphi \sqrt{\cos 2\varphi} \dots \sqrt[n]{\cos n\varphi}}{\varphi^2}$ ($n$ 为正整数).
+\end{example}
+\begin{solution}
+  解 令 $f(\varphi) = \cos \varphi \sqrt{\cos 2\varphi} \dots \sqrt[n]{\cos n\varphi}$, 则 $f(0) = 1$, 且
+  $$
+  \begin{aligned}
+  f'(\varphi) &= [e^{\ln f(\varphi)}]' = e^{\ln f(\varphi)} [\ln f(\varphi)]' = f(\varphi) \left(\sum_{k=1}^n \frac{\ln \cos k\varphi}{k}\right)' \\
+  &= -f(\varphi) \sum_{k=1}^n \tan k\varphi.
+  \end{aligned}
+  $$
+  故由 L'Hospital 法则得
+  $$
+  \begin{aligned}
+  I &= \lim_{\varphi \to 0} \frac{1 - f(\varphi)}{\varphi^2} = \lim_{\varphi \to 0} \frac{-f'(\varphi)}{2\varphi} = \lim_{\varphi \to 0} \frac{f(\varphi)}{2} \sum_{k=1}^n \frac{\tan k\varphi}{\varphi} \\
+  &= \frac{f(0)}{2} \sum_{k=1}^n \left(\lim_{\varphi \to 0} \frac{\tan k\varphi}{\varphi}\right) = \frac{1}{2} \sum_{k=1}^n k = \frac{1}{4}n(n+1).
+  \end{aligned}
+  $$
+\end{solution}
+
+\subsection{使用导数定义的}
+如果所求极限可凑成某个可导函数的增量, 那么可利用导数的定义来求得该极限. 这种方法多用于求含抽象函数的不定式极限.
+
+\begin{example}
+  求极限: $I = \lim_{x \to 3} \frac{\sqrt{x^3 + 9} \cdot \sqrt[3]{2x^2 - 17} - 6}{4 - \sqrt{x^3 - 23} \cdot \sqrt[3]{3x^2 - 19}}$.
+\end{example}
+\begin{solution}
+  【分析】这是 “$\frac{0}{0}$” 型的不定式, 若直接利用 L'Hospital 法则, 将面临复杂的求导运算. 这里, 我们尝试凑成导数的定义求解.
+
+  解 记 $f(x) = \sqrt{x^3 + 9} \sqrt[3]{2x^2 - 17}, g(x) = \sqrt{x^3 - 23} \sqrt[3]{3x^2 - 19}$, 则 $f(3) = 6, g(3) = 4$, 所以
+  $$
+  I = -\lim_{x \to 3} \frac{\frac{f(x) - f(3)}{x - 3}}{\frac{g(x) - g(3)}{x - 3}} = -\frac{f'(3)}{g'(3)}.
+  $$
+  对 $f(x)$ 取对数并求导, 得
+  $$
+  \ln f(x) = \frac{1}{2} \ln(x^3 + 9) + \frac{1}{3} \ln(2x^2 - 17),
+  $$
+  $$
+  \frac{f'(x)}{f(x)} = \frac{1}{2} \frac{3x^2}{x^3 + 9} + \frac{1}{3} \frac{4x}{2x^2 - 17},
+  $$
+  所以 $f'(3) = \frac{105}{4}$. 同理可得 $g'(3) = \frac{33}{2}$. 因此 $I = -\frac{35}{22}$.
+\end{solution}
+\begin{example}
+  (上海市竞赛题, 1991) 设函数 $f(x)$ 在点 $x_0$ 处可导, $\{\alpha_n\}$ 与 $\{\beta_n\}$ 是两个趋于 0 的正数列, 求极限
+  $$
+  I = \lim_{n \to \infty} \frac{f(x_0 + \alpha_n) - f(x_0 - \beta_n)}{\alpha_n + \beta_n}.
+  $$
+\end{example}
+\begin{solution}
+  【分析】本题是求不定式的极限. 由于只给定 $f(x)$ 在点 $x_0$ 处可导, 没有指明 $f(x)$ 在点 $x_0$ 的邻域内是否可导, 故不能使用 L'Hospital 法则, 而只能从导数的定义出发.
+
+  解 首先, 根据导数 $f'(x_0)$ 的定义以及极限与无穷小的关系, 可得
+  $$
+  \frac{f(x_0 + \alpha_n) - f(x_0)}{\alpha_n} = f'(x_0) + r_n,
+  $$
+  $$
+  \frac{f(x_0 - \beta_n) - f(x_0)}{-\beta_n} = f'(x_0) + s_n,
+  $$
+  其中 $r_n$ 与 $s_n$ 都是 $n \to \infty$ 时的无穷小. 因此
+  $$
+  \begin{aligned}
+  I &= \lim_{n \to \infty} \left[ \frac{f(x_0 + \alpha_n) - f(x_0)}{\alpha_n} \frac{\alpha_n}{\alpha_n + \beta_n} + \frac{f(x_0 - \beta_n) - f(x_0)}{-\beta_n} \frac{\beta_n}{\alpha_n + \beta_n} \right] \\
+  &= \lim_{n \to \infty} \left[ (f'(x_0) + r_n) \frac{\alpha_n}{\alpha_n + \beta_n} + (f'(x_0) + s_n) \frac{\beta_n}{\alpha_n + \beta_n} \right] \\
+  &= \lim_{n \to \infty} \left[ f'(x_0) + \frac{\alpha_n r_n + \beta_n s_n}{\alpha_n + \beta_n} \right].
+  \end{aligned}
+  $$
+  由于 $0 \le \left| \frac{\alpha_n r_n + \beta_n s_n}{\alpha_n + \beta_n} \right| \le |r_n| + |s_n| \to 0 \; (n \to \infty)$, 所以 $I = f'(x_0)$.
+\end{solution}
 % \section{傅立叶级数}
 % \section{傅立叶变换}
 	\section{积分}
     \subsection{积分的定义}
+    最简单，最直观的想法，就是求一段曲线下，在 $[a,b]$ 范围的面积，如何求得呢？分隔成 $N$ 个小矩形，然后将面积加起来就行了
+
+    在 $x_i$ 处的函数取值为 $f(x_i)$ ，取矩形的宽为 $\Delta x_i=x_{i+1}-x_i$ ，只要 $\Delta x_i$ 足够小，就可以认为 $f(x_i)\approx f(x_{i+1})$ ，于是矩形的高就是 $f(x_i)$ ，这一个小矩形的面积是 $f(x_{i})\cdot \Delta x_{i}$ 
+    将所有的小矩形加起来，就是总面积
+    \begin{equation}
+      S_{all}\approx \sum \Delta S =\sum f(x_{i})\cdot \Delta x_{i}
+    \end{equation}
+    约等号是因为这些矩形总是不能完美地贴合函数曲线的，必然带来误差
+
+    当取无数个矩形的极限时，每个矩形的宽都是无穷小，此时可以认为这些矩形完美贴合了曲线，所以约等号可以改成等号，而 $\Delta$ 也就改成 $d$ ，求和符号变成了 $\int$
+    \begin{equation}
+      S=\int_{a}^{b} f(x) \mathrm{d}x=\lim_{N \to \infty} \sum_{i=1}^{N} f(x_i) \Delta x_{i}
+    \end{equation}
+
+    如果上限是 $x$,一个变量，而下限 $x_0$ 是一个未知的常数，那么
+
+    \begin{equation}
+      \int_{-\infty}^{\infty}  \mathrm{d}x
+    \end{equation}
+    \section*{从定积分到不定积分的过渡}
+
+\subsection*{定积分}
+$\int_{a}^{b} f(x) \mathrm{d}x$ 是一个\textbf{数值}，代表 $f(x)$ 在 $[a,b]$ 上的面积。
+
+\subsection*{桥梁：变上限积分}
+定义一个面积\textbf{函数} $F(x)$，其上限 $b$ 变为变量 $x$：
+\begin{equation}
+    F(x) = \int_{a}^{x} f(t) \mathrm{d}t
+\end{equation}
+
+\subsection{微积分基本定理}
+该面积函数 $F(x)$ 的导数恰好是 $f(x)$：
+\begin{equation}
+    \begin{aligned}
+    F'(x) &= \frac{\mathrm{d}}{\mathrm{d}x} \left( \int_{a}^{x} f(t) \mathrm{d}t \right)  \\
+    &= \frac{\int_{x}^{x+\mathrm{d}x} f(t) \mathrm{d}t }{\mathrm{d}x}  \\
+    &\text{在这个区间内可认为f是常数f(x)}\\
+    &= \frac{f(x) \mathrm{d}x}{\mathrm{d}x} \\
+    &= f(x)
+    \end{aligned}
+\end{equation}
+
+\subsection{变上下限定积分的导数}
+面积函数是一个变上限的函数，只有上限和 $x$ 有关，对他求导可立刻得到 $f(x)$ ，可是如果一个定积分的上下限都和 $x$ 有关呢？
+
+\begin{equation}
+  \frac{\mathrm{d} }{\mathrm{d}x} \int_{a(x)}^{b(x)} f(x,t) \mathrm{d}t
+\end{equation}
+此时如何求出他的导数？( $f(x,t)$ 意思是 $f$ 不仅和哑指标 $t$ 有关，并且还和外面的 $x$ 有关) 
+下面具体写一写，为了过程的简便，我们先计算 $\int_{0}^{b(x)} f(x,t) \mathrm{d}t $ ，再通过将 $b(x)\to a(x)$ 再加负号得到 $\int_{a(x)}^{0} f(x,t) \mathrm{d}t$ ，再将两者加起来就能得到总的积分 $\int_{a(x)}^{b(x)} f(x,t) \mathrm{d}t$
+首先求出这个积分在 $x$ 发生无穷小变化 $\mathrm{d}x$ 后的差，就是
+
+\begin{align*}
+\frac{d}{dx} \int_{0}^{b(x)} f(x,t) dt &= \frac{1}{dx} \left( \int_{0}^{b(x+dx)} f(x+dx, t) dt - \int_{0}^{b(x)} f(x,t) dt \right) \\
+&\text{在中间加一项，又减一项}\\
+&= \frac{1}{dx} \left( \int_{b(x)}^{b(x+dx)} f(x+dx, t) dt + \int_{0}^{b(x)} f(x+dx, t) dt - \int_{0}^{b(x)} f(x,t) dt \right) \\
+&\text{在}b(x)\sim b(x+\mathrm{d}x) \text{区间内，} f(x,t) \text{视为常数，提到积分号外}\\
+&\text{并且将t代入b(x)}\\
+&= \frac{1}{dx} \int_{b(x)}^{b(x+dx)} f(x,t) dt + \int_{0}^{b(x)} \frac{f(x+dx, t) - f(x,t)}{dx} dt \\
+&= f(x, b(x)) \cdot \frac{b(x+dx) - b(x)}{dx} + \int_{0}^{b(x)} f_x'(x,t) dt \\
+&= f(x, b(x)) b'(x) + \int_{0}^{b(x)} f_x'(x,t) dt
+\end{align*}
+我们将 $b(x)$ 替换为 $a(x)$ ，然后在等式两边同时乘 $-1$ ，就有
+\begin{equation}
+  \frac{d}{dx} \int_{a(x)}^{0} f(x,t) dt=-f(x, a(x)) a'(x) + \int_{a(x)}^{0} f_x'(x,t) dt
+\end{equation}
+再将上面两个等式加起来，就有
+\begin{equation}
+  \frac{d}{dx} \int_{a(x)}^{b(x)} f(x,t) dt=\int_{a(x)}^{b(x)} f_x'(x,t) dt+f(x, b(x)) b'(x)-f(x, a(x)) a'(x)
+\end{equation}
+这就是所谓的变上下限积分的求导公式
+
+很容易发现，如果积分的上下限都和 $x$ 无关，那么积分和求导就能交换顺序，不过进了积分号就要变成偏导，即
+\begin{equation}
+  \frac{d}{dx} \int_{a}^{b} f(x,t) dt=\int_{a}^{b} \frac{\partial f(x,t)}{\partial x} dt
+\end{equation}
+
+\subsection{不定积分}
+$f(x)$ 的\textbf{全体原函数}称为 $f(x)$ 的不定积分，记为 $F(x) + C$ ($C$为任意常数)。
+\begin{equation}
+    \int f(x) \mathrm{d}x = F(x) + C
+\end{equation}
+但是注意，通常书上认为的 $C$ 是某这常数的想法是错误的，实际上 $C$ 是一个与 $x$ 无关的函数，我们稍后讨论
+
+\subsection*{总结}
+定积分（求面积）和不定积分（求原函数）通过微积分基本定理联系起来，揭示了\textbf{积分}与\textbf{求导}互为\textbf{逆运算}。
     \subsection{什么叫积不出来？}
-    \subsection{不定上下限积分的求导公式}
+\subsubsection{初等函数}
+刘维尔 (Joseph Liouville) 划分了六大基本函数：反对幂三指常以及它们的复合 (指的是反三角函数、对数函数、幂函数、三角函数、指数函数以及常函数)，其他的统称非初等函数，也就是俗称“积不出”。在考试范围内都是对初等函数的不定积分。
+
+对于那些不能用初等函数表示出来的积分，我们不得不这样干：直接将结果定义成一个新的特殊函数
+
+比如：
+$$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi} \eqno{(1.14)}
+$$
+它的不定积分是？当然不是初等函数了，而是定义为误差函数：
+$$
+\text{erf}(x) = \frac{2}{\sqrt{\pi}} \int_x^{\infty} e^{-x^2} dx \eqno{(1.15)}
+$$
+然后还有一些用过的符号：
+$$
+\text{Ei}(x) = \int_{-\infty}^x \frac{e^t}{t} dt, \text{Si}(x) = \int_0^x \frac{\sin t}{t} dt, \text{Ci}(x) = \int_0^x \frac{\cos t}{t} dt 
+$$
+分别称为指数积分函数、正弦积分函数，余弦积分函数
+
+\subsection{一个悖论}
+$$
+\int \frac{dx}{x} = x \cdot \frac{1}{x} - \int x \cdot d\left(\frac{1}{x}\right) = 1 + \int \frac{dx}{x}
+$$
+$$
+\Rightarrow 0 = 1
+$$
+这是怎么回事？
+
+其实是因为左右两边的 $\int \frac{dx}{x}$ 实际上都是 $F(x)+C_1,F(x)+C_2$，
+\begin{equation}
+  F(x)+C_1=1+F(x)+C_2
+\end{equation} 
+这样看起来就说得通了，但其实还是有问题
+\subsection{+C?}
+\href{https://zhuanlan.zhihu.com/p/586089550}{这个篇文章详细讨论过这个问题}https://zhuanlan.zhihu.com/p/586089550
+
+有兴趣的读者可以前往查阅
+
+简要地说，就是指
+\begin{equation}
+  \int f(x) \mathrm{d}x =F(x)+C(w)
+\end{equation}
+即 $C(w)$ 不能看作是一个常数，而是一个和 $x$ 有关，且对 $x$ 的导数为零的函数 $w(x)$
+\begin{example}
+
+  以 $\frac{1}{x} $ 的积分为例，
+  \begin{equation}
+    \begin{aligned}
+    \int \frac{1}{x} \mathrm{d}x&=\ln \left\vert x \right\vert +w(x) \\
+    &=\begin{cases} \ln \left\vert x \right\vert +C_1 , x<0 &  \\ \ln \left\vert x \right\vert +C_2 , x>0&  \end{cases}
+    \end{aligned}
+  \end{equation}
+  即 \begin{equation}
+    w(x)=\begin{cases} C_1 , x<0 &  \\ C_2 , x>0&  \end{cases}
+  \end{equation}
+\end{example}
     \subsection{积分中值定理}
     \subsection{基本不定积分方法}
+
+    \begin{proposition}[微分的四条法则]
+  对一个函数 $f$ 求微分, 若记为 $f'$, 则:
+  \begin{itemize}
+    \item $(f + g)' = f' + g'$(加和法则)
+    \item $(fg)' = f'g + fg'$(莱布尼兹法则)
+    \item $(f(g))' = f'(g) g'$(链式法则)
+    \item $(C)' = 0$
+  \end{itemize}
+\end{proposition}
+
+那么它们的逆也就构成了不定积分的四条性质:
+
+\begin{proposition}[不定积分的四条性质]
+  一个函数 $f$ 对 $x$ 求不定积分, 若记为 $\int f(x)dx$, 则:
+  \begin{itemize}
+    \item $\int df + dg = f + g$(加和律)
+    \item $\int g df + \int f dg = fg$(分部律)
+    \item $\int f'(g) dg = f(g)$(凑微分)
+    \item $\int 0 dt = C$
+  \end{itemize}
+\end{proposition}
     \subsubsection{凑微分}
+$\int g(x) f'(x) dx = \int g(x) \mathrm{d}(f(x))$
+然后将 $g(x)$ 用 $f(x)$ 表示就能算积分
+
+
+    \begin{itemize}
+  \item 幂指对 
+  \begin{equation}
+    \begin{aligned}
+      ae^{ax}\,\mathrm{d}x &= \mathrm{d}(e^{ax}) & \quad a^{x}\ln a\,\mathrm{d}x &= \mathrm{d}(a^{x}) \\
+      n x^{n-1}\,\mathrm{d}x &= \mathrm{d}(x^{n}) & \quad \frac{1}{x}\,\mathrm{d}x &= \mathrm{d}(\ln x)\\
+      \alpha x^{\alpha-1}\,\mathrm{d}x &= \mathrm{d}(x^{\alpha}) &\quad (x>0\text{ 若 }\alpha\notin\mathbb{Z})&
+    \end{aligned}
+  \end{equation}
+
+  \item 特别的，根号，三次根号，分式根号，分式三次根号
+  \begin{equation}
+    \begin{aligned}
+      \frac{f'(x)}{2\sqrt{f(x)}}\,\mathrm{d}x &= \mathrm{d}\big(\sqrt{f(x)}\big) &\quad -\frac{f'(x)}{2\,f(x)^{3/2}}\,\mathrm{d}x &= \mathrm{d}\!\left(\frac{1}{\sqrt{f(x)}}\right) \\
+      \frac{f'(x)}{3\sqrt[3]{f(x)^{2}}}\,\mathrm{d}x &= \mathrm{d}\big(\sqrt[3]{f(x)}\big) &\quad -\frac{f'(x)}{3\,f(x)^{4/3}}\,\mathrm{d}x &= \mathrm{d}\!\left(\frac{1}{\sqrt[3]{f(x)}}\right)
+    \end{aligned}
+  \end{equation}
+
+  \item 三角
+  \begin{equation}
+    \begin{aligned}
+      \cos x\,\mathrm{d}x &= \mathrm{d}(\sin x) &\quad -\sin x\,\mathrm{d}x &= \mathrm{d}(\cos x) \\
+      \frac{1}{\cos^{2}x}\,\mathrm{d}x &= \mathrm{d}(\tan x) &\quad -\frac{1}{\sin^{2}x}\,\mathrm{d}x &= \mathrm{d}(\cot x) \\
+      \sec x\tan x\,\mathrm{d}x &= \mathrm{d}(\sec x) &\quad -\csc x\cot x\,\mathrm{d}x &= \mathrm{d}(\csc x)
+    \end{aligned}
+  \end{equation}
+
+  \item 反三角
+  \begin{equation}
+    \begin{aligned}
+      \frac{\mathrm{d}x}{\sqrt{1-x^{2}}} &= \mathrm{d}(\arcsin x) &\quad -\frac{\mathrm{d}x}{\sqrt{1-x^{2}}} &= \mathrm{d}(\arccos x) \\
+      \frac{\mathrm{d}x}{1+x^{2}} &= \mathrm{d}(\arctan x) &\quad -\frac{\mathrm{d}x}{1+x^{2}} &= \mathrm{d}(\arccot x)
+    \end{aligned}
+  \end{equation}
+
+  \item 双曲
+  \begin{equation}
+    \begin{aligned}
+      \cosh x\,\mathrm{d}x &= \mathrm{d}(\sinh x) &\quad \sinh x\,\mathrm{d}x &= \mathrm{d}(\cosh x) \\
+      \frac{1}{\cosh^{2} x}\,\mathrm{d}x &= \mathrm{d}(\tanh x) &\quad -\frac{1}{\sinh^{2} x}\,\mathrm{d}x &= \mathrm{d}(\coth x)
+    \end{aligned}
+  \end{equation}
+
+  \item 反双曲
+  \begin{equation}
+    \begin{aligned}
+      \frac{\mathrm{d}x}{\sqrt{1+x^{2}}} &= \mathrm{d}(\arsinh x) &\quad \frac{\mathrm{d}x}{\sqrt{x-1}\,\sqrt{x+1}} &= \mathrm{d}(\arcosh x) \\
+      \frac{\mathrm{d}x}{1-x^{2}} &= \mathrm{d}(\artanh x) &\quad (|x|<1;\,\arcosh\,x\text{ 取 }x\ge1)&
+    \end{aligned}
+  \end{equation}
+\end{itemize}
     \subsubsection{分部积分}
+
+    由
+    \begin{equation}
+      d(uv)=u\mathrm{d}v+v\mathrm{d}u\implies u\mathrm{d}v= \mathrm{d}(uv)-v \mathrm{d}u
+    \end{equation}
+    \begin{equation}
+      \implies \int u \mathrm{d} v=uv - \int v \mathrm{d}u
+    \end{equation}
+    \begin{example}
+      \begin{equation}
+        \begin{aligned}
+        \int \ln (1+x^{2}) \mathrm{d}x
+        \end{aligned}
+      \end{equation}
+    \end{example}
+    \begin{solution}
+      \begin{equation}
+        \begin{aligned}
+        \int \ln (1+x^{2}) \mathrm{d}x&= x \ln(1+x^{2})-\int x \mathrm{d}(\ln (1+x^{2})) \\
+&=x \ln(1+x^{2}) - \int x \frac{2x}{1+x^{2}} \mathrm{d}x\\
+&=x \ln(1+x^{2}) - 2 \int (1- \frac{1}{1+x^{2}})\mathrm{d}x\\
+&=x \ln(1+x^{2})- 2(x-\arctan x)+C
+        \end{aligned}
+      \end{equation}
+    \end{solution}
+
     \subsection{换元}
+    换元积分的一般方法： $\int f(x) \mathrm{d}x  =^{x=\varphi(t)} \int f[\varphi(t)] \varphi'(t) dt = F[\varphi^{-1}(x)] + C$, 其中 $F(t)$ 是 $f[\varphi(t)] \varphi'(t)$ 的一个原函数, $\varphi^{-1}(x) = t$ 是 $x = \varphi(t)$ 的反函数.
+    \subsubsection{比值代换}
+\begin{example}
+  (第十一届全国初赛题, 2019) 设隐函数 $y = y(x)$ 由方程 $y^2(x - y) = x^2$ 所确定, 则 $\int \frac{dx}{y^2} = \_\_\_\_\_\_\_\_$.
+\end{example}
+\begin{solution}
+  解 令 $y = tx$, 与方程 $y^2(x - y) = x^2$ 联立, 解得 $x = \frac{1}{t^2(1 - t)}, y = \frac{1}{t(1 - t)}$, 则 $dx = \frac{-2 + 3t}{t^3(1 - t)^2} dt$. 所以
+  $$
+  \begin{aligned}
+  \int \frac{dx}{y^2} &= \int \frac{1}{\frac{1}{t^2(1 - t)^2}} \frac{-2 + 3t}{t^3(1 - t)^2} dt = \int \frac{-2 + 3t}{t} dt \\
+  &= 3t - 2 \ln|t| + C' = \frac{3y}{x} - 2 \ln\left|\frac{y}{x}\right| + C.
+  \end{aligned}
+  $$
+\end{solution}
+    \subsubsection{三角代换}
+    对于含二次根式的积分, 被积函数中含 $\sqrt{a^2 - x^2}$ 时, 可设 $x = a \sin t$; 含 $\sqrt{x^2 + a^2}$ 时, 可设 $x = a \tan t$; 含 $\sqrt{x^2 - a^2}$ 时, 可设 $x = a \sec t$; 含 $\sqrt{ax^2 + bx + c}$ 时, 可经配方化为上述三种情形.
+
+对于积分 $\int f(\sin x, \cos x) dx$, 其中 $f(u, v)$ 是有理函数, 利用代换 $t = \tan \frac{x}{2}$ 可化为有理函数的积分. 常称之为万能代换.
+\begin{example}
+  求: (I) $I = \int \frac{dx}{\sqrt{(5 + x^2)^3}}$; (II) $I = \int \frac{x}{\sqrt{3 + 2x - x^2}} dx$.
+\end{example}
+\begin{solution}
+  解 (I) 可设 $x = \sqrt{5} \tan t, t \in (-\frac{\pi}{2}, \frac{\pi}{2})$, 则 $dx = \sqrt{5} \sec^2 t dt$,
+  $$
+  I = \int \frac{\sqrt{5} \sec^2 t}{\sqrt{125 \sec^6 t}} dt = \frac{1}{5} \int \cos t dt = \frac{\sin t}{5} + C = \frac{x}{5\sqrt{5 + x^2}} + C.
+  $$
+  (II) 因为 $3 + 2x - x^2 = 4 - (x - 1)^2$, 故可设 $x - 1 = 2 \sin t, t \in (-\frac{\pi}{2}, \frac{\pi}{2})$, 则 $x = 1 + 2 \sin t, dx = 2 \cos t dt$. 从而
+  $$
+  I = \int (1 + 2 \sin t) dt = t - 2 \cos t + C = \arcsin \frac{x - 1}{2} - \sqrt{3 + 2x - x^2} + C.
+  $$
+\end{solution}
     \subsubsection{万能代换}
+    \begin{example}
+      \begin{equation}
+        \int \frac{1}{a \sin(x)+b} \mathrm{d}x
+      \end{equation}
+      \begin{solution}
+        万能代换（魏尔施特拉斯代换）：令 $t=\tan\dfrac{x}{2}$，则
+        \[
+          \sin x = \frac{2t}{1+t^{2}},\quad \cos x = \frac{1-t^{2}}{1+t^{2}},\quad \mathrm{d}x = \frac{2\,\mathrm{d}t}{1+t^{2}}.
+        \]
+        代入原积分（先假设 $b\ne 0$）：
+        \[
+          I 
+          = \int \frac{ \dfrac{2\,\mathrm{d}t}{1+t^{2}} }{ a\dfrac{2t}{1+t^{2}} + b }
+          = \int \frac{2\,\mathrm{d}t}{ b t^{2} + 2 a t + b }.
+        \]
+        配方：$b t^{2} + 2 a t + b = b\Big( t+\dfrac{a}{b} \Big)^{2} + b\Big(1-\dfrac{a^{2}}{b^{2}}\Big)$。
+        记 $u=t+\dfrac{a}{b}$，并分情形讨论：
+        \[
+          I = \frac{2}{b} \int \frac{\mathrm{d}u}{u^{2} + \dfrac{b^{2}-a^{2}}{b^{2}}}.
+        \]
+        - 当 $b^{2}>a^{2}$ 时，设 $c=\dfrac{\sqrt{b^{2}-a^{2}}}{|b|}$，得
+        \[
+          I = \frac{2}{\sqrt{b^{2}-a^{2}}} \arctan\!\frac{u}{c}
+          = \frac{2}{\sqrt{b^{2}-a^{2}}}\arctan\!\frac{b t + a}{\sqrt{b^{2}-a^{2}}} + C
+          = \frac{2}{\sqrt{b^{2}-a^{2}}}\arctan\!\frac{b\tan\tfrac{x}{2} + a}{\sqrt{b^{2}-a^{2}}} + C.
+        \]
+        - 当 $a^{2}>b^{2}$ 时，设 $c=\dfrac{\sqrt{a^{2}-b^{2}}}{|b|}$，有
+        \[
+          I = \frac{2}{b} \int \frac{\mathrm{d}u}{u^{2}-c^{2}}
+            = \frac{1}{\sqrt{a^{2}-b^{2}}}
+              \ln\left|\frac{u-c}{u+c}\right| + C
+            = \frac{1}{\sqrt{a^{2}-b^{2}}}
+              \ln\left|\frac{b\tan\tfrac{x}{2}+a-\sqrt{a^{2}-b^{2}}}{b\tan\tfrac{x}{2}+a+\sqrt{a^{2}-b^{2}}}\right| + C.
+        \]
+        - 当 $a^{2}=b^{2}$ 时，分母退化为平方项：$b(t+\tfrac{a}{b})^{2}$，从而
+        \[
+          I = \frac{2}{b} \int \frac{\mathrm{d}u}{u^{2}} = -\frac{2}{b u} + C = -\frac{2}{b t + a} + C = -\frac{2}{b\tan\tfrac{x}{2} + a} + C.
+        \]
+        若 $b=0$，则原式为 $\dfrac{1}{a\sin x}$ 的积分：
+        \[
+          I = \frac{1}{a}\int \frac{\mathrm{d}x}{\sin x}
+            = \frac{1}{a}\int \frac{ \dfrac{2\,\mathrm{d}t}{1+t^{2}} }{ \dfrac{2t}{1+t^{2}} }
+            = \frac{1}{a}\int \frac{\mathrm{d}t}{t}
+            = \frac{1}{a}\ln|\tan\tfrac{x}{2}| + C.
+        \]
+        以上给出了在不同参数范围下的显式原函数，均由万能代换统一得到。
+      \end{solution}
+    \end{example}
     \subsubsection{根式代换}
+这种代换一般用于计算某些简单无理函数的积分, 其目的在于将被积表达式“有理化”。
+(1) 对于含两个一次平方根式 $\sqrt{x + \alpha}$ 与 $\sqrt{x + \beta} (\alpha < \beta)$ 的积分, 可设
+$$
+\sqrt{x + \beta} = \lambda \left(t + \frac{1}{t}\right), \sqrt{x + \alpha} = \lambda \left(t - \frac{1}{t}\right).
+$$
+以上两式各自平方后相减, 即可求出 $\lambda$, 即 $4\lambda^2 = \beta - \alpha$.
+
+\begin{example}
+  求 $I = \int \frac{dx}{1 + \sqrt{x} + \sqrt{1 + x}}$.
+\end{example}
+\begin{solution}
+  解 设 $\sqrt{1 + x} = \lambda \left(t + \frac{1}{t}\right), \sqrt{x} = \lambda \left(t - \frac{1}{t}\right)$. 可求出 $\lambda = \frac{1}{2}$, 则 $t = \sqrt{x} + \sqrt{x + 1}$.
+  $$
+  I = \frac{1}{2} \int \frac{t^4 - 1}{t^3(t + 1)} dt = \frac{1}{2} \left(t - \ln|t| - \frac{1}{t} + \frac{1}{2t^2}\right) + C
+  $$
+  $$
+  = \frac{x}{2} + \sqrt{x} - \frac{1}{2}\sqrt{x(x + 1)} - \frac{1}{2}\ln(\sqrt{x} + \sqrt{x + 1}) + C.
+  $$
+\end{solution}
+
+(2) 对于含两个一次根式 $\sqrt[m]{x + a}$ 和 $\sqrt[n]{x + a}$ 的积分, 可取 $t = \sqrt[k]{x + a}$, 这里 $k$ 为 $m, n$ 的最小公倍数, 即 $\frac{1}{m}, \frac{1}{n}$ 的公分母.
+
+\begin{example}
+  求 $I = \int \frac{dx}{\sqrt{1 + x} + \sqrt[3]{1 + x}}$.
+\end{example}
+\begin{solution}
+  解 $\frac{1}{2}$ 和 $\frac{1}{3}$ 的公分母为 6, 故可设 $t = \sqrt[6]{1 + x}$, 则 $\sqrt{1 + x} = t^3, \sqrt[3]{1 + x} = t^2, dx = 6t^5 dt$. 故
+  $$
+  I = \int \frac{6t^5 dt}{t^3 + t^2} = 2t^3 - 3t^2 + 6t - 6 \ln(1 + t) + C
+  $$
+  $$
+  = 2\sqrt{1 + x} - 3\sqrt[3]{1 + x} + 6\sqrt[6]{1 + x} - 6 \ln(1 + \sqrt[6]{1 + x}) + C.
+  $$
+\end{solution}
+
+(3) 对于含有根式 $\sqrt[m]{\frac{x + a}{x - a}}$ 的积分, 可设 $t = \sqrt[m]{\frac{x + a}{x - a}}$.
     \subsubsection{倒代换}
+
+     倒代换 $t = \frac{1}{x + a}$
+
+当被积函数为 $x$ 的有理式或无理式时, 往往可利用倒置代换去分母中所含的因子 $x + a$ 或 $x$ 的幂.
+
+\begin{example}
+  求不定积分: (I) $\int \frac{dx}{x^4(x^2 + 1)}$; (II) $\int \frac{dx}{(1 + x)\sqrt{1 - x^2}}$.
+\end{example}
+\begin{solution}
+  解 (I) 令 $t = \frac{1}{x}$, 则
+  $$
+  I = -\int \frac{t^4}{t^2 + 1} dt = -\int \left(t^2 - 1 + \frac{1}{t^2 + 1}\right) dt
+  $$
+  $$
+  = -\left(\frac{t^3}{3} - t + \arctan t\right) + C = -\frac{1}{3x^3} + \frac{1}{x} - \arctan \frac{1}{x} + C.
+  $$
+  (II) 令 $t = \frac{1}{x + 1}$, 则
+  $$
+  I = -\int \frac{dt}{\sqrt{2t - 1}} = -\sqrt{2t - 1} + C = -\sqrt{\frac{1 - x}{1 + x}} + C.
+  $$
+\end{solution}
+
+ 二项代换 $t = x \pm \frac{1}{x}$
+
+\begin{example}
+  求不定积分: (I) $\int \frac{x^8(x^2 + 1)}{(x^2 - 1)^{10}} dx$; (II) $\int \frac{x^2 - 1}{x^4 + 3x^2 + 1} dx$.
+\end{example}
+\begin{solution}
+  解 (I) 令 $t = x - \frac{1}{x}$, 则 $dt = \left(1 + \frac{1}{x^2}\right) dx$,
+  $$
+  I = \int \frac{dt}{t^{10}} = -\frac{1}{9t^9} + C = -\frac{x^9}{9(x^2 - 1)^9} + C.
+  $$
+  (II) 令 $t = x + \frac{1}{x}$, 则 $dt = \left(1 - \frac{1}{x^2}\right) dx$,
+  $$
+  I = \int \frac{dt}{t^2 + 1} = \arctan t + C = \arctan \left(x + \frac{1}{x}\right) + C.
+  $$
+\end{solution}
     \subsubsection{部分分式法}
+
+这种方法适用于求解被积函数是有理分式函数的不定积分. 有理分式分为有理真分式和有理假分式. 对于有理假分式, 可先将其化为有理整式和有理真分式之和. 所谓部分分式法, 是首先用待定系数法或者赋特殊值的方法把有理真分式分解成最简分式的代数和, 即分解成部分分式之和, 然后采用直接积分或者凑微分等方法求出各个部分分式的不定积分.
+
+在将有理真分式
+$$
+\frac{P(x)}{Q(x)} = \frac{a_0 x^n + a_1 x^{n-1} + \dots + a_{n-1} x + a_n}{b_0 x^m + b_1 x^{m-1} + \dots + b_{m-1} x + b_m} \quad (\text{其中 } a_0 \ne 0, b_0 \ne 0, n < m)
+$$
+分解成部分分式之和的时候, 应注意下列两点:
+(1) 如果分母 $Q(x)$ 中有因式 $(x - a)^k$, 那么分解后有下列 $k$ 个部分分式之和:
+$$
+\frac{A_1}{x - a} + \frac{A_2}{(x - a)^2} + \dots + \frac{A_{k-1}}{(x - a)^{k-1}} + \frac{A_k}{(x - a)^k},
+$$
+其中 $A_1, A_2, \dots, A_k$ 都是常数. 特别地, 如果 $k = 1$, 那么分解后有 $\frac{A}{x - a}$.
+(2) 如果分母 $Q(x)$ 中有因式 $(x^2 + px + q)^k$, 且其中 $p^2 - 4q < 0$, 那么分解后有下列 $k$ 个部分分式之和:
+$$
+\frac{M_1 x + N_1}{x^2 + px + q} + \frac{M_2 x + N_2}{(x^2 + px + q)^2} + \dots + \frac{M_k x + N_k}{(x^2 + px + q)^k},
+$$
+其中 $M_i, N_i (i = 1, 2, \dots, k)$ 都是常数. 特别地, 如果 $k = 1$, 那么分解后有 $\frac{Mx + N}{x^2 + px + q}$.
+
+\begin{example}
+  求不定积分: (I) $I = \int \frac{x^2 + 1}{x(x - 1)^2} dx$; (II) $I = \int \frac{2x^2 + 2x + 13}{(x - 2)(x^2 + 1)^2} dx$.
+\end{example}
+\begin{solution}
+  解 (I) 将被积函数分解成部分分式之和:
+  $$
+  \frac{x^2 + 1}{x(x - 1)^2} = \frac{a}{x} + \frac{b}{(x - 1)^2} + \frac{c}{x - 1},
+  $$
+  即有
+  $$
+  x^2 + 1 = a(x - 1)^2 + bx + cx(x - 1) = (a + c)x^2 + (-2a + b - c)x + a.
+  $$
+  用待定系数法确定系数 $a, b, c$. 比较同次幂的系数, 得
+  $$
+  a + c = 1, \quad -2a + b - c = 0, \quad a = 1.
+  $$
+  解得 $a = 1, b = 2, c = 0$. 于是
+  $$
+  I = \int \frac{x^2 + 1}{x(x - 1)^2} dx = \int \left(\frac{1}{x} + \frac{2}{(x - 1)^2}\right) dx = \ln|x| - \frac{2}{x - 1} + C.
+  $$
+  (II) 将被积函数分解成部分分式之和:
+  $$
+  \frac{2x^2 + 2x + 13}{(x - 2)(x^2 + 1)^2} = \frac{a}{x - 2} + \frac{bx + c}{x^2 + 1} + \frac{dx + e}{(x^2 + 1)^2},
+  $$
+  即
+  $$
+  2x^2 + 2x + 13 = a(x^2 + 1)^2 + (bx + c)(x - 2)(x^2 + 1) + (dx + e)(x - 2).
+  $$
+  采用赋特殊值的方法确定系数 $a, b, c, d, e$.
+  令 $x = 2$, 得 $25 = 25a$, 故 $a = 1$.
+  令 $x = i$, 得 $11 + 2i = (di + e)(i - 2) = -d - 2e + (e - 2d)i$, 即
+  $$
+  \begin{cases} -d - 2e = 11, \\ e - 2d = 2, \end{cases}
+  $$
+  故 $d = -3, e = -4$.
+  令 $x = 0$, 得 $13 = a - 2c - 2e$, 即 $13 = 9 - 2c$, 故 $c = -2$.
+  令 $x = 1$, 得 $17 = 4a - 2(b + c) - (d + e)$, 即 $2 = -2b$, 故 $b = -1$.
+  于是
+  $$
+  \begin{aligned}
+  I &= \int \left[ \frac{1}{x - 2} + \frac{-x - 2}{x^2 + 1} + \frac{-3x - 4}{(x^2 + 1)^2} \right] dx = \int \frac{dx}{x - 2} - \int \frac{x + 2}{x^2 + 1} dx - \int \frac{3x + 4}{(x^2 + 1)^2} dx \\
+  &= \ln|x - 2| - \int \frac{x}{x^2 + 1} dx - 2 \int \frac{dx}{x^2 + 1} - 3 \int \frac{x}{(x^2 + 1)^2} dx - 4 \int \frac{dx}{(x^2 + 1)^2} \\
+  &= \ln|x - 2| - \frac{1}{2} \ln(x^2 + 1) - 2 \arctan x + \frac{3}{2(x^2 + 1)} - \frac{2x}{x^2 + 1} - 2 \arctan x + C \\
+  &= \ln|x - 2| - \frac{1}{2} \ln(x^2 + 1) - \frac{4x - 3}{2(x^2 + 1)} - 4 \arctan x + C.
+  \end{aligned}
+  $$
+\end{solution}
+
+\begin{example}
+  求 $I = \int \frac{dx}{x^2(1 + x^2)^2}$.
+\end{example}
+\begin{solution}
+  【分析】若采用部分分式法求解本题, 则在将被积函数分解成部分分式之和的形式时, 由于
+  $$
+  \frac{1}{x^2(1 + x^2)^2} = \frac{a}{x} + \frac{b}{x^2} + \frac{cx + d}{1 + x^2} + \frac{ex + f}{(1 + x^2)^2},
+  $$
+  需要确定 6 个待定系数, 故运算量较大. 而采用换元积分法, 就简单得多了.
+
+  解 令 $x = \tan t$, 则 $dx = \sec^2 t dt$. 于是
+  $$
+  \begin{aligned}
+  I &= \int \frac{\sec^2 t dt}{\tan^2 t \sec^4 t} = \int \frac{dt}{\tan^2 t \sec^2 t} = \int \frac{\sec^2 t - \tan^2 t}{\tan^2 t \sec^2 t} dt = \int \frac{dt}{\tan^2 t} - \int \frac{dt}{\sec^2 t} \\
+  &= \int (\csc^2 t - 1) dt - \int \cos^2 t dt = -\cot t - t - \frac{t}{2} - \frac{1}{4} \sin 2t + C \\
+  &= -\frac{1}{x} - \frac{3}{2} \arctan x - \frac{x}{2(1 + x^2)} + C.
+  \end{aligned}
+  $$
+\end{solution}
+
+对于被积函数是三角函数有理的不定积分, 若采用万能代换 $t = \tan \frac{x}{2}$, 则往往导致求有理分式函数的积分.
+
+
     \subsubsection{留数法}
+
+    这里所谓的留数法，其实是使用了一种更简便的方法来计算上面的部分分式法右边各项的系数：
+
+    比如 $f(x)=\frac{P(x)}{Q(x)}$ ，如果分母 $Q(x)$ 中有因式 $(x - a)^m$ ，即有 $x=a$ 的 $m$ 重根，则
+    \begin{equation}
+      f(x)=\frac{A_1}{x - a} + \frac{A_2}{(x - a)^2} + \dots + \frac{A_{m-1}}{(x - a)^{m-1}} + \frac{A_m}{(x - a)^m},
+    \end{equation}
+我们不使用直接通分的方便来计算各个系数 $A_{k}$
+，比如我想计算最后一个系数 $A_m$
+ 
+
+就将等式两边同时乘以 $(x-a)^{m}$ ，有
+\begin{equation}
+      (x-a)^{m}f(x)=A_1 (x - a)^{m-1} + A_2 (x - a)^{m-2} + \dots + A_{m-1} (x - a)^{1} + A_m,
+    \end{equation}
+    此时再令 $x\to a$ ，就能得到
+    \begin{equation}
+      A_m=\lim_{x \to a} (x-a)^{m}f(x)
+    \end{equation}
+    如果我想得到前面的系数呢？直接对 $(x-a)^{m}f(x)=A_1 (x - a)^{m-1} + A_2 (x - a)^{m-2} + \dots + A_{m-1} (x - a)^{1} + A_m$ 左右两边求导就好了！
+
+    比如求一阶导， $A_m$ 因为是常数消失掉了，而 $A_{m-1}$ 则变成了常数项
+\begin{equation}
+  [(x-a)^{m}f(x)]'=A_1 (m-1)(x - a)^{m-2} + A_2 (m-2)(x - a)^{m-3} + \dots + A_{m-1}
+\end{equation}
+ 太好了，直接取极限就能得到 $A_{m-1}=\lim_{x \to a} [(x-a)^{m}f(x)]'$
+
+ 继续求导，就能得到所有的系数！
+ 直接对 $(x-a)^{m}f(x)=A_1 (x - a)^{m-1} + A_2 (x - a)^{m-2} + \dots + A_{m-1} (x - a)^{1} + A_m$ 左右两边继续求导得到：
+
+  一般地，对任意 $k=1,2,\dots,m$，都有统一公式
+  \begin{equation}
+    \boxed{\;A_k=\frac{1}{(m-k)!}\lim_{x\to a}\,\frac{\mathrm{d}^{\,m-k}}{\mathrm{d}x^{\,m-k}}\Big[(x-a)^{m}f(x)\Big]\;}
+  \end{equation}
+  特别地，当 $m=1$（单根）时，$A_1=\displaystyle\lim_{x\to a}(x-a)f(x)$，这正是复分析中的“留数”$\operatorname{Res}(f,a)$。因此，这里所谓“留数法”，实质上就是用上述极限/求导公式直接读取部分分式系数。
+
+  若分母含有实不可约二次因子（如 $x^2+1$），可在复数域中先分解为线性因子，再把共轭项成对合并回到实系数形式。例如
+  \begin{equation}
+    \frac{1}{(x^2+1)^2}=\frac{B}{(x-i)^2}+\frac{\overline{B}}{(x+i)^2},\quad
+    \frac{1}{x^2+1}=\frac{A}{x-i}+\frac{\overline{A}}{x+i},
+  \end{equation}
+  其中 $\overline{\cdot}$ 为共轭。容易验证（令 $A=u+iv,\,B=s+it$）
+  \begin{equation}
+    \frac{A}{x-i}+\frac{\overline{A}}{x+i}=\frac{(2u)x-2v}{x^2+1},\qquad
+    \frac{B}{(x-i)^2}+\frac{\overline{B}}{(x+i)^2}=\frac{2s(x^2-1)-4t x}{(x^2+1)^2}
+    =\frac{2}{x^2+1}+\frac{-4t x-2(1+s)}{(x^2+1)^2},
+  \end{equation}
+  从而总能合并为
+  \begin{equation}
+    \frac{Mx+N}{x^2+1}+\frac{Dx+E}{(x^2+1)^2}\quad (M,N,D,E\in\mathbb{R}).
+  \end{equation}
+
+  下面用本方法快速重做前面两个“部分分式法”的例题。
+
+  \paragraph{例 (I) 回访} $\displaystyle I=\int \frac{x^2+1}{x(x-1)^2}\,\mathrm{d}x$。
+  极点为 $x=0$（一重）与 $x=1$（二重）。
+  \begin{align*}
+    &A_{x=0,1}=\lim_{x\to 0} x\,\frac{x^2+1}{x(x-1)^2}=\frac{1}{1^2}=1,\\
+    &A_{x=1,2}=\lim_{x\to 1}(x-1)^2\,\frac{x^2+1}{x(x-1)^2}=\left.\frac{x^2+1}{x}\right|_{x=1}=2,\\
+    &A_{x=1,1}=\left.\frac{\mathrm{d}}{\mathrm{d}x}\Big[(x-1)^2\,\frac{x^2+1}{x(x-1)^2}\Big]\right|_{x=1}
+    =\left.\frac{\mathrm{d}}{\mathrm{d}x}\Big(\frac{x^2+1}{x}\Big)\right|_{x=1}=\left.\frac{x^2-1}{x^2}\right|_{x=1}=0.
+  \end{align*}
+  因而
+  \begin{equation*}
+    \frac{x^2+1}{x(x-1)^2}=\frac{1}{x}+\frac{2}{(x-1)^2}+\frac{0}{x-1},\quad
+    I=\ln|x|-\frac{2}{x-1}+C.
+  \end{equation*}
+
+  \paragraph{例 (II) 回访} $\displaystyle I=\int \frac{2x^2+2x+13}{(x-2)(x^2+1)^2}\,\mathrm{d}x$。
+  极点：$x=2$（一重）、$x=\pm i$（二重）。先取 $x=2$：
+  \begin{equation*}
+    A_{x=2,1}=\lim_{x\to 2}(x-2)\,\frac{2x^2+2x+13}{(x-2)(x^2+1)^2}
+    =\frac{2\cdot 4+4+13}{(4+1)^2}=\frac{25}{25}=1.
+  \end{equation*}
+  对 $x=i$，记 $g(x)=\dfrac{2x^2+2x+13}{x-2}$，则
+  \begin{equation*}
+    A_{i,2}=\lim_{x\to i}(x-i)^2\,\frac{g(x)}{(x^2+1)^2}
+    =\left.\frac{g(x)}{(x+i)^2}\right|_{x=i}
+    =\frac{11+2i}{(i-2)(2i)^2}=1+\frac{3}{4}i.
+  \end{equation*}
+  又
+  \begin{equation*}
+    A_{i,1}=\left.\frac{\mathrm{d}}{\mathrm{d}x}\Big(\frac{g(x)}{(x+i)^2}\Big)\right|_{x=i}
+    =\frac{2i\,g'(i)-2g(i)}{(2i)^3}=2i-\frac{1}{2}.
+  \end{equation*}
+  由实系数性可知 $x=-i$ 处系数取共轭：$A_{-i,2}=\overline{A_{i,2}}=1-\tfrac{3}{4}i,\ A_{-i,1}=\overline{A_{i,1}}=-2i-\tfrac{1}{2}$。
+  将共轭对合并回实系数形式（利用上面的合并恒等式）可得
+  \begin{equation*}
+    \frac{A_{i,1}}{x-i}+\frac{\overline{A_{i,1}}}{x+i}=\frac{-x-4}{x^2+1},\qquad
+    \frac{A_{i,2}}{(x-i)^2}+\frac{\overline{A_{i,2}}}{(x+i)^2}=\frac{2}{x^2+1}+\frac{-3x-4}{(x^2+1)^2}.
+  \end{equation*}
+  再与 $\dfrac{1}{x-2}$ 相加，得到与前文一致的分解
+  \begin{equation*}
+    \frac{2x^2+2x+13}{(x-2)(x^2+1)^2}
+    =\frac{1}{x-2}+\frac{-x-2}{x^2+1}+\frac{-3x-4}{(x^2+1)^2}.
+  \end{equation*}
+  积分结果即
+  \begin{equation*}
+    I=\ln|x-2| -\frac{1}{2}\ln(x^2+1) - \frac{4x-3}{2(x^2+1)} - 4\arctan x + C,
+  \end{equation*}
+  与部分分式法所得完全一致，但系数的获得更为快捷。
+
+
+
     \subsection{基本定积分方法}
+    以下结论可作为公式使用 (其中 $f(x)$ 为连续函数):
+    \begin{itemize}
+      \item 若 $f(x)$ 为偶函数, 则 $\displaystyle \int_{-a}^a f(x)\,dx = 2 \int_0^a f(x)\,dx$ ($a > 0$)。
+      \item 若 $f(x)$ 为奇函数, 则 $\displaystyle \int_{-a}^a f(x)\,dx = 0$ ($a > 0$)。
+      \item $\displaystyle \int_{-a}^a f(x)\,dx = \int_0^a \big[f(x) + f(-x)\big] \, dx$ ($a > 0$)。
+      \item 若 $f(x)$ 以 $T$ 为周期, 则 $\displaystyle \int_a^{a+T} f(x)\,dx = \int_0^T f(x)\,dx$（其中 $a$ 为任意实数）。
+      \item $\displaystyle \int_0^{\pi/2} f(\sin x)\,dx = \int_0^{\pi/2} f(\cos x)\,dx$。
+      \item $\displaystyle \int_0^\pi x\, f(\sin x)\,dx = \frac{\pi}{2} \int_0^\pi f(\sin x)\,dx$。
+      \item $\displaystyle \int_0^{\pi/2} \sin^{2n} x\, dx = \frac{(2n - 1)!!}{(2n)!!} \cdot \frac{\pi}{2},\quad \int_0^{\pi/2} \sin^{2n+1} x\, dx = \frac{(2n)!!}{(2n + 1)!!}$。此即 Wallis (沃利斯) 公式, 对余弦函数 $\cos x$ 也有这两个公式。
+    \end{itemize}
+
+此外, 变量代换、分部积分、拆项等各种方法与技巧的综合运用, 往往也能使某些定积分的计算化难为易或化繁为简.
+
+\begin{example}
+  (第五届全国初赛题, 2013) 计算定积分 $I = \int_{-\pi}^\pi \frac{x \sin x \cdot \arctan e^x}{1 + \cos^2 x} dx$.
+\end{example}
+\begin{solution}
+  解 对任意 $x$, 恒有 $\arctan e^x + \arctan e^{-x} = \frac{\pi}{2}$ (详见本章例 3.47). 利用公式 (3), 得
+  $$
+  I = \int_0^\pi \frac{x \sin x \cdot (\arctan e^x + \arctan e^{-x})}{1 + \cos^2 x} dx
+  $$
+  $$
+  = \frac{\pi}{2} \int_0^\pi \frac{x \sin x}{1 + \cos^2 x} dx.
+  $$
+  根据积分区间与被积函数的特征, 可利用公式 (6). 因此
+  $$
+  I = \left(\frac{\pi}{2}\right)^2 \int_0^\pi \frac{\sin x}{1 + \cos^2 x} dx = -\frac{\pi^2}{4} \arctan(\cos x) \bigg|_0^\pi = \frac{\pi^3}{8}.
+  $$
+\end{solution}
+
+
     \subsubsection{区间再现}
-    \subsubsection{点火}
+
+
+    “区间再现”是一种计算定积分 $\int_a^b f(x) dx$ 的技巧。它利用变量代换 $t = a + b - x$。
+
+在该代换下, $dx = -dt$, 积分上下限反转:
+$$
+\int_a^b f(x) dx = \int_b^a f(a + b - t) (-dt) = \int_a^b f(a + b - t) dt
+$$
+由于 $t$ 只是一个积分变量, $\int_a^b f(a + b - t) dt = \int_a^b f(a + b - x) dx$。
+因此, 我们得到核心等式:
+$$
+\int_a^b f(x) dx = \int_a^b f(a + b - x) dx
+$$
+这个技巧在 $\int_0^a f(x) dx = \int_0^a f(a - x) dx$ 的形式中尤为常见。
+
+\begin{example}[3.37 (I)]
+求: (I) $\int_0^1 \frac{\ln(1 + x)}{1 + x^2} dx$
+\end{example}
+
+\begin{solution}
+(I) 令 $x = \tan t$, 则 $dx = \sec^2 t dt$。
+当 $x=0$ 时 $t=0$, 当 $x=1$ 时 $t=\frac{\pi}{4}$。
+$$
+I = \int_0^{\pi/4} \frac{\ln(1 + \tan t)}{1 + \tan^2 t} \sec^2 t dt = \int_0^{\pi/4} \ln(1 + \tan t) dt
+$$
+\textbf{方法一：(课本解法)}
+$$
+\begin{aligned}
+I &= \int_0^{\pi/4} \ln\left( \frac{\cos t + \sin t}{\cos t} \right) dt \\
+&= \int_0^{\pi/4} \ln(\sin t + \cos t) dt - \int_0^{\pi/4} \ln \cos t dt \text{} \\
+&= \int_0^{\pi/4} \ln\left(\sqrt{2} \left( \frac{1}{\sqrt{2}}\sin t + \frac{1}{\sqrt{2}}\cos t \right) \right) dt - \int_0^{\pi/4} \ln \cos t dt \\
+&= \int_0^{\pi/4} \ln\left(\sqrt{2} \cos\left(\frac{\pi}{4} - t\right)\right) dt - \int_0^{\pi/4} \ln \cos t dt \text{} \\
+&= \int_0^{\pi/4} \ln \sqrt{2} dt + \int_0^{\pi/4} \ln \cos\left(\frac{\pi}{4} - t\right) dt - \int_0^{\pi/4} \ln \cos t dt \\
+&= \frac{1}{2}\ln 2 \cdot [t]_0^{\pi/4} + \int_0^{\pi/4} \ln \cos\left(\frac{\pi}{4} - t\right) dt - \int_0^{\pi/4} \ln \cos t dt \\
+&= \frac{\pi}{8} \ln 2 + \int_0^{\pi/4} \ln \cos\left(\frac{\pi}{4} - t\right) dt - \int_0^{\pi/4} \ln \cos t dt \text{}
+\end{aligned}
+$$
+此时, 我们对第一个积分应用“区间再现”法。令 $u = \frac{\pi}{4} - t$, 则 $dt = -du$。
+当 $t=0$ 时 $u=\frac{\pi}{4}$, 当 $t=\frac{\pi}{4}$ 时 $u=0$。
+$$
+\int_0^{\pi/4} \ln \cos\left(\frac{\pi}{4} - t\right) dt = \int_{\pi/4}^0 \ln(\cos u) (-du) = \int_0^{\pi/4} \ln(\cos u) du
+$$
+由于 $u$ 只是积分变量, 上式等于 $\int_0^{\pi/4} \ln(\cos t) dt$。
+因此, 原式中的两个积分相消:
+$$
+I = \frac{\pi}{8} \ln 2 + \left( \int_0^{\pi/4} \ln(\cos t) dt \right) - \int_0^{\pi/4} \ln \cos t dt = \frac{\pi}{8} \ln 2. \text{}
+$$
+\textbf{方法二：(直接区间再现)}
+$$
+I = \int_0^{\pi/4} \ln(1 + \tan t) dt
+$$
+应用区间再现, 令 $t = \frac{\pi}{4} - u$, 则 $dt = -du$。
+$$
+\begin{aligned}
+I &= \int_{\pi/4}^0 \ln\left(1 + \tan\left(\frac{\pi}{4} - u\right)\right) (-du) = \int_0^{\pi/4} \ln\left(1 + \frac{\tan\frac{\pi}{4} - \tan u}{1 + \tan\frac{\pi}{4} \tan u}\right) du \\
+&= \int_0^{\pi/4} \ln\left(1 + \frac{1 - \tan u}{1 + \tan u}\right) du \\
+&= \int_0^{\pi/4} \ln\left(\frac{(1 + \tan u) + (1 - \tan u)}{1 + \tan u}\right) du \\
+&= \int_0^{\pi/4} \ln\left(\frac{2}{1 + \tan u}\right) du \\
+&= \int_0^{\pi/4} (\ln 2 - \ln(1 + \tan u)) du \\
+&= \int_0^{\pi/4} \ln 2 du - \int_0^{\pi/4} \ln(1 + \tan u) du \\
+I &= (\ln 2) [u]_0^{\pi/4} - I \\
+2I &= \frac{\pi}{4} \ln 2 \\
+I &= \frac{\pi}{8} \ln 2.
+\end{aligned}
+$$
+\end{solution}
+    \begin{example}
+  求: (I) $\int_0^1 \frac{\ln(1 + x)}{1 + x^2} dx$; (II) $\int_0^{2\pi} \frac{dx}{2 + \cos x}$; (III) $\int_0^{\pi/2} \frac{\sin x dx}{1 + \sqrt{\sin 2x}}$.
+\end{example}
+\begin{solution}
+  解 (I) 令 $x = \tan t$, 则
+  $$
+  \begin{aligned}
+  I &= \int_0^{\pi/4} \ln(1 + \tan t) dt = \int_0^{\pi/4} \ln(\sin x + \cos x) dx - \int_0^{\pi/4} \ln \cos x dx \\
+  &= \int_0^{\pi/4} \ln\left(\sqrt{2} \cos\left(\frac{\pi}{4} - x\right)\right) dx - \int_0^{\pi/4} \ln \cos x dx \\
+  &= \frac{\pi}{8} \ln 2 + \int_0^{\pi/4} \ln \cos\left(\frac{\pi}{4} - x\right) dx - \int_0^{\pi/4} \ln \cos x dx \\
+  &= \frac{\pi}{8} \ln 2 \quad (\text{对上式前一积分作代换 } u = \frac{\pi}{4} - x \text{ 即得后一积分}).
+  \end{aligned}
+  $$
+\end{solution}
+    
 
 \chapter{双元法}
+
+双元法是一种处理具有对称结构被积函数的强大思想。其核心是将被积函数中的两个部分 $p(x), q(x)$ 看作一个整体，利用它们之间存在的代数关系（特别是微分关系）来简化积分。
+
+\section{二次双元：$p^2 \pm q^2 = C^2$}
+\textbf{定义}: 满足 $p^2 \pm q^2 = C^2$ (C为常数) 关系的一对函数 $(p, q)$ 为一对二次双元。
+\begin{itemize}
+    \item \textbf{实圆关系} ($+$): $p^2 + q^2 = C^2$。微分得 $pdp = -qdq \implies \frac{dp}{q} = -\frac{dq}{p}$。
+    \item \textbf{虚圆关系} ($-$): $p^2 - q^2 = C^2$。微分得 $pdp = qdq \implies \frac{dp}{q} = \frac{dq}{p}$。
+\end{itemize}
+这个微分关系是双元法所有变换的基础，例如“等分性”：$\frac{A dq \mp B dp}{Ap \pm Bq} = \frac{dq}{p}$。
+
+\subsection{基本构型与核心公式}
+\begin{theorem}[双元第一积分公式]
+  对于双元 $x, y$, 我们有
+  $$
+  \int \frac{dx}{y} = \begin{cases} \ln(x + y) & (\text{Im}) \\ \arctan \frac{x}{y} & (\text{Re}) \end{cases} \eqno{(2.2)}
+  $$
+  $\text{Re}$ 表示实圆, $\text{Im}$ 表示虚圆。
+\end{theorem}
+\begin{proof}
+  对于虚圆, 我们有 $x dx = y dy$, 于是有
+  $$
+  \frac{dx}{y} = \frac{dy}{x} = \frac{dx + dy}{y + x} \eqno{(2.3)}
+  $$
+  其中利用了等分性。于是
+  $$
+  \int \frac{dx}{y} = \int \frac{d(x + y)}{x + y} = \ln(x + y) \eqno{(2.4)}
+  $$
+  由于是不定积分, 也可以有其他形式。其他比较常见的形式是 $\text{arth} \frac{x}{y}$, 以及带常数的 $\text{arsh}$ 等, 不过推荐用定理中的形式, 因为又提示了对称性, 又足够简洁。
+
+  对于实圆, 我们同样有:
+  $$
+  \frac{dx}{iy} = \frac{idy}{x} = \frac{dx + idy}{iy + x} \eqno{(2.5)}
+  $$
+  这里就不写成 $\ln(x + iy)$ 的形式了, 因为不是完全对称的, 而且带虚数不太好看。推荐写成一个等价的形式:
+  $$
+  \int \frac{dx}{y} = \arctan \frac{x}{y} \eqno{(2.6)}
+  $$
+  另外的形式有 $\arcsin$ 函数等等。
+\end{proof}
+
+\begin{theorem}[双元第二积分公式]
+  对于双元 $x, y$, 我们有:
+  $$
+  \int f(x, y) \cdot \frac{dx}{y} = \int f(x, y) \cdot \frac{ydx - xdy}{y^2 \pm x^2} \eqno{(2.7)}
+  $$
+  对于实圆取加号, 对于虚圆取减号。可以注意到这里的分母在两种情况下均为常数。♡
+\end{theorem}
+\begin{proof}
+  证明是容易的, 我们需要关注在第一公式里使用的等分性, 这里只讨论虚圆,
+  $$
+  \frac{dx}{y} = \frac{dy}{x} = \frac{ydx}{y^2} = \frac{xdy}{x^2} = \frac{ydx - xdy}{y^2 - x^2} \eqno{(2.8)}
+  $$
+  这与 $f$ 本身没有什么关系。如果 $f=1$ 就退化到第一公式的情形。
+
+  由此, 我们可以用上面的思路推导所有的双元积分。
+\end{proof}
+
+\begin{theorem}[双元第三积分公式]
+  对于双元 $x, y$, 我们有:
+  $$
+  \int \frac{f(x, y)}{y^3} dx = \frac{1}{y^2 \pm x^2} \int f(x, y) \cdot d\left(\frac{x}{y}\right) \eqno{(2.9)}
+  $$
+  这里是由于 $y^2 \pm x^2$ 为常数, 可以提到积分号外。另外同前, 对于实圆取加号, 对于虚圆取减号。是第二积分公式的推论。♡
+\end{theorem}
+\begin{proof}
+  利用第二积分公式:
+  $$
+  \frac{dx}{y^3} = \frac{1}{y^2 \pm x^2} \frac{ydx - xdy}{y^2} = \frac{d(x/y)}{y^2 \pm x^2} \eqno{(2.10)}
+  $$
+  同样地, 这与 $f$ 本身没什么关系。
+
+  可能会有小可爱想知道 $\int \frac{dx}{y^2}$ 怎么算, 这里有两种方案. 一是借用旧有积分表上的公式,
+  $$
+  \int \frac{dx}{a^2 + x^2} = \frac{1}{a} \arctan \frac{x}{a}, \int \frac{dx}{a^2 - x^2} = \frac{1}{a} \text{arth} \frac{x}{a} \eqno{(2.11)}
+  $$
+  这样把 $y^2$ 换成 $a^2 \pm x^2$ 就可以解决了。还有一个条路是完全在双元公式下:
+  $$
+  \begin{aligned}
+  \int \frac{dx}{y^2} &= \int \frac{dx}{y^3} \cdot y = \frac{1}{y^2 \pm x^2} \int d(x/y) \frac{1}{1/y} \\
+  &= \frac{1}{\sqrt{y^2 \pm x^2}} \int \frac{d(x/y)}{\sqrt{y^2 \pm x^2}/y} \\
+  &= \frac{1}{\sqrt{y^2 \pm x^2}} \int \frac{dm}{n}
+  \end{aligned}
+  $$
+  然后我们判断 $m = x/y, n = \sqrt{y^2 \pm x^2}/y$ 是虚圆还是实圆, 就可以套用第一公式了。笔者建议去习惯第二种, 这样能更完美的容纳双元体系, 如果太习惯旧有规则也不强求。
+
+  下面来看一些简单的例题。
+\end{proof}
+
+\begin{example}
+  求 $\int \sqrt{1 + x^2} dx$.
+\end{example}
+\begin{solution}
+  解: 设 $y = \sqrt{1 + x^2}$, 并且合理利用 $y^2 - x^2 = 1$ 进行代换:
+  $$
+  \begin{aligned}
+  \int y dx &= \frac{1}{2} \int y dx + x dy + y dx - x dy \\
+  &= \frac{1}{2} \left[ \int y dx + x dy + \int \frac{y dx - x dy}{y^2 - x^2} \right] \\
+  &= \frac{1}{2} \left[ \int d(xy) + \int \frac{dx}{y} \right] \\
+  &= \frac{1}{2} [xy + \ln(x + y)] + C
+  \end{aligned}
+  $$
+  这里建议读者停下阅读, 尝试算算 $\int \sqrt{4 - x^2} dx$ 之类的。这种比较基础的积分需要熟练掌握。
+\end{solution}
+
+\begin{example}
+  求 $\int \frac{x^2}{\sqrt{1 - x^2}} dx$
+\end{example}
+\begin{solution}
+  解: 设 $y = \sqrt{1 - x^2}$, 则有:
+  $$
+  \begin{aligned}
+  \int \frac{x^2}{\sqrt{1 - x^2}} dx &= \int \frac{x^2 dx}{y} = -\int x dy \\
+  &= -\frac{1}{2} \left( \int d(xy) + \int \frac{dy}{x} \right) \\
+  &= -\frac{1}{2} \left( x\sqrt{1 - x^2} + \arctan \frac{\sqrt{1 - x^2}}{x} \right) + C
+  \end{aligned}
+  $$
+\end{solution}
+\textbf{构型1 (基础微分形式)}: $\int \frac{dq}{p}$
+\begin{itemize}
+    \item \textbf{虚圆}: $\int \frac{dq}{p} = \int \frac{d(p+q)}{p+q} = \ln(p+q)$
+    \item \textbf{实圆}: $\int \frac{dq}{p} = \int \frac{d(q/p)}{1+(q/p)^2} = \arctan\frac{q}{p}$
+\end{itemize}
+
+\textbf{构型2 (点火公式的本质)}: $\int p dq$
+这个积分可以通过凑微分和分部积分思想得到一个非常优美的公式：
+\begin{equation}
+    \int p dq = \frac{1}{2} (pq + C^2 \int \frac{dq}{p}) \quad (\text{实圆关系})
+\end{equation}
+\begin{equation}
+    \int p dq = \frac{1}{2} (pq + C^2 \int \frac{dq}{p}) \quad (\text{虚圆关系, 这里应为 } p^2-q^2=C^2, 2\int pdq = pq+C^2\int\frac{dq}{p})
+\end{equation}
+\begin{proof}
+(虚圆 $p^2-q^2=C^2$): $\int pdq = pq - \int qdp = pq - \int \frac{q^2}{p}dq = pq - \int \frac{p^2-C^2}{p}dq = pq - \int pdq + C^2\int\frac{dq}{p}$. 移项得 $2\int pdq = pq + C^2\int\frac{dq}{p}$。
+\end{proof}
+这个公式将形如 $\int \sqrt{a^2 \pm x^2} dx$ 的积分统一起来，并将其计算转化为基本构型1。
+
+\begin{problem}
+    计算 $I = \int \sqrt{a^2+x^2} dx$。
+\end{problem}
+\begin{solution}
+    设双元 $p=\sqrt{a^2+x^2}, q=x$。它们满足虚圆关系 $p^2-q^2=a^2$。
+    我们要求的是 $\int p dq$。套用公式：
+    \begin{align*}
+        I = \int p dq &= \frac{1}{2} (pq + a^2 \int \frac{dq}{p}) \\
+          &= \frac{1}{2} (x\sqrt{a^2+x^2} + a^2 \ln(p+q)) \\
+          &= \frac{1}{2} (x\sqrt{a^2+x^2} + a^2 \ln(x+\sqrt{a^2+x^2}))
+    \end{align*}
+\end{solution}
+\begin{example}
+  求 $\int \sqrt{x^2 + \sqrt{x^2 + \sqrt{x^2 + \dots}}} dx$.
+\end{example}
+\begin{solution}
+  解: 若设被积函数为 $f(x)$, 那么有极限等式:
+  $$
+  \sqrt{x^2 + f(x)} = f(x) \eqno{(2.12)}
+  $$
+  解得: $f(x) = \frac{1}{2} (1 + \sqrt{1 + 4x^2})$, 再设 $p = \sqrt{1 + 4x^2}, q = 2x$, (并且利用前面的例题) 就有:
+  $$
+  \begin{aligned}
+  \int \frac{1}{2} (1 + p) dx &= \frac{x}{2} + \frac{1}{4} \int p dq \\
+  &= \frac{x}{8} (pq + \ln(p + q)) + C \\
+  &= \frac{x}{4} (2 + \sqrt{1 + 4x^2}) + \frac{1}{8} \ln(\sqrt{1 + 4x^2} + 2x) + C
+  \end{aligned}
+  $$
+  可以看到还是轻松愉快的。如果熟练了, 我们可以同时考虑更多的二次双元, 它们互相有实圆/虚圆关系。
+\end{solution}
+
+\begin{example}[\textcolor{green}{2.4}]
+  求 $\int \frac{dx}{\sqrt{1 - \sin^4 x}}$.
+\end{example}
+\begin{solution}
+  解: (By 水中星) 若设 $p = \sin x, q = \cos x, r = \sqrt{1 + \sin^2 x}$, 则有:
+  $$
+  \begin{aligned}
+  \int \frac{dx}{\sqrt{1 - \sin^4 x}} &= \int \frac{dx}{rq} = \int \frac{dp}{rq^2} = \int \frac{r^2}{r^2 - 2p^2} \frac{dp}{r^3} = \int \frac{1}{1 - 2(p/r)^2} d\left(\frac{p}{r}\right) \\
+  &= \frac{1}{\sqrt{2}} \text{arth} \frac{\sqrt{2} p}{r} + C = \frac{1}{\sqrt{2}} \text{arth} \frac{\sqrt{2} \sin x}{\sqrt{1 + \sin^2 x}} + C
+  \end{aligned}
+  $$
+\end{solution}
+
+\begin{example}[\textcolor{green}{2.6}]
+  [2020 广东省数竞 (民办高职)] 求 $\int \ln(x + \sqrt{1 + x^2}) dx$.
+\end{example}
+\begin{solution}
+  解:(By 白酱) 令 $y = \sqrt{1 + x^2}$, 这里注意逆用第一积分公式, 则:
+  $$
+  \begin{aligned}
+  \int \ln(x + \sqrt{1 + x^2}) dx &= \int \ln(x + y) dx \\
+  &= x \ln(x + y) - \int x \frac{dx}{y} \\
+  &= x \ln(x + y) - \int dy \\
+  &= x \ln(x + y) - y + C
+  \end{aligned}
+  $$
+\end{solution}
+
+\begin{example}[\textcolor{green}{2.7}]
+  求 $\int \frac{\ln(x + \sqrt{1 + x^2})}{x^2} dx$.
+\end{example}
+\begin{solution}
+  解:(By 风中鱼) 令 $y = \sqrt{1 + x^2}$, 同前:
+  $$
+  \begin{aligned}
+  \int \frac{\ln(x + \sqrt{1 + x^2})}{x^2} dx &= -\int \ln(x + y) d\left(\frac{1}{x}\right) \\
+  &= -\frac{1}{x} \ln(x + y) + \int \frac{dx}{xy} \\
+  &= \int \frac{dy}{x^2} - \frac{\ln(x + y)}{x} \\
+  &= -\text{arthy} - \frac{\ln(x + y)}{x} + C \\
+  &= -\text{arth}(\sqrt{1 + x^2}) - \frac{\ln(x + \sqrt{1 + x^2})}{x} + C
+  \end{aligned}
+  $$
+\end{solution}
+
+下面是常见三角函数的积分, 若设 $p = \sin x, q = \cos x$:
+\begin{itemize}
+  \item $\int \sin x dx = \int p dx = \int -dq = -\cos x$
+  \item $\int \cos x dx = \int q dx = \int dp = \sin x$
+  \item $\int \tan x dx = \int \frac{p}{q} dx = \int -\frac{dq}{q} = -\ln(\cos x)$
+  \item $\int \cot x dx = \int \frac{q}{p} dx = \int \frac{dp}{p} = \ln(\sin x)$
+  \item $\int \csc x dx = \int \frac{-dq}{p^2} = -\int \frac{dq}{1 - q^2} = -\text{arth}(\cos x)$
+  \item $\int \sec x dx = \int \frac{dp}{q^2} = \int \frac{dp}{1 - p^2} = \text{arth}(\sin x)$
+\end{itemize}
+
+\subsection{双元的降次与递推}
+在一般的课本上, 常常采用三角换元法。这算是双元的一种特殊情形, 两者的主要区别在于三角有倍角半角表示, 而双元需要变换成倍角形式。后者见以后的内容, 这里讲解不用倍角表示来求解高次不定积分。
+
+在这个部分中只有三种富有技巧性的操作, 分别是常数代换、分部积分和混合。
+
+\begin{example}[\textcolor{green}{2.8}]
+  求 $\int \sin^3 x dx$.
+\end{example}
+\begin{solution}
+  解 先进行双元 $p = \sin x, q = \cos x$,
+  $$
+  \begin{aligned}
+  \int \sin^3 x dx &= \int p^3 \frac{dp}{q} = -\int p^2 dq \\
+  &= -\int (1 - q^2) dq \\
+  &= \frac{1}{3} q^3 - q + C
+  \end{aligned}
+  $$
+  这里是单纯的常数代换, 用来联系 $n$ 次与 $n + 2$ 次。
+\end{solution}
+
+\begin{example}[\textcolor{green}{2.9}]
+  求 $\int \sin^4 x dx$.
+\end{example}
+\begin{solution}
+  解: 同前, 令 $p = \sin x, q = \cos x$,
+  $$
+  \begin{aligned}
+  \int \sin^4 x dx &= -\int p^3 dq \\
+  &= -\int (1 - q^2) p dq = \int q^2 p dq - \int p dq \\
+  &= \int p^2 q dp - \int p dq \\
+  &= -\frac{1}{3} p^3 q - \int p dq + \frac{1}{3} \int p^3 dq \\
+  &= -\frac{1}{3} p^3 q - \frac{3}{4} \int p dq
+  \end{aligned}
+  $$
+  这里我们会发现最开始的 $\int p^3 dq \to \int p dq$, 这个过程就是混合降次。(注: 上面最后一个等号是消去红色部分 $1:3$ 混合得到。)
+
+  更高次也可以利用这个方法来降次求得。然后利用
+  $$
+  \begin{aligned}
+  \int p dq &= \frac{1}{2} \left[ \int p dq + q dp + \int \frac{p dq - q dp}{q^2 + p^2} \right] \\
+  &= \frac{1}{2} \left( \int d(pq) + \int \frac{dq}{p} \right) \\
+  &= \frac{1}{2} \left( pq + \arctan \frac{q}{p} \right) \\
+  &= \frac{1}{2} (\sin x \cos x - x)
+  \end{aligned}
+  $$
+  即可完成积分。
+
+  当然不止限于三角函数积分, 类似 $\int (1 + x^2)^{\frac{3}{2}} dx$ 也可以解决。这里我们可以总结一个常用公式, 对于考试来说是绰绰有余的:
+
+  结论 对于双元 $p, q$, 有
+  $$
+  \int p dq = \frac{1}{2} pq + \frac{1}{2} (p^2 \pm q^2) \int \frac{dq}{p} \eqno{(2.14)}
+  $$
+  其中虚圆取减号, 实圆取加号。总之 $p^2 \pm q^2$ 是常数。
+\end{solution}
+\subsection{对勾三元与四次根式积分}
+当被积函数中出现 $x \pm 1/x$ 结构时，可以考虑对勾双元。
+恒等式 $(x-\frac{a}{x})^{2}+4a=(x+\frac{a}{x})^{2}$ 诱导出一对双元。通常取 $a=1$，并引入第三个元 $r=\sqrt{x^2+1/x^2+b}$，构成“对勾三元”：
+$p=x+1/x, q=x-1/x, r=\sqrt{p^2-2+b} = \sqrt{q^2+2+b}$。
+
+\subsubsection{对勾三元}
+
+因为有恒等式 $(x - \frac{a}{x})^2 + 4a = (x + \frac{a}{x})^2$，所以这里可以诱导出一对双元。(又称“对勾三元 (From Mirion)” )
+
+\begin{center}
+  \color{red}
+  $p, q, r \to x + \frac{a}{x}, x - \frac{a}{x}, \sqrt{x^2 + \frac{a^2}{x^2} + b}$
+\end{center}
+
+在化简一些四次的不定积分上, 有奇效。观察次数差来换双元即可。另外还有一个特别的小技巧, 我们可以注意到 $\frac{1}{2}p + \frac{1}{2}q = x$, 由等分性:
+$$
+\frac{dx}{x} = \frac{d(\frac{1}{2}p + \frac{1}{2}q)}{\frac{1}{2}p + \frac{1}{2}q} = \frac{dp}{q} \eqno{(2.37)}
+$$
+如果将 $x$ 换成 $x^n$, 那么
+$$
+n \frac{dx}{x} = \frac{d(x^n)}{x^n} = \frac{dp}{q} \eqno{(2.38)}
+$$
+这个技巧将在下面的例题中频繁使用。
+
+\begin{example}
+  求 $\int \frac{1 - x^2}{1 + x^2} \frac{dx}{\sqrt{x^4 + x^2 + 1}}$.
+\end{example}
+\begin{solution}
+  解:(By 风中鱼) 设
+  $$
+  p = x + \frac{1}{x}, q = x - \frac{1}{x}, r = \frac{\sqrt{x^4 + x^2 + 1}}{x} \eqno{(2.39)}
+  $$
+  则:
+  $$
+  \begin{aligned}
+  \int \frac{1 - x^2}{1 + x^2} \frac{dx}{\sqrt{x^4 + x^2 + 1}} &= -\int \frac{dp}{pr} \\
+  &= -\int \frac{dr}{p^2} = -\int \frac{dr}{r^2 + 1} \\
+  &= \arctan \frac{x}{\sqrt{x^4 + x^2 + 1}} + C
+  \end{aligned}
+  $$
+\end{solution}
+
+
+
+
+\section{隐函数的不定积分}
+\begin{example}
+  若 $y(x - y)^2 = x$ 定义了 $y(x)$, 求 $\int \frac{dx}{x - 3y}$.
+\end{example}
+\begin{solution}
+  \textbf{法一：}若设
+  $$
+  x = \frac{t^3}{t^2 - 1}, y = \frac{t}{t^2 - 1}, t = x - y
+  $$
+  我们将这条曲线单值参数化了。
+  $$
+  \begin{aligned}
+  \int \frac{dx}{x - 3y} &= \int \frac{t^2 - 1 \quad 3t^2(t^2 - 1) - 2t^4}{t^3 - 3t \quad (t^2 - 1)^2} dt \\
+  &= \int \frac{t dt}{t^2 - 1} = \frac{1}{2} \ln(t^2 - 1) + C \\
+  &= \frac{1}{2} \ln((x - y)^2 - 1) + C
+  \end{aligned}
+  $$
+
+  \textbf{法二：}我们求全微分后
+  $$
+  x (x - 3y) dy + y (x + y) dx = 0
+  $$
+  于是有
+  $$
+  \begin{cases}
+  \frac{dx}{x - 3y} = \frac{-x dy}{y(x+y)} = \frac{dy}{x+y} - \frac{dy}{y} \\
+  \frac{dy}{x+y} = \frac{-y dx}{x(x-3y)} = \frac{1}{3} \left(\frac{dx}{x} - \frac{dx}{x-3y}\right)
+  \end{cases}
+  $$
+  两式相加即可。
+  $$
+  \int \frac{dx}{x - 3y} = \frac{\ln x - 3 \ln y}{4} + C
+  $$
+\end{solution}
+\begin{example}
+  若 $(x^2 + y^2)^2 = 2xy$ 定义了 $y(x)$, 求 $\int \frac{dx}{\sqrt{x^2 + y^2}}$.
+\end{example}
+\begin{solution}
+  解:(By 虚调子) 若设
+  $$
+  p = \frac{\sqrt{x^2 + y^2}}{x}, q = \frac{y}{x}
+  $$
+  则构成双元, 以及有:
+  $$
+  p^4 x^2 = 2q \Leftrightarrow 4 \frac{dp}{p} + 2 \frac{dx}{x} = \frac{dq}{q}
+  $$
+  于是
+  $$
+  \begin{aligned}
+  \int \frac{dx}{\sqrt{x^2 + y^2}} &= \int \frac{dx}{px} \\
+  &= \frac{1}{2} \int \frac{dp}{pq} - 2 \int \frac{dp}{p^2} \\
+  &= -\frac{1}{2} \text{arth} p + \frac{2}{p} \\
+  &= \frac{2x}{\sqrt{x^2 + y^2}} - \frac{1}{2} \text{arth} \frac{\sqrt{x^2 + y^2}}{x} + C
+  \end{aligned}
+  $$
+\end{solution}
+
+\begin{example}
+  若 $z^3 + xz = 8$ 定义了 $z(x)$, 求 $\int z^2 dx$.
+\end{example}
+\begin{solution}
+  解:(By 风中鱼) 我们先取一次全微分, 有
+  $$
+  3z^2 dz + x dz + z dx = 0
+  $$
+  那么回代可以发现
+  $$
+  \begin{aligned}
+  \int z^2 dx &= \int -z (3z^2 dz + x dz) \\
+  &= -\frac{3}{4} z^4 - \int xz dz \\
+  &= -\frac{3}{4} z^4 - \frac{1}{2} xz^2 + \frac{1}{2} \int z^2 dx \\
+  \implies \frac{1}{2} \int z^2 dx &= -\frac{3}{4} z^4 - \frac{1}{2} xz^2 + C' \\
+  \int z^2 dx &= -\frac{3}{2} z^4 - xz^2 + C
+  \end{aligned}
+  $$
+  最后一步是进行了混合。
+\end{solution}
 \chapter{单元法}
+
+单元法是双元法的变体，其核心关系是**乘积为常数**，即 $pq=C$。它统一并简化了经典的欧拉代换和万能代换。
+\subsection{双元化单元}
+
+在双元法里, 我们常常会考虑: $x^2 + y^2 = 1$ 这种情形。因为这使得
+$$
+\int y dx - x dy = \int \frac{y dx - x dy}{x^2 + y^2} \to \arctan \frac{x}{y}
+$$
+但是这并不是唯一的情形! 比如当 $x, y$ 满足 $xy = 1$ 时,
+$$
+\int y dx - x dy = \int \frac{y dx - x dy}{xy} = \int \frac{dx}{x} - \frac{dy}{y} = \ln \frac{x}{y} \eqno{(1.1)}
+$$
+也是可以积出来的。
+
+\subsubsection{定积分双元}
+
+那么我们可以来研究 $pq = C$ 的双元 $p, q$, 微分关系将与二次双元不相同:
+$$
+p dq + q dp = 0 \eqno{(1.2)}
+$$
+值得一提的是二次双元与这类定积分双元是很容易互相转化的, 换句话说两者本质上是一回事, 在求解不定积分上各有各的方便之处。
+$$
+p^2 - q^2 = C \to (p + q)(p - q) = C \eqno{(1.3)}
+$$
+(注: 如果是实圆的话将带虚数。)
+
+如果我们令定积分双元 $s = p + q, t = p - q$, 会得到
+$$
+p^2 - q^2 = C \to p = \frac{s + t}{2}, q = \frac{s - t}{2}
+$$
+不难联想到
+$$
+\cosh^2 x - \sinh^2 x = 1 \to \cosh x = \frac{e^x + e^{-x}}{2}, \sinh x = \frac{e^x - e^{-x}}{2}
+$$
+我们发现了这里存在类似的对应: 定积分双元之于二次双元, 亦如指数函数之于三角函数。而这正是单元的核心——寻找类似“指数函数”性质的广泛联系。
+\begin{example}
+  求 $\int \frac{dx}{1 + \sqrt{x} + \sqrt{1 + x}}$.
+\end{example}
+\begin{solution}
+  解 不妨设
+  $$
+  p = \sqrt{x} + \sqrt{1 + x}, q = \sqrt{1 + x} - \sqrt{x}, pq = 1
+  $$
+  这样可以将原题可以去掉根号。充分利用条件, 我们会采用类似
+  $$
+  \int \frac{dq}{1 + p} = \int \frac{q dq}{q + pq} = \int \frac{q dq}{q + 1}
+  $$
+  来简化计算。
+  $$
+  \begin{aligned}
+  \int \frac{dx}{1 + \sqrt{x} + \sqrt{1 + x}} &= \int \frac{1}{1 + p} d\left(\frac{1}{4}(p - q)^2\right) \\
+  &= \frac{1}{2} \int \frac{p dp}{1 + p} + \frac{1}{2} \int \frac{q^2 dq}{1 + q} \\
+  &= \frac{1}{2}p - \frac{1}{2}\ln(p + 1) + \frac{1}{2}\left(\frac{1}{2}q^2 - q\right) + \frac{1}{2}\ln(1 + q) + C' \\
+  &= \frac{1}{4}(\sqrt{1 + x} - \sqrt{x})^2 + \sqrt{x} + \frac{1}{2} \ln \frac{1 + \sqrt{1 + x} - \sqrt{x}}{1 + \sqrt{1 + x} + \sqrt{x}} + C
+  \end{aligned}
+  $$
+\end{solution}
+
+\begin{example}
+  求 $\int \sqrt{x + \sqrt{1 + x^2}} dx$.
+\end{example}
+\begin{solution}
+  解 (By 风中鱼) 如果题目简单, 我们也可以不写成双元, 一般竞赛题(对, 这种题已经只会在竞赛出现了)会采用如下写法: 若设 $t = \sqrt{x + \sqrt{1 + x^2}}$, 则有 $t^2 - \frac{1}{t^2} = 2x$, 本质是一样的。
+  $$
+  \begin{aligned}
+  \int \sqrt{x + \sqrt{1 + x^2}} dx &= \frac{1}{2} \int t d\left(t^2 - \frac{1}{t^2}\right) \\
+  &= \int t \left(t + \frac{1}{t^3}\right) dt \\
+  &= \frac{1}{3}t^3 - \frac{1}{t} + C
+  \end{aligned}
+  $$
+\end{solution}
+\section{基本思想：从双元到单元}
+二次双元 $p^2-q^2=C$ 可以写作 $(p-q)(p+q)=C$。如果我们令 $s=p+q, t=p-q$，那么它们就满足单元关系 $st=C$。这揭示了双元法和单元法的深刻联系。
+例如，处理 $\sqrt{ax^2+bx+c}$ 时，欧拉的第一类代换 $\sqrt{ax^2+bx+c} = t \pm \sqrt{a}x$ 本质上就是构造了一个单元关系。但直接使用单元法进行计算通常更为简洁。
+
+\begin{problem}
+    计算 $I = \int \frac{dx}{(2+x)\sqrt{1+x}}$
+\end{problem}
+\begin{solution}
+    这是一个可以用根式代换 $t=\sqrt{1+x}$ 解决的标准题目。我们用单元法的思想来重新审视。
+    设 $p = \sqrt{1+x}, q = 2+x = 1+p^2$。这没有形成 $pq=C$ 的关系。
+    
+    正确的单元构造应该是基于被积函数结构。设 $t = \sqrt{1+x}$，则 $x=t^2-1$。
+    $I = \int \frac{2t dt}{(t^2+1)t} = 2 \int \frac{dt}{t^2+1} = 2 \arctan t + C = 2\arctan\sqrt{1+x}+C$。
+    这个例子太简单，无法体现单元法的威力。让我们回到之前那个更复杂的例子。
+\end{solution}
+
+\begin{problem}
+    计算 $I = \int \frac{dx}{1+\sqrt{x}+\sqrt{1+x}}$
+\end{problem}
+\begin{solution}
+    设单元 $p=\sqrt{1+x}+\sqrt{x}, q=\sqrt{1+x}-\sqrt{x}$，则 $pq=1$。
+    我们用 $p$ 来表示 $x$ 和 $dx$：
+    $p-q = 2\sqrt{x} \implies p - 1/p = 2\sqrt{x} \implies x = (\frac{p-1/p}{2})^2$。
+    $dx = 2(\frac{p-1/p}{2}) \cdot (\frac{1+1/p^2}{2}) dp = \frac{p^2-1}{2p} \frac{p^2+1}{p^2} dp$。
+    被积函数的分母是 $1+\sqrt{x}+\sqrt{1+x} = 1+p$。
+    \begin{align*}
+        I &= \int \frac{1}{1+p} \cdot \frac{(p-1)(p+1)}{2p} \cdot \frac{p^2+1}{p^2} dp = \int \frac{(p-1)(p^2+1)}{2p^3} dp \\
+        &= \frac{1}{2} \int (1 - \frac{1}{p} + \frac{1}{p^2} - \frac{1}{p^3}) dp \\
+        &= \frac{1}{2} (p - \ln p - \frac{1}{p} + \frac{1}{2p^2}) + C
+    \end{align*}
+    代回 $p = \sqrt{1+x}+\sqrt{x}$ 和 $1/p = q = \sqrt{1+x}-\sqrt{x}$：
+    $p-1/p = 2\sqrt{x}$
+    \begin{equation*}
+        I = \frac{1}{2} (2\sqrt{x} - \ln(\sqrt{1+x}+\sqrt{x}) + \frac{1}{2}(\sqrt{1+x}-\sqrt{x})^2) + C \\
+        = \sqrt{x} - \frac{1}{2}\ln(\sqrt{1+x}+\sqrt{x}) + \frac{1}{4}(1+2x-2\sqrt{x(1+x)}) + C
+    \end{equation*}
+\end{solution}
+
+\section{指数类的单元法}
+当被积函数形如 $\int g(x) e^{f(x)} dx$ 时，一个有效的策略是尝试寻找一个函数 $P(x)$，使得 $(P(x)e^{f(x)})' = g(x)e^{f(x)}$。这其实就是单元法的思想。
+我们寻找两个单元 $p, q$，其中一个（比如 $p$）包含 $e^{f(x)}$，另一个（$q$）是辅助函数，它们之间有简单的微分关系，且它们的组合能够表达出被积函数。
+
+\begin{problem}
+    计算 $I = \int(1+x-\frac{1}{x})e^{x+\frac{1}{x}}dx$。
+\end{problem}
+\begin{solution}
+    被积函数中 $e^{x+1/x}$ 提示我们积分的结果很可能包含这一项。
+    我们尝试对 $P(x)e^{x+1/x}$ 求导，看看能否凑出被积函数。
+    $(x e^{x+1/x})' = 1 \cdot e^{x+1/x} + x \cdot e^{x+1/x} \cdot (1-1/x^2) = (1+x-1/x) e^{x+1/x}$。
+    这恰好就是被积函数。因此，
+    \begin{equation*}
+        I = \int (x e^{x+1/x})' dx = x e^{x+1/x} + C
+    \end{equation*}
+    从单元法的角度看，我们实际上是猜测了 $p=xe^{x+1/x}$，并发现 $dp$ 就是被积表达式。
+\end{solution}
 \chapter{组合积分法}
-\chapter{其他小方法}
-\section{费曼求导法}
-\section{循环法}
-\section{先求递推，再求特值}
-\section{rullani (傅汝兰尼)积分公式}
+
+组合积分法专门处理形如 $\int \frac{a_1 f(x) + b_1 g(x)}{a f(x) + b g(x)} dx$ 的积分，其核心是通过构造辅助积分并建立线性方程组来求解。
+
+\section{核心思想与基本函数对}
+该方法适用于满足特定微分性质的函数对 $(f(x), g(x))$，常见的有：
+\begin{itemize}
+    \item \textbf{三角函数对}: $f(x)=\sin x, g(x)=\cos x$。满足 $f'(x)=g(x), g'(x)=-f(x)$。
+    \item \textbf{双曲函数对}: $f(x)=\sinh x, g(x)=\cosh x$。满足 $f'(x)=g(x), g'(x)=f(x)$。
+    \item \textbf{指数函数对}: $f(x)=e^x, g(x)=e^{-x}$。满足 $f'(x)=f(x), g'(x)=-g(x)$。
+\end{itemize}
+方法的核心是：将被积函数的分子写成分母及其导数的线性组合。
+$a_1 f(x) + b_1 g(x) = A(a f(x) + b g(x)) + B(a f'(x) + b g'(x))$
+通过比较系数解出A和B，然后积分。
+\begin{align*}
+    I &= \int (A + B \frac{(a f(x) + b g(x))'}{a f(x) + b g(x)}) dx \\
+      &= Ax + B \ln|a f(x) + b g(x)| + C
+\end{align*}
+
+\section{三角函数对 $(\sin x, \cos x)$}
+对于 $I = \int \frac{a_1 \sin x + b_1 \cos x}{a \sin x + b \cos x} dx$，我们设：
+$a_1 \sin x + b_1 \cos x = A(a \sin x + b \cos x) + B(a \cos x - b \sin x)$
+比较 $\sin x$ 和 $\cos x$ 的系数：
+$a_1 = Aa - Bb$
+$b_1 = Ab + Ba$
+解得 $A = \frac{aa_1+bb_1}{a^2+b^2}$ 和 $B = \frac{ab_1-ba_1}{a^2+b^2}$。
+最终结果为 $I = Ax + B \ln|a \sin x + b \cos x| + C$。
+
+求 $T_1 = \int \frac{\sin x}{a \cos x + b \sin x} dx, \quad T_2 = \int \frac{\cos x}{a \cos x + b \sin x} dx$.
+
+我们可以用代换 $t = \tan \frac{x}{2}$ 分别求出 $T_1$ 与 $T_2$, 但还有更简单的方法, 即
+$$
+bT_1 + aT_2 = \int dx = x + C_1, \eqno{(1)}
+$$
+$$
+\begin{aligned}
+-aT_1 + bT_2 &= \int \frac{-a \sin x + b \cos x}{a \cos x + b \sin x} dx = \int \frac{d(a \cos x + b \sin x)}{a \cos x + b \sin x} \\
+&= \ln|a \cos x + b \sin x| + C_2.
+\end{aligned}
+\eqno{(2)}
+$$
+由此立刻可以得到
+$$
+T_1 = \frac{1}{a^2 + b^2} [bx - a \ln|a \cos x + b \sin x|] + C,
+$$
+$$
+T_2 = \frac{1}{a^2 + b^2} [ax + b \ln|a \cos x + b \sin x|] + C'.
+$$
+\section{1. 互导函数与自导函数}
+由导数公式可知
+$$
+(\sin x)' = \cos x, \quad (\cos x)' = -\sin x,
+$$
+$$
+(\text{ch } x)' = \text{sh } x, \quad (\text{sh } x)' = \text{ch } x.
+$$
+由这样的一种互导性引出如下定义:
+
+\textbf{定义 1} 设函数 $f(x)$ 与 $g(x)$ 为可导函数, 如果 $f'(x) = \alpha g(x)$, 且 $g'(x) = \alpha f(x)$ 或 $g'(x) = -\alpha f(x)$ ($\alpha$ 为任意常数), 那么称 $f(x)$ 与 $g(x)$ 为互导函数. 若 $f'(x) = \alpha g(x)$, 且 $g'(x) = -\alpha f(x)$, 则称 $f(x)$ 与 $g(x)$ 为相互反互导函数, $\alpha$ 为互导系数.
+
+例如, 双曲正弦函数 $f(x) = \text{sh } x$ 与双曲余弦函数 $g(x) = \text{ch } x$
+
+\textbf{定义 2} 设函数 $y=f(x)$ 为可导函数, 如果
+$$
+f'(x) = \omega f(x) \quad (\omega \text{ 为任意常数}),
+$$
+那么, 函数 $y=f(x)$ 为自导函数. $\omega$ 为自导系数.
+
+如果 $y=f(x)$ 为自导函数, 则称 $y=f(-x)$ 为对称自导函数.
+这是因为 $y=f(x)$ 与 $y=f(-x)$ 的图像关于 $y$ 轴对称的缘故.
+如: $y=e^{-x}$ 为自导函数, 这是因为
+$$
+y' = (e^{-x})' = -e^{-x} = -y.
+$$
+同时 $y=e^{-x}$ 也是 $y=e^x$ 的对称自导函数.
+常数函数 $y=a$ 也是自导函数, 这是因为
+$$
+y' = (a)' = 0 = 0 \cdot y.
+$$
+这里自导系数 $\omega=0$.
+
+同样不难验证 函数 $y=a^{\pm x}, y=e^{ax}, y=e^{-ax}, y=a^{ax}, y=a^{-ax}$ 等都为自导函数.
+
+\subsection{参元组合法}
+在求一个积分 $I$ 时, 找出另一个与 $I$ 结构相似的积分 $J$, 然后将两个积分组合起来, 通过解 $I$ 与 $J$ 的方程组求解积分的方法叫做参元组合法.
+
+\textbf{例 1} 设函数 $f(x)$ 为自导函数, 则 $f(-x)$ 为对称自导函数, 求下列有理式的积分:
+$$
+I = \int \frac{f(x)}{a f(x) + b f(-x)} dx.
+$$
+\textbf{解} 设 $J = \int \frac{f(-x)}{a f(x) + b f(-x)} dx$ 则有
+$$
+aI + bJ = \int dx = x \quad (\text{不计一常数之差, 以下同})
+$$
+$$
+\begin{aligned}
+aI - bJ &= \int \frac{a f(x) - b f(-x)}{a f(x) + b f(-x)} dx = \frac{1}{\omega} \int \frac{d[a f(x) + b f(-x)]^*}{a f(x) + b f(-x)} \\
+&= \frac{1}{\omega} \ln|a f(x) + b f(-x)|.
+\end{aligned}
+$$
+两式相加立刻可得
+$$
+I = \frac{1}{2a} [x + \frac{1}{\omega} \ln|a f(x) + b f(-x)|] + C.
+$$
+
+\subsection{分解组合法}
+将一个积分分为两个结构相似的积分 $I$ 与 $J$, 将 $I$ 与 $J$ 组合成一个方程组, 解方程组即得积分 $I$ 与 $J$. 最后将 $I$ 和 $J$ 联合成所要求的积分, 这种求积分的方法叫做分解组合法.
+
+\textbf{例 2} 设 $f(x)$ 与 $g(x)$ 为相互互导函数, 且 $\alpha=1$, 即 $f'(x)=g(x)$. 且 $g'(x)=-f(x)$, 求下列有理式的积分:
+$$
+I = \int \frac{a_1 f(x) + b_1 g(x)}{a f(x) + b g(x)} dx.
+$$
+\textbf{解} 令 $I_1 = \int \frac{f(x) dx}{a f(x) + b g(x)}, I_2 = \int \frac{g(x) dx}{a f(x) + b g(x)}$,
+则有
+$$
+a I_1 + b I_2 = \int dx = x,
+$$
+$$
+\begin{aligned}
+-b I_1 + a I_2 &= \int \frac{-b f(x) + a g(x)}{a f(x) + b g(x)} dx = \int \frac{d[a f(x) + b g(x)]}{a f(x) + b g(x)} \\
+&= \ln|a f(x) + b g(x)|,
+\end{aligned}
+$$
+由此立刻得到
+$$
+I_1 = \frac{1}{a^2 + b^2} [ax - b \ln|a f(x) + b g(x)|],
+$$
+$$
+I_2 = \frac{1}{a^2 + b^2} [bx + a \ln|a f(x) + b g(x)|].
+$$
+所以 $I = a_1 I_1 + b_1 I_1$
+$$
+= \frac{a a_1 + b b_1}{a^2 + b^2} x + \frac{a b_1 - a_1 b}{a^2 + b^2} \ln|a f(x) + b g(x)| + C.
+$$
+以上只是简单介绍了组合积分法的两大类型, 这些方法在以后的积分过程中都要用到. 一般来说, 具有自导性与互导性函数 (如三角函数、指数函数、双曲函数) 有理式的积分均可使用组合积分法.
+
+\subsection{含有 $a \sin x + b \cos x$ 的积分}
+
+\begin{example}
+  求 $I = \int \frac{\cos^2 x}{a \sin x + b \cos x} dx$.
+\end{example}
+\begin{solution}
+  解 显然可令 $J = \int \frac{\sin^2 x}{a \sin x + b \cos x} dx$ 作为辅助积分, 于是有
+  $$
+  I + J = \int \frac{\cos^2 x + \sin^2 x}{a \sin x + b \cos x} dx = \int \frac{dx}{a \sin x + b \cos x}
+  $$
+  $$
+  = \frac{1}{\sqrt{a^2 + b^2}} \ln \left| \tan \frac{x + \arctan \frac{b}{a}}{2} \right|, \eqno{(6)}
+  $$
+  $$
+  \begin{aligned}
+  -b^2 I + a^2 J &= \int \frac{a^2 \sin^2 x - b^2 \cos^2 x}{a \sin x + b \cos x} dx \\
+  &= \int (a \sin x - b \cos x) dx = -a \cos x - b \sin x.
+  \end{aligned}
+  \eqno{(7)}
+  $$
+  $a^2 \times (6) - (7)$, 得
+  $$
+  I = \frac{1}{a^2 + b^2} \left[ \frac{a^2}{\sqrt{a^2 + b^2}} \ln \left| \tan \frac{x + \arctan \frac{b}{a}}{2} \right| + a \sin x + b \cos x \right] + C.
+  $$
+\end{solution}
+
+
+
+\begin{example}
+  求 $$ I = \int \frac{a_1 \sin x + b_1 \cos x}{a \sin x + b \cos x} dx, $$
+\end{example}
+\begin{solution}
+  令
+
+$$ I_1 = \int \frac{\cos x}{a \sin x + b \cos x} dx, $$
+$$ I_2 = \int \frac{\sin x}{a \sin x + b \cos x} dx, $$
+则有
+$$
+b I_1 + a I_2 = \int dx = x, \eqno{(4)}
+$$
+$$
+\begin{aligned}
+a I_1 - b I_2 &= \int \frac{a \cos x - b \sin x}{a \sin x + b \cos x} dx = \int \frac{d(a \sin x + b \cos x)}{a \sin x + b \cos x} \\
+&= \ln|a \sin x + b \cos x|.
+\end{aligned}
+\eqno{(5)}
+$$
+$b \times (4) + a \times (5)$, 得
+$$
+I_1 = \frac{b}{a^2 + b^2} x + \frac{a}{a^2 + b^2} \ln|a \sin x + b \cos x|,
+$$
+$a \times (4) - b \times (5)$, 得
+$$
+I_2 = \frac{a}{a^2 + b^2} x - \frac{b}{a^2 + b^2} \ln|a \sin x + b \cos x|.
+$$
+于是有
+$$
+I = a_1 I_2 + b_1 I_1
+$$
+$$
+= \frac{a a_1 + b b_1}{a^2 + b^2} x + \frac{a b_1 - b a_1}{a^2 + b^2} \ln|a \sin x + b \cos x| + C.
+$$
+\end{solution}
+
+\begin{example}
+  求 $I = \int \frac{\sin x}{1 + \sin x + \cos x} dx$.
+\end{example}
+\begin{solution}
+  解 令 $J = \int \frac{\cos x}{1 + \sin x + \cos x} dx$, 则
+  $$
+  \begin{aligned}
+  I + J &= \int \frac{\sin x + \cos x}{1 + \sin x + \cos x} dx = \int \left( 1 - \frac{1}{1 + \sin x + \cos x} \right) dx \\
+  &= x - \ln \left| 1 + \tan \frac{x}{2} \right| = x - \ln \left| \frac{1 + \sin x + \cos x}{1 + \cos x} \right|,
+  \end{aligned}
+  $$
+  $$
+  \begin{aligned}
+  -I + J &= \int \frac{\cos x - \sin x}{1 + \sin x + \cos x} dx = \int \frac{d(1 + \sin x + \cos x)}{1 + \sin x + \cos x} \\
+  &= \ln|1 + \sin x + \cos x|.
+  \end{aligned}
+  $$
+  所以有
+  $$
+  \begin{aligned}
+  I &= \frac{1}{2} \left[ x - \ln \left| \frac{1 + \sin x + \cos x}{1 + \cos x} \right| - \ln|1 + \sin x + \cos x| \right] + C \\
+  &= \frac{1}{2} [x - 2 \ln|1 + \sin x + \cos x| + \ln|1 + \cos x|] + C \\
+  &= \frac{1}{2} \left[ x + \ln \frac{|1 + \cos x|}{(1 + \sin x + \cos x)^2} \right] + C.
+  \end{aligned}
+  $$
+\end{solution}
+
+\subsection{含有 $a + b\sin x$ 与 $c + d\cos x $的积分}
+
+\begin{example}
+  求 $\int \frac{\sin x}{1 + \sin x} d x$.
+\end{example}
+\begin{solution}
+  解法 1 令 $I = \int \frac{\sin x}{1 + \sin x} d x$, $J = \int \frac{\sin x}{1 - \sin x} d x$,
+  则
+  $$
+  I + J = \int \frac{2 \sin x}{1 - \sin^2 x} d x = 2 \int \frac{\sin x}{\cos^2 x} d x = \frac{2}{\cos x},
+  $$
+  $$
+  I - J = - \int \frac{2 \sin^2 x}{1 - \sin^2 x} d x = -2 \int \tan^2 x d x = -2 \int (\sec^2 x - 1) d x
+  $$
+  $$
+  = -2 \tan x + 2x.
+  $$
+  所以有
+  $$
+  I = \frac{1}{\cos x} - \tan x + x + C.
+  $$
+\end{solution}
+
+\begin{example}
+  求 $\int \frac{\sin x}{a + b \sin x} dx (|a| > |b|)$.
+\end{example}
+\begin{solution}
+  解 令 $I = \int \frac{\sin x}{a + b \sin x} dx$, $J = \int \frac{\sin x}{a - b \sin x} dx$,
+  则
+  $$
+  I + J = \int \frac{2 a \sin x}{a^2 - b^2 \sin^2 x} dx = \int \frac{-2 a}{a^2 - b^2 + b^2 \cos^2 x} d(b \cos x)
+  $$
+  $$
+  = \frac{-2}{\sqrt{a^2 - b^2}} \frac{a}{b} \arctan \frac{b \cos x}{\sqrt{a^2 - b^2}},
+  $$
+  $$
+  \begin{aligned}
+  I - J &= - \int \frac{2 b \sin^2 x}{a^2 - b^2 \sin^2 x} dx = \frac{2}{b} \int \frac{a^2 - b^2 \sin^2 x - a^2}{a^2 - b^2 \sin^2 x} dx \\
+  &= \frac{2}{b} \int dx - \frac{2 a^2}{b} \int \frac{dx}{a^2 - b^2 \sin^2 x} \\
+  &= \frac{2}{b} x + \frac{2 a^2}{b} \int \frac{1}{a^2 \csc^2 x - b^2} d(\cot x) \\
+  &= \frac{2}{b} x + \frac{2 a^2}{b} \int \frac{d(a \cot x)}{a^2 - b^2 + a^2 \cot^2 x} \\
+  &= \frac{2}{b} x + \frac{2}{\sqrt{a^2 - b^2}} \frac{a}{b} \arctan \frac{a \cot x}{\sqrt{a^2 - b^2}}.
+  \end{aligned}
+  $$
+  所以有
+  $$
+  I = \frac{1}{b} x + \frac{1}{\sqrt{a^2 - b^2}} \frac{a}{b} \arctan \frac{a \cot x}{\sqrt{a^2 - b^2}}
+  $$
+  $$
+  - \frac{1}{\sqrt{a^2 - b^2}} \frac{a}{b} \arctan \frac{b \cos x}{\sqrt{a^2 - b^2}} + C.
+  $$
+\end{solution}
+\subsection{含有 $b + \arctan x$ 的积分}
+
+\begin{example}
+  求 $I = \int \frac{a_1 + b_1 \tan x}{b + a \tan x} dx$.
+\end{example}
+\begin{solution}
+  解 如果此题使用代换 $\tan x = u$, $dx = \frac{du}{1 + u^2}$, 则
+  $$
+  I = \int \frac{a_1 + b_1 u}{b + au} \frac{du}{1 + u^2}.
+  $$
+  要求出以上有理函数的积分是很困难的, 但用组合积分法, 就方便多了。
+
+  令
+  $$
+  I_1 = \int \frac{dx}{b + a \tan x}, \quad I_2 = \int \frac{\tan x}{b + a \tan x} dx,
+  $$
+  则
+  $$
+  b I_1 + a I_2 = x,
+  $$
+  $$
+  \begin{aligned}
+  a I_1 - b I_2 &= \int \frac{a - b \tan x}{b + a \tan x} dx = \int \frac{\frac{a}{b} - \tan x}{1 + \frac{a}{b} \tan x} dx \\
+  &= \int \tan x \arctan \frac{a}{b} - x dx \\
+  &= \ln \left| \cos \arctan \frac{a}{b} - x \right|.
+  \end{aligned}
+  $$
+  于是有
+  $$
+  I_1 = \frac{1}{a^2 + b^2} \left[ bx + a \ln\left| \cos \arctan \frac{a}{b} - x \right| \right],
+  $$
+  $$
+  I_2 = \frac{1}{a^2 + b^2} \left[ ax - b \ln\left| \cos \arctan \frac{a}{b} - x \right| \right].
+  $$
+  所以有
+  $$
+  \begin{aligned}
+  I &= a_1 I_1 + b_1 I_2 \\
+  &= \frac{b a_1 + a b_1}{a^2 + b^2} x + \frac{a a_1 - b b_1}{a^2 + b^2} \ln\left| \cos \arctan \frac{a}{b} - x \right| + C.
+  \end{aligned}
+  $$
+\end{solution}
+
+\subsection{含有 $a e^{x} + be^{- x}$的积分}
+
+\begin{example}
+  求 $I = \int \frac{a_1 e^x + b_1 e^{-x}}{a e^x + b e^{-x}} dx$.
+
+  此例可考虑使用分解组合法。
+\end{example}
+\begin{solution}
+  解 令 $I_1 = \int \frac{e^x dx}{a e^x + b e^{-x}}, \quad I_2 = \int \frac{e^{-x} dx}{a e^x + b e^{-x}}$,
+  则
+  $$
+  a I_1 + b I_2 = x,
+  $$
+  $$
+  \begin{aligned}
+  a I_1 - b I_2 &= \int \frac{a e^x - b e^{-x}}{a e^x + b e^{-x}} dx = \int \frac{d(a e^x + b e^{-x})}{a e^x + b e^{-x}} \\
+  &= \ln|a e^x + b e^{-x}|.
+  \end{aligned}
+  $$
+  两式分别相加、相减, 得
+  $$
+  I_1 = \frac{1}{2a} [x + \ln|a e^x + b e^{-x}|],
+  $$
+  $$
+  I_2 = \frac{1}{2b} [x - \ln|a e^x + b e^{-x}|].
+  $$
+  于是有
+  $$
+  \begin{aligned}
+  I &= a_1 I_1 + b_1 I_2 \\
+  &= \frac{a_1 b + b_1 a}{2ab} x + \frac{a_1 b - b_1 a}{2ab} \ln|a e^x + b e^{-x}| + C.
+  \end{aligned}
+  $$
+  为了后面例题求解的需要, 查表求得一些较简单的积分公式如下:
+  $$
+  \int \frac{dx}{a e^x + b e^{-x}} = \frac{1}{\sqrt{ab}} \arctan \left(\sqrt{\frac{a}{b}} e^x\right) + C \quad (ab > 0), \eqno{(1)}
+  $$
+  $$
+  \int \frac{dx}{a e^x + b e^{-x} + c} = \frac{1}{\sqrt{c^2 - 4ab}} \ln \left| \frac{2 a e^x + c - \sqrt{c^2 - 4ab}}{2 a e^x + c + \sqrt{c^2 - 4ab}} \right| + C \quad (c^2 - 4ab > 0), \eqno{(2)}
+  $$
+  $$
+  \int \frac{d x}{a^2 e^{2x} + b^2 e^{-2x}} = \frac{1}{2ab} \arctan \left(\frac{a}{b} e^{2x}\right) + C \quad (ab \ne 0). \eqno{(3)}
+  $$
+\end{solution}
+
+
+\subsection{含有 $a\cdot \sinh x + b \cdot \cosh x$ 的积分}
+
+\begin{equation}
+  \text{对于分母含有 } a \sinh x + b \cosh x \text{ 的积分, 可考虑使用组合积分法。}
+\end{equation}
+
+\begin{example}
+  \begin{equation}
+    \text{求} I = \int \frac{\sinh x}{a \sinh x + b \cosh x} dx \quad (|a| \ne |b|).
+  \end{equation}
+\end{example}
+\begin{solution}
+  \text{解 不妨令}
+  $$
+  I = \int \frac{\sinh x}{a \sinh x + b \cosh x} dx, \quad J = \int \frac{\cosh x}{a \sinh x + b \cosh x} dx,
+  $$
+  \text{则有}
+  $$
+  a I + b J = x,
+  $$
+  $$
+  \begin{aligned}
+  b I + a J &= \int \frac{b \sinh x + a \cosh x}{a \sinh x + b \cosh x} dx = \int \frac{d(a \sinh x + b \cosh x)}{a \sinh x + b \cosh x} \\
+  &= \ln|a \sinh x + b \cosh x|.
+  \end{aligned}
+  $$
+  \text{所以有}
+  $$
+  I = \frac{1}{a^2 - b^2} [ax - b \ln|a \sinh x + b \cosh x|] + C.
+  $$
+\end{solution}
+
+\begin{example}
+  \begin{equation}
+    \text{求 } I = \int \frac{a_1 \sinh x + b_1 \cosh x}{a \sinh x + b \cosh x} dx \quad (|a| \ne |b|).
+  \end{equation}
+\end{example}
+\begin{solution}
+  \text{解 观察所求积分的结构, 可将被积函数分解为两个双曲函数有理式的积分, 故可令}
+  $$
+  I_1 = \int \frac{\sinh x}{a \sinh x + b \cosh x} dx, \quad I_2 = \int \frac{\cosh x}{a \sinh x + b \cosh x} dx,
+  $$
+  \text{则有}
+  $$
+  a_1 I_1 + b_1 I_2 = x,
+  $$
+  $$
+  b I_1 + a I_2 = \int \frac{d(a \sinh x + b \cosh x)}{a \sinh x + b \cosh x} = \ln|a \sinh x + b \cosh x|.
+  $$
+  \text{所以有}
+  $$
+  I_1 = \frac{1}{a^2 - b^2} [ax - b \ln|a \sinh x + b \cosh x|],
+  $$
+  $$
+  I_2 = \frac{1}{a^2 - b^2} [-bx + a \ln|a \sinh x + b \cosh x|].
+  $$
+  \text{于是有}
+  $$
+  I = a_1 I_1 + b_1 I_2 = \frac{a a_1 - b b_1}{a^2 - b^2} x + \frac{a b_1 - b a_1}{a^2 - b^2} \ln|a \sinh x + b \cosh x| + C.
+  $$
+\end{solution}
+
+\section{费曼求导法 (Leibniz积分规则)}
+费曼求导法，也称为含参变量积分求导或莱布尼兹积分规则。其基本思想是：如果一个积分难以直接计算，但通过引入一个参数可以将其转化为一个更易于处理的形式，那么我们就可以对含参积分关于该参数求导，计算得到的导数函数的积分，最后再对结果关于参数进行积分，以求得原积分。
+
+
+
+其背后的原理我们在第一章讲过：
+
+\begin{equation}
+  \frac{d}{dx} \int_{a(x)}^{b(x)} f(x,t) dt=\int_{a(x)}^{b(x)} f_x'(x,t) dt+f(x, b(x)) b'(x)-f(x, a(x)) a'(x)
+\end{equation}
+这就是所谓的变上下限积分的求导公式
+
+很容易发现，如果积分的上下限都和 $x$ 无关，那么积分和求导就能交换顺序，不过进了积分号就要变成偏导，即
+\begin{equation}
+  \frac{d}{dx} \int_{a}^{b} f(x,t) dt=\int_{a}^{b} \frac{\partial f(x,t)}{\partial x} dt
+\end{equation}
+
+https://zhuanlan.zhihu.com/p/687355703 这个知乎专栏提到了很多费曼积分法的应用，下面举几例
+
+\section*{计算狄利克雷积分 (Dirichlet Integral)}
+
+这是一个著名的积分：
+\begin{equation}
+\int_{0}^{+\infty} \frac{\sin x}{x} dx
+\end{equation}
+我们可以使用费曼技巧（Feynman's Trick，即在积分符号下求导）来解决它。
+
+\subsection*{构造含参积分}
+我们引入一个参数 $t$，构造一个新的函数 $I(t)$:
+\begin{equation}
+\text{设 } I(t) = \int_{0}^{+\infty} \frac{\sin x}{x} \cdot e^{-tx} dx
+\end{equation}
+那么原积分便等于 $I(0)$，所以只需求出函数 $I(t)$ 的表达式即可。
+
+\subsection*{对参数求导}
+我们对 $I(t)$ 关于 $t$ 求导。在满足某些条件下，可以交换积分和求导的次序：
+\begin{equation}
+I'(t) = \frac{d}{dt} \int_{0}^{+\infty} \frac{\sin x}{x} \cdot e^{-tx} dx = \int_{0}^{+\infty} \frac{\partial}{\partial t} \left(\frac{\sin x}{x} \cdot e^{-tx}\right) dx
+\end{equation}
+计算偏导数：
+\begin{equation}
+\frac{\partial}{\partial t} \left(\frac{\sin x}{x} \cdot e^{-tx}\right) = \frac{\sin x}{x} \frac{\partial}{\partial t} (e^{-tx}) = \frac{\sin x}{x} (-x e^{-tx}) = -\sin x \cdot e^{-tx}
+\end{equation}
+所以：
+\begin{equation}
+I'(t) = -\int_{0}^{+\infty} \sin x \cdot e^{-tx} dx
+\end{equation}
+这个积分可以通过分部积分或欧拉公式（Euler's formula）计算，结果为：
+\begin{equation}
+I'(t) = \left. \frac{\cos x + t \sin x}{t^2 + 1} e^{-tx} \right|_{0}^{+\infty} = \frac{-1}{t^2 + 1}
+\end{equation}
+
+
+
+\subsection*{积分还原}
+现在我们对 $I'(t)$ 进行积分以还原 $I(t)$:
+\begin{equation}
+I(t) = \int I'(t) dt = \int \frac{-dt}{t^2 + 1} = -\arctan t + C
+\end{equation}
+其中 $C$ 为待定常数。
+
+\subsection*{确定常数 C}
+为了求出 $C$，我们需要一个 $I(t)$ 的已知值。我们来求 $I(t)$ 在 $t \to +\infty$ 时的极限：
+\begin{equation}
+\lim_{t \to +\infty} I(t) = \lim_{t \to +\infty} \int_{0}^{+\infty} \frac{\sin x}{x} \cdot e^{-tx} dx = 0
+\end{equation}
+（当 $t$ 很大时，$e^{-tx}$ 迅速衰减到0，使得整个积分趋于0）。
+将这个极限代入 $I(t)$ 的表达式中：
+\begin{equation}
+\lim_{t \to +\infty} I(t) = \lim_{t \to +\infty} (-\arctan t + C) = -\frac{\pi}{2} + C
+\end{equation}
+因此，我们有 $-\frac{\pi}{2} + C = 0$，解得 $C = \frac{\pi}{2}$。
+
+\subsection*{最终结果}
+我们求出了 $I(t)$ 的完整表达式：
+\begin{equation}
+I(t) = \frac{\pi}{2} - \arctan t
+\end{equation}
+原积分就是 $I(0)$:
+\begin{equation}
+I(0) = \int_{0}^{+\infty} \frac{\sin x}{x} dx = \frac{\pi}{2} - \arctan 0 = \frac{\pi}{2}
+\end{equation}
+同时，我们也可以得到其他一些积分的值，例如：
+\begin{equation}
+I(1) = \int_{0}^{+\infty} \frac{\sin x}{x e^x} dx = \frac{\pi}{2} - \arctan 1 = \frac{\pi}{4}
+\end{equation}
+
+\begin{example}[傅汝兰尼积分的证明]
+设 $f(x)$ 在 $[0, +\infty)$ 上连续，且广义积分 $\int_A^{+\infty} \frac{f(x)}{x} dx$ 收敛，其中常数 $A > 0$。试证明：
+$$
+\int_0^{+\infty} \frac{f(ax) - f(bx)}{x} dx = f(0) \ln\left(\frac{b}{a}\right) \quad (0 < a < b).
+$$
+\end{example}
+\begin{solution}
+任取 $\delta > 0$，有
+$$
+\int_\delta^{+\infty} \frac{f(ax) - f(bx)}{x} dx = \int_{a\delta}^{+\infty} \frac{f(u)}{u}du - \int_{b\delta}^{+\infty} \frac{f(v)}{v}dv = \int_{a\delta}^{b\delta} \frac{f(u)}{u}du
+$$
+根据积分中值定理，存在 $\xi \in [a\delta, b\delta]$，使得
+$$
+\int_{a\delta}^{b\delta} \frac{f(u)}{u}du = f(\xi) \ln\left(\frac{b}{a}\right)
+$$
+注意到 $f(x)$ 的连续性，当 $\delta \to 0$ 时，$\xi \to 0$，故 $\lim_{\delta \to 0} f(\xi) = f(0)$。因此
+$$
+\int_0^{+\infty} \frac{f(ax) - f(bx)}{x} dx = \lim_{\delta \to 0} \int_{a\delta}^{b\delta} \frac{f(u)}{u}du = f(0) \ln\left(\frac{b}{a}\right).
+$$
+\end{solution}
+
+\section{循环法 (或回归法)}
+循环法通常在分部积分中使用。当对一个积分连续进行若干次分部积分后，如果再次出现了与原积分相同的积分项，我们就可以将其移项合并，通过解一个代数方程来求出原积分的值。
+
+\begin{example}
+求 $I = \int \frac{e^{\arctan x}}{\sqrt{(1+x^2)^3}} dx$.
+\end{example}
+\begin{solution}
+$$
+\begin{aligned}
+I &= \int \frac{x}{(1+x^2)\sqrt{1+x^2}} e^{\arctan x} dx \\
+&= \int \frac{x}{1+x^2} d(e^{\arctan x}) \\
+&= \frac{x}{1+x^2} e^{\arctan x} - \int e^{\arctan x} \frac{1-x^2}{(1+x^2)^2} dx \\
+&= \frac{x}{\sqrt{1+x^2}} \frac{e^{\arctan x}}{\sqrt{1+x^2}} - \int \frac{e^{\arctan x}}{(1+x^2)\sqrt{1+x^2}} (1-x^2) d(\arctan x) \\
+&= \frac{x-1}{2\sqrt{1+x^2}} e^{\arctan x} - \int \frac{x e^{\arctan x}}{\sqrt{(1+x^2)^3}} dx
+\end{aligned}
+$$
+于是我们得到 $I = \frac{x-1}{2\sqrt{1+x^2}} e^{\arctan x} - I$。
+解得 $I = \frac{x-1}{4\sqrt{1+x^2}} e^{\arctan x} + C$。
+\end{solution}
+
+\section{先求递推，再求特值 (递推法)}
+这种方法多用于被积函数中含有自然数 $n$ 的情形。我们通过分部积分或其他技巧，建立一个关于 $I_n$ 和 $I_{n-k}$ (k为整数) 的递推关系式。然后，通过计算一个或几个简单的初值（如 $I_0$ 或 $I_1$），利用递推公式逐步求解 $I_n$。
+
+\begin{example}
+求 $I_n = \int \sin^n x dx$ 的递推公式，并计算 $\int \sin^4 x dx$。
+\end{example}
+\begin{solution}
+$$
+\begin{aligned}
+I_n &= \int \sin^{n-1} x \sin x dx = -\int \sin^{n-1} x d(\cos x) \\
+&= -\sin^{n-1} x \cos x + \int \cos x (n-1) \sin^{n-2} x \cos x dx \\
+&= -\sin^{n-1} x \cos x + (n-1) \int \sin^{n-2} x (1-\sin^2 x) dx \\
+&= -\sin^{n-1} x \cos x + (n-1) (I_{n-2} - I_n)
+\end{aligned}
+$$
+移项整理得递推公式： $I_n = -\frac{1}{n}\sin^{n-1} x \cos x + \frac{n-1}{n} I_{n-2}$。
+
+由于 $I_0 = \int dx = x + C$，我们有：
+$$
+I_2 = -\frac{1}{2}\sin x \cos x + \frac{1}{2}I_0 = \frac{x}{2} - \frac{1}{4}\sin(2x) + C_1
+$$
+$$
+I_4 = -\frac{1}{4}\sin^3 x \cos x + \frac{3}{4}I_2 = -\frac{1}{4}\sin^3 x \cos x + \frac{3}{4}\left(\frac{x}{2} - \frac{1}{4}\sin(2x)\right) + C_2
+$$
+\end{solution}
+\subsection*{附：欧拉公式解法}
+
+求解以下两个不定积分：
+\begin{align*}
+    I_1 &= \int e^{at} \sin(\omega t) dt \\
+    I_2 &= \int e^{at} \cos(\omega t) dt
+\end{align*}
+
+
+
+我们利用欧拉公式 $e^{i\theta} = \cos\theta + i\sin\theta$。
+将 $I_2$ 和 $I_1$ 组合成一个复数形式的积分 $I_2 + iI_1$：
+\begin{equation}
+    I_2 + iI_1 = \int e^{at} \cos(\omega t) dt + i \int e^{at} \sin(\omega t) dt
+\end{equation}
+根据积分的线性性质，可以合并为：
+\begin{equation}
+    I_2 + iI_1 = \int e^{at} (\cos(\omega t) + i\sin(\omega t)) dt
+\end{equation}
+应用欧拉公式，被积函数可以写成复指数形式：
+\begin{equation}
+    I_2 + iI_1 = \int e^{at} e^{i\omega t} dt = \int e^{(a+i\omega)t} dt
+\end{equation}
+
+这个复指数函数的积分非常直接：
+\begin{equation}
+    \int e^{(a+i\omega)t} dt = \frac{1}{a+i\omega} e^{(a+i\omega)t}
+\end{equation}
+为了分离实部和虚部，我们将分母中的复数有理化：
+\begin{equation}
+    \frac{1}{a+i\omega} = \frac{1}{a+i\omega} \cdot \frac{a-i\omega}{a-i\omega} = \frac{a-i\omega}{a^2 - (i\omega)^2} = \frac{a-i\omega}{a^2 + \omega^2}
+\end{equation}
+同时，将复指数 $e^{(a+i\omega)t}$ 展开：
+\begin{equation}
+    e^{(a+i\omega)t} = e^{at} e^{i\omega t} = e^{at}(\cos(\omega t) + i\sin(\omega t))
+\end{equation}
+
+展开并分离实部和虚部
+
+现在我们将上述结果相乘：
+\begin{equation}
+    \frac{a-i\omega}{a^2 + \omega^2} \cdot e^{at}(\cos(\omega t) + i\sin(\omega t))
+\end{equation}
+展开这个表达式：
+\begin{align*}
+    &= \frac{e^{at}}{a^2 + \omega^2} [ (a-i\omega)(\cos(\omega t) + i\sin(\omega t)) ] \\
+    &= \frac{e^{at}}{a^2 + \omega^2} [ a\cos(\omega t) + ia\sin(\omega t) - i\omega\cos(\omega t) - i^2\omega\sin(\omega t) ] \\
+    &= \frac{e^{at}}{a^2 + \omega^2} [ (a\cos(\omega t) + \omega\sin(\omega t)) + i(a\sin(\omega t) - \omega\cos(\omega t)) ]
+\end{align*}
+比较实部和虚部，得到 $I_2$ 和 $I_1$ 的解。
+
+\begin{itemize}
+    \item \textbf{实部} 对应 $I_2$:
+    \begin{equation}
+        I_2 = \text{Re}(I_2 + iI_1) = \frac{e^{at}}{a^2+\omega^2} (a\cos(\omega t) + \omega\sin(\omega t))
+    \end{equation}
+    
+    \item \textbf{虚部 } 对应 $I_1$:
+    \begin{equation}
+        I_1 = \text{Im}(I_2 + iI_1) = \frac{e^{at}}{a^2+\omega^2} (a\sin(\omega t) - \omega\cos(\omega t))
+    \end{equation}
+\end{itemize}
+（通常在不定积分的最后加上常数 C）。
+\section{Frullani (傅汝兰尼) 积分公式}
+Frullani 积分公式提供了一种计算特定形式广义积分的快捷方法。
+
+\textbf{公式：} 设 $f(x)$ 在 $[0, +\infty)$ 上连续，且广义积分 $\int_A^{+\infty} \frac{f(x)}{x} dx$ 对任意 $A > 0$ 都收敛。则对于任意正数 $a, b$，有：
+$$
+\int_0^{+\infty} \frac{f(ax) - f(bx)}{x} dx = \left( \lim_{x \to +\infty} f(x) - f(0) \right) \ln\left(\frac{a}{b}\right)
+$$
+如果 $\lim_{x \to +\infty} f(x)$ 存在，记为 $f(+\infty)$，则公式为：
+$$
+\int_0^{+\infty} \frac{f(ax) - f(bx)}{x} dx = \left( f(+\infty) - f(0) \right) \ln\left(\frac{a}{b}\right)
+$$
+特别地，如果 $f(+\infty) = f(0)$，则积分为0。如果极限 $\lim_{x \to +\infty} f(x)$ 不存在，但 $f(0)$ 已知，且积分收敛，则公式简化为：
+$$
+\int_0^{+\infty} \frac{f(ax) - f(bx)}{x} dx = -f(0) \ln\left(\frac{a}{b}\right) = f(0) \ln\left(\frac{b}{a}\right)
+$$
 
 \appendix
 \chapter{版本更新历史}
 
 \datechange{2025/10/17}{编写第一章基础知识}
+\datechange{2025/10/19}{编写完初稿}
 % \datechange{2025/10/05}{编写第一章}
 % \begin{change}
 %   \item 删除 \lstinline{mathpazo} 数学字体选项。
